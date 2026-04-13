@@ -39,13 +39,28 @@ backToTopBtn.addEventListener('click', () => {
 });
 
 // Chat Bot button click handler
+const chatWindow = document.getElementById('chatWindow');
+const closeChatBtn = document.getElementById('closeChatBtn');
+
 chatbotBtn.addEventListener('click', () => {
-    alert('Chat Bot feature coming soon!');
-    // You can replace this with your chat bot implementation
+    chatWindow.classList.toggle('show');
 });
 
+if (closeChatBtn) {
+    closeChatBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        chatWindow.classList.remove('show');
+    });
+}
 
-
+// Close chat when clicking outside
+document.addEventListener('click', (e) => {
+    if (chatWindow && chatWindow.classList.contains('show') && 
+        !chatWindow.contains(e.target) && 
+        !chatbotBtn.contains(e.target)) {
+        chatWindow.classList.remove('show');
+    }
+});
 
 const circle = document.querySelector('.progress-ring__circle');
 
@@ -90,7 +105,7 @@ function updateNavVisibility() {
     const targetOffset = scrollTarget.offsetTop;
     const currentScroll = window.pageYOffset;
     const shouldShowTopNav = currentScroll >= targetOffset - 120;
-    console.log('Scroll:', currentScroll, 'Target:', targetOffset, 'Show Top Nav:', shouldShowTopNav)
+    // console.log('Scroll:', currentScroll, 'Target:', targetOffset, 'Show Top Nav:', shouldShowTopNav)
     // console.log(document.documentElement.scrollTop);
     
     if (shouldShowTopNav && lastNavState !== 'top') {
@@ -147,16 +162,146 @@ if (typeof Swiper !== 'undefined') {
     });
 }
 
-const pathButtons = document.querySelectorAll('.path-btn');
-const learningPathCards = document.querySelectorAll('.learning-path-card');
+// Section 2 - Courses (Learning Path)
+const courseButtons = document.querySelectorAll('#section-2 .path-btn');
+const courseCards = document.querySelectorAll('#section-2 .courses-card');
 
-pathButtons.forEach(button => {
+courseButtons.forEach(button => {
     button.addEventListener('click', () => {
-        const path = button.dataset.path;
+        const course = button.dataset.course;
 
-        pathButtons.forEach(item => item.classList.toggle('active', item === button));
-        learningPathCards.forEach(card => {
-            card.classList.toggle('active', card.dataset.path === path);
+        courseButtons.forEach(item => item.classList.toggle('active', item === button));
+        courseCards.forEach(card => {
+            card.classList.toggle('active', card.dataset.course === course);
+        });
+    });
+});
+
+// Section 3 - Student Projects with Tabs
+const projectButtons = document.querySelectorAll('#section-3 .path-btn');
+const projectSliderWrappers = document.querySelectorAll('#section-3 .projects-slider-wrapper');
+const projectSwipers = new Map();
+
+function initializeProjectSwipers() {
+    if (typeof Swiper === 'undefined') {
+        return;
+    }
+
+    projectSliderWrappers.forEach((wrapper) => {
+        const swiper = new Swiper(wrapper, {
+            loop: true,
+            speed: 800,
+            slidesPerView: 1.1,
+            spaceBetween: 20,
+            observer: true,
+            observeParents: true,
+            autoplay: {
+                delay: 4500,
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: wrapper.querySelector('.swiper-pagination'),
+                type: 'progressbar',
+            },
+            navigation: {
+                nextEl: wrapper.querySelector('.swiper-button-next'),
+                prevEl: wrapper.querySelector('.swiper-button-prev'),
+            },
+            breakpoints: {
+                576: {
+                    slidesPerView: 2,
+                    spaceBetween: 18,
+                },
+                768: {
+                    slidesPerView: 3,
+                    spaceBetween: 20,
+                },
+                992: {
+                    slidesPerView: 4,
+                    spaceBetween: 24,
+                },
+                1200: {
+                    slidesPerView: 5,
+                    spaceBetween: 24,
+                },
+            },
+        });
+
+        if (!wrapper.classList.contains('active')) {
+            swiper.autoplay.stop();
+        }
+
+        projectSwipers.set(wrapper.dataset.project, swiper);
+    });
+}
+
+function setActiveProjectTab(projectId) {
+    projectButtons.forEach((button) => {
+        button.classList.toggle('active', button.dataset.project === projectId);
+    });
+
+    projectSliderWrappers.forEach((wrapper) => {
+        const isActive = wrapper.dataset.project === projectId;
+        wrapper.classList.toggle('active', isActive);
+
+        const swiper = projectSwipers.get(wrapper.dataset.project);
+        if (!swiper) {
+            return;
+        }
+
+        if (isActive) {
+            swiper.update();
+            swiper.slideToLoop(0, 0, false);
+            swiper.autoplay.start();
+        } else {
+            swiper.autoplay.stop();
+        }
+    });
+}
+
+projectButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+        setActiveProjectTab(button.dataset.project);
+    });
+});
+
+window.addEventListener('load', () => {
+    initializeProjectSwipers();
+    const activeProjectButton = document.querySelector('#section-3 .path-btn.active');
+    if (activeProjectButton) {
+        setActiveProjectTab(activeProjectButton.dataset.project);
+    }
+});
+
+// Video play button functionality for all video buttons
+const videoPlayBtns = document.querySelectorAll('#section-3 .video-play-btn');
+videoPlayBtns.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const videoUrl = btn.dataset.video;
+        
+        // Create modal for video
+        const modal = document.createElement('div');
+        modal.className = 'video-modal';
+        modal.innerHTML = `
+            <div class="video-modal-content">
+                <button class="video-modal-close">&times;</button>
+                <iframe width="100%" height="600" src="${videoUrl}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        `;
+        
+        document.body.appendChild(modal);
+        
+        // Close modal on close button click
+        modal.querySelector('.video-modal-close').addEventListener('click', () => {
+            modal.remove();
+        });
+        
+        // Close modal on outside click
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.remove();
+            }
         });
     });
 });
@@ -187,92 +332,39 @@ function animated_swiper(selector, init) {
     });
     init.on("slideChange", animated);
 }
-animated_swiper(sliderActive2, sliderInit2);
+// animated_swiper(sliderActive2, sliderInit2);
 
 
-//>> Wow Animation Start <<//
-new WOW().init();
+// see https://nextparticle.nextco.de for more informations
 
-//>> Video Popup Start <<//
-$(".img-popup").magnificPopup({
-    type: "image",
-    gallery: {
-        enabled: true,
-    },
+var nextParticle = new NextParticle(document.all.logo);
+nextParticle.particleGap = 1;
+nextParticle.noise = 0;
+nextParticle.mouseForce = 30;
+nextParticle.size = Math.max(window.innerWidth, window.innerHeight);
+nextParticle.colorize = false;
+nextParticle.tint = '#FF00FF';
+nextParticle.minWidth = nextParticle.size;
+nextParticle.minHeight = nextParticle.size;
+nextParticle.maxWidth = nextParticle.size;
+nextParticle.maxHeight = nextParticle.size;
+
+var redraw = function() {
+  nextParticle.initPosition = "none";
+  nextParticle.initDirection = "none";
+  nextParticle.fadePostion = "none";
+  nextParticle.fadeDirection = "none";
+  nextParticle.minWidth = nextParticle.size;
+  nextParticle.minHeight = nextParticle.size;
+  nextParticle.maxWidth = nextParticle.size;
+  nextParticle.maxHeight = nextParticle.size;
+  nextParticle.color = nextParticle.colorize ? nextParticle.tint : '';
+  nextParticle.start();
+};
+
+
+window.addEventListener('resize', function() {
+  nextParticle.width = window.innerWidth;
+  nextParticle.height = window.innerHeight;
+  redraw();
 });
-
-$('.video-popup').magnificPopup({
-    type: 'iframe',
-    callbacks: {}
-});
-
-
-//>> Wow Animation Start <<//
-new WOW().init();
-
-//>> Nice Select Start <<//
-$('select').niceSelect();
-
-$('.odometer').appear(function(e) {
-    var odo = $(".odometer");
-    odo.each(function() {
-        var countNumber = $(this).attr("data-count");
-        $(this).html(countNumber);
-    });
-});
-
-
-// Tamino Martinius - All rights reserved
-
-// Copyright © 2013 Tamino Martinius (http://zaku.eu)
-// Copyright © 2013 Particleslider.com (http://particleslider.com
-
-// Terms of usage: http://particleslider.com/legal/license
-
-var init = function(){
-  var isMobile = navigator.userAgent &&
-    navigator.userAgent.toLowerCase().indexOf('mobile') >= 0;
-  var isSmall = window.innerWidth < 1000;
-  
-  var ps = new ParticleSlider({
-    ptlGap: 0,
-    ptlSize: 2,
-    width: 1e9,
-    height: 1e9
-  });
-    
-  var gui = new dat.GUI();
-  gui.add(ps, 'ptlGap').min(0).max(5).step(1).onChange(function(){
-    ps.init(true);
-  });
-  gui.add(ps, 'ptlSize').min(1).max(5).step(1).onChange(function(){
-    ps.init(true);
-  });
-  gui.add(ps, 'restless');
-  gui.addColor(ps, 'color').onChange(function(value){
-    ps.monochrome = true;
-    ps.setColor(value);
-	  ps.init(true);
-  });
-  
-  
-  (window.addEventListener
-   ? window.addEventListener('click', function(){ps.init(true)}, false)
-   : window.onclick = function(){ps.init(true)});
-}
-
-var initParticleSlider = function(){
-  var psScript = document.createElement('script');
-  (psScript.addEventListener
-    ? psScript.addEventListener('load', init, false)
-    : psScript.onload = init);
-  psScript.src = 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/23500/ps-0.9.js';
-	psScript.setAttribute('type', 'text/javascript');
-  document.body.appendChild(psScript);
-}
-    
-(window.addEventListener
-  ? window.addEventListener('load', initParticleSlider, false)
-  : window.onload = initParticleSlider);
-
-
