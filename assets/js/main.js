@@ -88,7 +88,7 @@ window.addEventListener('scroll', () => {
 
 // Desktop nav behavior and active tab handling
 const pageNavLinks = document.querySelectorAll('.top-nav .nav-links a, .nav-box .nav-links a');
-const scrollTarget = document.getElementById('section-2');
+const scrollTarget = document.getElementById('courses');
 const boxNav = document.querySelector('.nav-box');
 const topNav = document.querySelector('.top-nav');
 const boxNavMobile = document.querySelector('.top-nav-mobile-box');
@@ -107,7 +107,7 @@ function updateNavVisibility() {
     const targetOffset = scrollTarget.offsetTop;
     const currentScroll = window.pageYOffset;
     const shouldShowTopNav = currentScroll >= targetOffset - 120;
-    const shouldShowMobileTopNav = currentScroll >= 120;
+    const shouldShowMobileTopNav = currentScroll >= targetOffset - 120;
 
     if (window.innerWidth < 992) {
         if (shouldShowMobileTopNav && lastNavState !== 'mobile-top') {
@@ -120,11 +120,13 @@ function updateNavVisibility() {
             topNavMobile?.classList.add('hidden');
             lastNavState = 'mobile-box';
         }
+        // console.log("Current Scroll:", currentScroll, "Target Offset:", targetOffset, "Should Show Mobile Top Nav:", shouldShowMobileTopNav);
 
         boxNav?.classList.remove('hidden');
         topNav?.classList.add('hidden');
         return;
     }
+
 
     boxNavMobile?.classList.add('hidden');
     topNavMobile?.classList.add('hidden');
@@ -181,8 +183,8 @@ if (typeof Swiper !== 'undefined') {
 }
 
 // Section 2 - Courses (Learning Path)
-const courseButtons = document.querySelectorAll('#section-2 .path-btn');
-const courseCards = document.querySelectorAll('#section-2 .courses-card');
+const courseButtons = document.querySelectorAll('#courses .path-btn');
+const courseCards = document.querySelectorAll('#courses .courses-card');
 
 courseButtons.forEach(button => {
     button.addEventListener('click', () => {
@@ -196,8 +198,8 @@ courseButtons.forEach(button => {
 });
 
 // Section 3 - Student Projects with Tabs
-const projectButtons = document.querySelectorAll('#section-3 .path-btn');
-const projectSliderWrappers = document.querySelectorAll('#section-3 .projects-slider-wrapper');
+const projectButtons = document.querySelectorAll('#projects .path-btn');
+const projectSliderWrappers = document.querySelectorAll('#projects .projects-slider-wrapper');
 const projectSwipers = new Map();
 
 function initializeProjectSwipers() {
@@ -292,14 +294,14 @@ projectButtons.forEach((button) => {
 
 window.addEventListener('load', () => {
     initializeProjectSwipers();
-    const activeProjectButton = document.querySelector('#section-3 .path-btn.active');
+    const activeProjectButton = document.querySelector('#projects .path-btn.active');
     if (activeProjectButton) {
         setActiveProjectTab(activeProjectButton.dataset.project);
     }
 });
 
 // Video play button functionality for all video buttons
-const videoPlayBtns = document.querySelectorAll('#section-3 .video-play-btn');
+const videoPlayBtns = document.querySelectorAll('#projects .video-play-btn');
 
 const closeVideoModal = (modal) => {
     if (!modal) {

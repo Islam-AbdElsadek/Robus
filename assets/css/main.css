@@ -206,7 +206,7 @@ html {
     flex-direction: column;
     gap: 12px;
     align-items: center;
-    z-index: 9999;
+    z-index: 9998;
 }
 
 .fixed-btn {
@@ -237,6 +237,12 @@ html {
 .whatsapp-btn:hover {
     background-color: #20ba5a;
     transform: scale(1.1);
+}
+
+@media (max-width: 991px) {
+    .whatsapp-btn {
+        display: none;
+    }
 }
 
 /* Chat Bot Button */
@@ -329,22 +335,14 @@ html {
     max-height: 52px;
 }
 
-.top-nav-mobile,
-.top-nav-mobile-box {
-    width: 100%;
-    align-items: center;
-    justify-content: space-between;
-    z-index: 10000;
-}
-
 
 .top-nav-mobile:not(.hidden) {
     opacity: 1;
     pointer-events: auto;
     display: flex !important;
     animation: fadeDown 0.4s ease forwards;
-    z-index: 10000;
-    position: sticky;
+    z-index: 20000;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -366,7 +364,14 @@ html {
     animation: fadeDown 0.4s ease reverse forwards;
 }
 
-.top-nav-mobile-box {
+
+
+.top-nav-mobile-box:not(.hidden) {
+    display: flex !important;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 10000;
     position: absolute;
     top: 0;
     left: 0;
@@ -380,10 +385,6 @@ html {
     border: 1px solid rgba(255, 255, 255, 0.5);
     border-radius: 0 0 16px 16px;
     box-shadow: 0 18px 40px rgba(0, 0, 0, 0.08);
-}
-
-.top-nav-mobile-box:not(.hidden) {
-    display: flex !important;
 }
 
 .top-nav-mobile-box.hidden {
@@ -464,7 +465,7 @@ html {
     pointer-events: auto;
     display: flex !important;
     animation: fadeDown 0.4s ease forwards;
-    z-index: 10000;
+    z-index: 10001;
     position: sticky;
     top: 0;
     left: 0;
@@ -474,8 +475,6 @@ html {
     align-items: center;
     justify-content: space-between;
     box-shadow: 0 18px 40px rgba(0, 0, 0, 0.08);
-    opacity: 0;
-    transform: translateY(-20px);
     transition: all 0.4s ease;
 }
 
@@ -489,7 +488,7 @@ html {
 }
 
 section[id] {
-    scroll-margin-top: 120px;
+    scroll-margin-top: 500px;
 }
 
 #home {
@@ -500,6 +499,7 @@ section[id] {
 @media (max-width: 991px) {
     #home {
         padding: 4rem 0;
+        padding-top: 150px;
     }
 
     .top-nav,
@@ -526,9 +526,9 @@ section[id] {
     box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.2);
     background: rgba(194, 227, 198, 0.95);
     padding: 10px 12px;
-    z-index: 9998;
+    z-index: 9997;
     justify-content: space-around;
-    align-items: center;
+    align-items: flex-end;
     gap: 8px;
     /* backdrop-filter: blur(3px); */
     border-top: 1px solid rgba(255, 255, 255, 0.08);
@@ -556,7 +556,7 @@ section[id] {
     justify-content: center;
     gap: 4px;
     padding: 8px 0;
-    color: rgb(148, 148, 148);
+    color: var(--black);
     font-size: 12px;
     text-decoration: none;
     transition:
@@ -573,19 +573,42 @@ section[id] {
     color: var(--theme-green);
 }
 
-.bottom-nav .tab.active i,
-.bottom-nav .tab:hover i {
+.bottom-nav .tab.active > i,
+.bottom-nav .tab:hover > i {
     color: var(--theme-green);
 }
 
-.bottom-nav .tab i {
-    font-size: 18px;
-    color: rgb(148, 148, 148);
+.bottom-nav .tab > i {
+    font-size: 22px;
+    color: var(--black);
 }
 
 .bottom-nav .tab span {
     display: block;
     line-height: 1;
+}
+
+.whatsapp-tab {
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    background: var(--theme-green);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 16px rgba(74,103,65,.4);
+    position: relative;
+    transition: transform .2s, box-shadow .2s;
+}
+
+.whatsapp-tab i {
+    font-size: 22px;
+    color: var(--white);
+}
+
+.bottom-nav .tab:active .whatsapp-tab {
+    transform: scale(.93);
 }
 
 .top-nav {
@@ -808,7 +831,7 @@ section:nth-child(even) {
 
 /* Projects Section Styles */
 
-#section-3 .container {
+#projects .container {
     width: 100%;
 }
 
@@ -1012,14 +1035,14 @@ section:nth-child(even) {
 }
 
 @media (max-width: 575px) {
-    #section-3 .projects-slider-wrapper .swiper-slide {
+    #projects .projects-slider-wrapper .swiper-slide {
         width: 320px;
         display: flex;
         flex-direction: column;
         justify-content: center;
     }
 
-    #section-3 .student-project-card {
+    #projects .student-project-card {
         width: min(86vw, 320px) !important;
         margin: 40px 0px;
     }
