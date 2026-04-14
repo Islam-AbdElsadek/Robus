@@ -153,12 +153,49 @@ setTimeout(updateNavVisibility, 100);
 
 
 
-pageNavLinks.forEach(link => {
-    link.addEventListener('click', () => {
-        pageNavLinks.forEach(item => item.classList.remove('active'));
-        link.classList.add('active');
+// Get all navigation links from all navbars
+const allNavLinks = document.querySelectorAll('.top-nav .nav-links a, .nav-box .nav-links a, .bottom-nav .tab');
+
+// Function to update active state across all navbars
+function setActiveNavLink(targetHref) {
+    allNavLinks.forEach(link => {
+        const linkHref = link.getAttribute('href');
+        if (linkHref === targetHref) {
+            link.classList.add('active');
+        } else {
+            link.classList.remove('active');
+        }
+    });
+}
+
+// Add click listeners to all navigation links
+allNavLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+        const href = link.getAttribute('href');
+        // Only handle anchor links, not external links
+        if (href.startsWith('#')) {
+            setActiveNavLink(href);
+        }
     });
 });
+
+// Update active link on page scroll
+function updateActiveNavOnScroll() {
+    const sections = document.querySelectorAll('section[id]');
+    const scrollPosition = window.scrollY + 100;
+
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+
+        if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+            setActiveNavLink('#' + section.id);
+        }
+    });
+}
+
+window.addEventListener('scroll', updateActiveNavOnScroll);
+window.addEventListener('load', updateActiveNavOnScroll);
 
 // review swiper initialization
 if (typeof Swiper !== 'undefined') {

@@ -466,7 +466,7 @@ html {
     display: flex !important;
     animation: fadeDown 0.4s ease forwards;
     z-index: 10001;
-    position: sticky;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -488,7 +488,7 @@ html {
 }
 
 section[id] {
-    scroll-margin-top: 500px;
+    scroll-margin-top: 80px;
 }
 
 #home {
@@ -2009,7 +2009,7 @@ body.video-modal-open {
     margin-bottom: 600px;
     border-bottom-left-radius: 50px;
     border-bottom-right-radius: 50px;
-    overflow: hidden;
+    overflow: clip;
 }
 
 
