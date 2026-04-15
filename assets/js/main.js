@@ -199,7 +199,7 @@ window.addEventListener('load', updateActiveNavOnScroll);
 
 // review swiper initialization
 if (typeof Swiper !== 'undefined') {
-    new Swiper('.review-slider-2', {
+    const reviewSwiper = new Swiper('.review-slider-2', {
         loop: true,
         speed: 800,
         slidesPerView: 1,
@@ -217,6 +217,11 @@ if (typeof Swiper !== 'undefined') {
             prevEl: '.review-slider-2 .swiper-button-prev',
         },
     });
+    
+    // Ensure autoplay starts
+    if (reviewSwiper && reviewSwiper.autoplay) {
+        reviewSwiper.autoplay.start();
+    }
 }
 
 // Section 2 - Courses (Learning Path)
@@ -293,6 +298,8 @@ function initializeProjectSwipers() {
 
         if (!wrapper.classList.contains('active')) {
             swiper.autoplay.stop();
+        } else {
+            swiper.autoplay.start();
         }
 
         projectSwipers.set(wrapper.dataset.project, swiper);
@@ -465,48 +472,107 @@ window.addEventListener('resize', function() {
 
 
   /*=============================================
-	=         Instagram Active          =
+	=    Footer Instagram Slider (Swiper)        =
 =============================================*/
-  $(".instagram-active").slick({
-    dots: false,
-    infinite: true,
-    speed: 1000,
-    autoplay: true,
-    arrows: false,
-    swipe: false,
-    slidesToShow: 5,
-    slidesToScroll: 1,
-    responsive: [
-      {
-        breakpoint: 1200,
-        settings: {
-          slidesToShow: 5,
-          slidesToScroll: 1,
-          infinite: true,
+  if (typeof Swiper !== 'undefined') {
+    window.addEventListener('load', () => {
+      const footerSwiper = new Swiper('.footer-instagram-slider', {
+        loop: true,
+        speed: 800,
+        spaceBetween: 0,
+        slidesPerView: 5,
+        slidesPerGroup: 1,
+        centeredSlides: false,
+        grabCursor: true,
+        observer: true,
+        observeParents: true,
+        autoplay: {
+          delay: 3500,
+          disableOnInteraction: false,
         },
-      },
-      {
-        breakpoint: 992,
-        settings: {
-          slidesToShow: 4,
-          slidesToScroll: 1,
+        breakpoints: {
+          0: {
+            slidesPerView: 2,
+          },
+          576: {
+            slidesPerView: 3,
+          },
+          768: {
+            slidesPerView: 4,
+          },
+          1024: {
+            slidesPerView: 5,
+          },
         },
-      },
-      {
-        breakpoint: 767,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 1,
-          arrows: false,
-        },
-      },
-      {
-        breakpoint: 575,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
-          arrows: false,
-        },
-      },
-    ],
-  });
+      });
+      
+      // Ensure autoplay starts
+      if (footerSwiper && footerSwiper.autoplay) {
+        footerSwiper.autoplay.start();
+      }
+    });
+  }
+
+/*=============================================
+	=    Mobile Menu Functionality               =
+=============================================*/
+
+// Function to open mobile menu
+function openMobileMenu() {
+    console.log('Opening mobile menu');
+    document.body.classList.add('mobile-menu-visible');
+}
+
+// Function to close mobile menu
+function closeMobileMenu() {
+    console.log('Closing mobile menu');
+    document.body.classList.remove('mobile-menu-visible');
+}
+
+// Use event delegation to handle button clicks
+document.body.addEventListener('click', (e) => {
+    // Check if clicked element is a mobile menu button
+    if (e.target.closest('.top-nav-mobile-button') || e.target.closest('.top-nav-mobile-box-button')) {
+        console.log('Mobile menu button clicked via delegation');
+        openMobileMenu();
+    }
+    
+    // Check if clicked element is the close button
+    if (e.target.closest('.mobile-menu .close-btn')) {
+        console.log('Close button clicked via delegation');
+        closeMobileMenu();
+    }
+    
+    // Check if clicked element is a menu link (but not dropdown buttons)
+    if (e.target.closest('.mobile-menu .navigation a') && !e.target.closest('.dropdown-btn')) {
+        console.log('Menu link clicked via delegation');
+        closeMobileMenu();
+    }
+});
+
+// Close menu when clicking backdrop
+document.addEventListener('click', (e) => {
+    if (e.target.classList.contains('menu-backdrop') && document.body.classList.contains('mobile-menu-visible')) {
+        console.log('Backdrop clicked');
+        closeMobileMenu();
+    }
+});
+
+// Also initialize on DOMContentLoaded as backup
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('DOMContentLoaded - Mobile Menu initialized');
+    
+    const mobileMenuButton = document.querySelector('.top-nav-mobile-button');
+    const mobileMenuBoxButton = document.querySelector('.top-nav-mobile-box-button');
+    const menuBackdrop = document.querySelector('.menu-backdrop');
+    const closeBtn = document.querySelector('.mobile-menu .close-btn');
+    const mobileMenuLinks = document.querySelectorAll('.mobile-menu .navigation a');
+
+    console.log('Mobile Menu Elements:', {
+        mobileMenuButton: !!mobileMenuButton,
+        mobileMenuBoxButton: !!mobileMenuBoxButton,
+        menuBackdrop: !!menuBackdrop,
+        closeBtn: !!closeBtn,
+        mobileMenuLinksCount: mobileMenuLinks.length
+    });
+});
