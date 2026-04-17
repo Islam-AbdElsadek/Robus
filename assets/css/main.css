@@ -1241,17 +1241,17 @@ section:nth-child(even) {
 	z-index: 0;
 }
 .banner-shape.one {
-	left: -18px;
+	left: -100px;
 	top: 14%;
 }
 
 .banner-shape.one img {
-    width: 200px;
+    width: 300px;
 }
 
 .banner-shape.two {
 	right: 0;
-	top: 8%;
+	top: 14%;
     overflow: hidden;
 }
 
@@ -1399,7 +1399,8 @@ button:focus {
 		margin: 0 0 15px;
 	}
 	.banner-shape.one {
-		width: 70px;
+		/* width: 70px; */
+        left: -50px
 	}
 	.banner-shape.two {
 		/* width: 70px; */
@@ -1409,6 +1410,10 @@ button:focus {
 	}
     .banner-shape.two img {
 		width: 150px;
+        right: -25px;
+	}
+    .banner-shape.one img {
+		width: 200px;
         right: -25px;
 	}
 	.banner-content .title {

@@ -5,10 +5,10 @@ const chatbotData = {
         'main': {
             message: 'اختر واحدة من الخيارات التالية:',
             options: [
-                { id: 1, text: '1️⃣ معلومات عن الأكاديمية', nextMenu: 'academy-info' },
-                { id: 2, text: '2️⃣ الكورسات المتاحة', nextMenu: 'courses' },
-                { id: 3, text: '3️⃣ أسعار العضويات', nextMenu: 'pricing' },
-                { id: 4, text: '4️⃣ تواصل معنا', nextMenu: 'contact' }
+                { id: 1, text: '1 معلومات عن الأكاديمية', nextMenu: 'academy-info' },
+                { id: 2, text: '2 الكورسات المتاحة', nextMenu: 'courses' },
+                { id: 3, text: '3 أسعار العضويات', nextMenu: 'pricing' },
+                { id: 4, text: '4 تواصل معنا', nextMenu: 'contact' }
             ]
         },
         'academy-info': {
@@ -18,9 +18,9 @@ const chatbotData = {
         'courses': {
             message: 'اختر الكورس الذي تريد معرفة معلومات عنه:',
             options: [
-                { id: 1, text: '1️⃣ JavaScript', nextMenu: 'course-js' },
-                { id: 2, text: '2️⃣ React', nextMenu: 'course-react' },
-                { id: 3, text: '3️⃣ Python', nextMenu: 'course-python' }
+                { id: 1, text: '1 JavaScript', nextMenu: 'course-js' },
+                { id: 2, text: '2 React', nextMenu: 'course-react' },
+                { id: 3, text: '3 Python', nextMenu: 'course-python' }
             ]
         },
         'course-js': {
