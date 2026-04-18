@@ -1,46 +1,46 @@
 // Chatbot Tree Structure
 const chatbotData = {
-    initialMessage: 'اختر واحدة من الخيارات التالية:',
+    initialMessage: 'Choose one of the following options:',
     menus: {
         'main': {
-            message: 'اختر واحدة من الخيارات التالية:',
+            message: 'Choose one of the following options:',
             options: [
-                { id: 1, text: '1 معلومات عن الأكاديمية', nextMenu: 'academy-info' },
-                { id: 2, text: '2 الكورسات المتاحة', nextMenu: 'courses' },
-                { id: 3, text: '3 أسعار العضويات', nextMenu: 'pricing' },
-                { id: 4, text: '4 تواصل معنا', nextMenu: 'contact' }
+                { id: 1, text: '1) About the Academy', nextMenu: 'academy-info' },
+                { id: 2, text: '2) Available Courses', nextMenu: 'courses' },
+                { id: 3, text: '3) Membership Prices', nextMenu: 'pricing' },
+                { id: 4, text: '4) Contact Us', nextMenu: 'contact' }
             ]
         },
         'academy-info': {
-            message: 'Robus Academy هي أكاديمية متخصصة في تعليم البرمجة وتطوير الويب. نقدم كورسات عملية وشاملة لجميع المستويات.',
+            message: 'Robus Academy is a specialized academy for teaching programming and web development. We offer practical and comprehensive courses for all levels.',
             options: []
         },
         'courses': {
-            message: 'اختر الكورس الذي تريد معرفة معلومات عنه:',
+            message: 'Choose the course you want to know about:',
             options: [
-                { id: 1, text: '1 JavaScript', nextMenu: 'course-js' },
-                { id: 2, text: '2 React', nextMenu: 'course-react' },
-                { id: 3, text: '3 Python', nextMenu: 'course-python' }
+                { id: 1, text: '1) JavaScript', nextMenu: 'course-js' },
+                { id: 2, text: '2) React', nextMenu: 'course-react' },
+                { id: 3, text: '3) Python', nextMenu: 'course-python' }
             ]
         },
         'course-js': {
-            message: 'كورس JavaScript يشمل الأساسيات والمستويات المتقدمة. المدة: 8 أسابيع.',
+            message: 'JavaScript course includes basics and advanced levels. Duration: 8 weeks.',
             options: []
         },
         'course-react': {
-            message: 'كورس React متخصص في بناء تطبيقات ويب حديثة. المدة: 6 أسابيع.',
+            message: 'React course specializes in building modern web applications. Duration: 6 weeks.',
             options: []
         },
         'course-python': {
-            message: 'كورس Python للمبتدئين وحتى المستوى المتقدم. المدة: 10 أسابيع.',
+            message: 'Python course for beginners to advanced level. Duration: 10 weeks.',
             options: []
         },
         'pricing': {
-            message: 'العضويات لدينا:\n💳 الباقة الأساسية: 99 ج.م/شهر\n💳 الباقة المتقدمة: 199 ج.م/شهر\n💳 الباقة الأفضل: 299 ج.م/شهر',
+            message: 'Our memberships:\n💳 Basic Plan: $99/month\n💳 Premium Plan: $199/month\n💳 Best Plan: $299/month',
             options: []
         },
         'contact': {
-            message: 'يمكنك التواصل معنا عبر:\n📱 WhatsApp: https://wa.me/robusacademy\n📧 Email: contact@robusacademy.com\n🌐 الموقع: www.robusacademy.com',
+            message: 'You can contact us via:\n📱 WhatsApp: https://wa.me/robusacademy\n📧 Email: contact@robusacademy.com\n🌐 Website: www.robusacademy.com',
             options: []
         }
     }
@@ -60,6 +60,7 @@ class Chatbot {
         this.optionCounter = 0; // Track option numbering for current menu
         this.storageKey = 'chatbotMessages'; // LocalStorage key
         this.menuStorageKey = 'chatbotCurrentMenu'; // Store current menu state
+        this.conversationKey = 'chatbotConversation'; // Store full conversation with options
         
         this.init();
     }
@@ -83,11 +84,6 @@ class Chatbot {
 
     toggleChat() {
         this.chatWindow.classList.toggle('hidden');
-        
-        // Load saved messages and menu state when opening chat
-        if (!this.chatWindow.classList.contains('hidden')) {
-            this.loadChatHistory();
-        }
     }
 
     closeChat() {
@@ -95,17 +91,18 @@ class Chatbot {
     }
 
     displayInitialMessage() {
-        // Check if there are saved messages
+        // Check if there are saved conversations
         try {
-            const savedMessages = JSON.parse(localStorage.getItem(this.storageKey)) || [];
-            if (savedMessages.length > 0) {
+            const savedConversation = JSON.parse(localStorage.getItem(this.conversationKey)) || [];
+            if (savedConversation.length > 0) {
+                // Load saved conversation
                 this.loadChatHistory();
                 return;
             }
         } catch (error) {
-            console.error('Error checking saved messages:', error);
+            console.error('Error checking saved conversation:', error);
         }
-
+        
         // Clear previous messages
         this.chatBody.innerHTML = '';
         this.currentMenu = 'main';
@@ -137,10 +134,15 @@ class Chatbot {
         this.chatBody.appendChild(messageDiv);
         
         // Save message to localStorage
+        const currentMenuData = chatbotData.menus[this.currentMenu];
+        const options = currentMenuData && currentMenuData.options ? currentMenuData.options.map(o => ({text: o.text, id: o.id})) : [];
+        
         this.saveMessage({
             type: 'bot',
             content: message,
-            timestamp: timestamp
+            timestamp: timestamp,
+            menuId: this.currentMenu,
+            optionCount: options.length
         });
         
         this.scrollToBottom();
@@ -164,11 +166,12 @@ class Chatbot {
         messageDiv.innerHTML = userMessageContent;
         this.chatBody.appendChild(messageDiv);
         
-        // Save message to localStorage
+        // Save message to localStorage with selected option
         this.saveMessage({
             type: 'user',
             content: message,
-            timestamp: timestamp
+            timestamp: timestamp,
+            selectedOption: parseInt(message)
         });
         
         this.scrollToBottom();
@@ -206,7 +209,7 @@ class Chatbot {
             returnBtn.style.fontSize = '1rem';
             returnBtn.style.padding = '0.6rem 0.8rem';
             const returnBtnNumber = options.length + 1;
-            returnBtn.textContent = `${returnBtnNumber}️⃣ العودة للقائمة الرئيسية`;
+            returnBtn.textContent = `${returnBtnNumber}) Return to Main Menu`;
             returnBtn.dataset.optionId = 'return-main';
             returnBtn.addEventListener('click', (e) => {
                 e.preventDefault();
@@ -225,6 +228,35 @@ class Chatbot {
         this.scrollToBottom();
     }
 
+    disableAllOptions() {
+        const buttons = this.chatBody.querySelectorAll('.options-container button');
+        buttons.forEach(btn => {
+            btn.disabled = true;
+            btn.classList.remove('btn-outline-success', 'btn-outline-warning');
+            btn.classList.add('btn-outline-secondary');
+            btn.style.opacity = '0.6';
+            btn.style.cursor = 'not-allowed';
+            btn.style.border = '2px solid #6c757d';
+        });
+    }
+
+    highlightSelectedOption(selectedOptionNumber) {
+        // Get the last options container (the one we just added)
+        const optionsContainers = this.chatBody.querySelectorAll('.options-container');
+        if (optionsContainers.length === 0) return;
+        
+        const lastOptionsContainer = optionsContainers[optionsContainers.length - 1];
+        const buttons = lastOptionsContainer.querySelectorAll('button');
+        
+        buttons.forEach((btn, index) => {
+            if (index + 1 === selectedOptionNumber) {
+                btn.style.borderColor = '#FFD700';
+                btn.style.borderWidth = '2px';
+                btn.style.backgroundColor = 'rgba(255, 215, 0, 0.15)';
+            }
+        });
+    }
+
     handleOptionClick(optionIndex) {
         const currentMenuData = chatbotData.menus[this.currentMenu];
         const options = currentMenuData.options || [];
@@ -239,11 +271,9 @@ class Chatbot {
         // Display user message (just the number)
         this.displayUserMessage(`${optionIndex}`);
 
-        // Remove options
-        const optionsContainer = this.chatBody.querySelector('.options-container');
-        if (optionsContainer) {
-            optionsContainer.remove();
-        }
+        // Disable all options and highlight selected one
+        this.disableAllOptions();
+        this.highlightSelectedOption(optionIndex);
 
         // Move to next menu
         const nextMenuId = selectedOption.nextMenu;
@@ -268,11 +298,9 @@ class Chatbot {
         const optionNumber = (currentMenuData.options || []).length + 1;
         this.displayUserMessage(`${optionNumber}`);
 
-        // Remove options
-        const optionsContainer = this.chatBody.querySelector('.options-container');
-        if (optionsContainer) {
-            optionsContainer.remove();
-        }
+        // Disable all options and highlight selected one
+        this.disableAllOptions();
+        this.highlightSelectedOption(optionNumber);
 
         // Return to main menu
         this.currentMenu = 'main';
@@ -280,7 +308,7 @@ class Chatbot {
         const mainMenuData = chatbotData.menus['main'];
         
         setTimeout(() => {
-            this.displayBotMessage('تم العودة للقائمة الرئيسية. اختر خياراً من فضلك:');
+            this.displayBotMessage('Returned to Main Menu. Please choose an option:');
             this.displayOptions();
         }, 500);
 
@@ -303,27 +331,57 @@ class Chatbot {
         const maxOptionNumber = options.length + (this.currentMenu !== 'main' ? 1 : 0);
         
         if (optionId >= 1 && optionId <= maxOptionNumber) {
-            // Remove options if they exist
-            const optionsContainer = this.chatBody.querySelector('.options-container');
-            if (optionsContainer) {
-                optionsContainer.remove();
-            }
+            // Disable all options and highlight selected one
+            this.disableAllOptions();
+            this.highlightSelectedOption(optionId);
 
             // Check if it's the return button
             if (optionId === options.length + 1 && this.currentMenu !== 'main') {
-                this.returnToMainMenu();
+                this.returnToMainMenuFromInput();
             } else if (optionId >= 1 && optionId <= options.length) {
-                this.handleOptionClick(optionId);
+                this.handleOptionClickFromInput(optionId);
             }
         } else {
             // Invalid option
             setTimeout(() => {
-                this.displayBotMessage(`عذراً، الخيار غير صحيح. الرجاء اختيار رقم من 1 إلى ${maxOptionNumber}.`);
+                this.displayBotMessage(`Sorry, the option is incorrect. Please choose a number from 1 to ${maxOptionNumber}.`);
             }, 500);
         }
 
         // Clear input field
         this.inputField.value = '';
+    }
+
+    handleOptionClickFromInput(optionIndex) {
+        const currentMenuData = chatbotData.menus[this.currentMenu];
+        const options = currentMenuData.options || [];
+        
+        const selectedOption = options[optionIndex - 1];
+        
+        // Move to next menu
+        const nextMenuId = selectedOption.nextMenu;
+        if (nextMenuId && chatbotData.menus[nextMenuId]) {
+            this.currentMenu = nextMenuId;
+            this.saveMenuState(this.currentMenu);
+            const nextMenuData = chatbotData.menus[nextMenuId];
+            
+            setTimeout(() => {
+                this.displayBotMessage(nextMenuData.message);
+                this.displayOptions();
+            }, 500);
+        }
+    }
+
+    returnToMainMenuFromInput() {
+        // Return to main menu
+        this.currentMenu = 'main';
+        this.saveMenuState(this.currentMenu);
+        const mainMenuData = chatbotData.menus['main'];
+        
+        setTimeout(() => {
+            this.displayBotMessage('Returned to Main Menu. Please choose an option:');
+            this.displayOptions();
+        }, 500);
     }
 
     scrollToBottom() {
@@ -383,9 +441,9 @@ class Chatbot {
 
     saveMessage(messageObj) {
         try {
-            let messages = JSON.parse(localStorage.getItem(this.storageKey)) || [];
-            messages.push(messageObj);
-            localStorage.setItem(this.storageKey, JSON.stringify(messages));
+            let conversation = JSON.parse(localStorage.getItem(this.conversationKey)) || [];
+            conversation.push(messageObj);
+            localStorage.setItem(this.conversationKey, JSON.stringify(conversation));
         } catch (error) {
             console.error('Error saving message to localStorage:', error);
         }
@@ -410,51 +468,74 @@ class Chatbot {
 
     loadChatHistory() {
         try {
-            const messages = JSON.parse(localStorage.getItem(this.storageKey)) || [];
+            const conversation = JSON.parse(localStorage.getItem(this.conversationKey)) || [];
             const savedMenuState = this.getMenuState();
             
             // If there are saved messages, display them
-            if (messages.length > 0) {
-                // Clear current content but keep any existing options
-                const optionsContainer = this.chatBody.querySelector('.options-container');
+            if (conversation.length > 0) {
+                // Clear current content
                 this.chatBody.innerHTML = '';
-                if (optionsContainer) {
-                    this.chatBody.appendChild(optionsContainer);
-                }
                 
                 // Restore the menu state
                 this.currentMenu = savedMenuState;
                 
-                // Display all saved messages without re-saving them
-                messages.forEach(msg => {
-                    const formattedTime = this.getFormattedTime(msg.timestamp);
-                    const messageDiv = document.createElement('div');
+                // Reconstruct the conversation with proper order: bot message -> options -> user message
+                let i = 0;
+                while (i < conversation.length) {
+                    const msg = conversation[i];
                     
                     if (msg.type === 'bot') {
-                        messageDiv.className = 'd-flex flex-row justify-content-start mb-3';
-                        messageDiv.innerHTML = `
-                            <img src="assets/img/chatbot/chatbot1.svg" alt="bot" style="width: 45px; height: 45px; border-radius: 50%; margin-right: 10px;">
-                            <div>
-                                <p class="small p-2 ms-3 mb-1 rounded-3 bg-body-tertiary text-wrap">${msg.content}</p>
-                                <small class="ms-3 text-muted" style="font-size: 0.75rem;">${formattedTime}</small>
-                            </div>
-                        `;
-                    } else {
-                        messageDiv.className = 'd-flex flex-row justify-content-end mb-3';
-                        messageDiv.innerHTML = `
-                            <div>
-                                <p class="small p-2 me-3 mb-1 text-white rounded-3 bg-primary">${msg.content}</p>
-                                <small class="me-3 text-muted" style="font-size: 0.75rem; display: block; text-align: right;">${formattedTime}</small>
-                            </div>
-                            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava4-bg.webp" alt="user" style="width: 45px; height: 45px; border-radius: 50%;">
-                        `;
+                        // Display bot message
+                        this.displayMessageInHistory(msg);
+                        
+                        // Check if this is the last bot message (don't show disabled options for it)
+                        let isLastBotMessage = false;
+                        if (i === conversation.length - 1 || 
+                            (i + 1 < conversation.length && conversation[i + 1].type === 'user' && i + 1 === conversation.length - 1)) {
+                            isLastBotMessage = true;
+                        }
+                        
+                        // Display options for this bot message only if it's not the last one
+                        if (!isLastBotMessage) {
+                            const menuData = chatbotData.menus[msg.menuId];
+                            if (menuData) {
+                                const options = menuData.options || [];
+                                // Show options if there are any, or if menu is not main (so return button can show)
+                                if (options.length > 0 || msg.menuId !== 'main') {
+                                    this.displayOptionsInHistory(options, msg.menuId, false);
+                                }
+                            }
+                        }
+                        
+                        // Check if next message is user message
+                        if (i + 1 < conversation.length && conversation[i + 1].type === 'user') {
+                            i++;
+                            const userMsg = conversation[i];
+                            
+                            // Display user message
+                            this.displayMessageInHistory(userMsg);
+                            
+                            // Highlight the selected option
+                            if (userMsg.selectedOption) {
+                                this.highlightSelectedOption(userMsg.selectedOption);
+                            }
+                        }
+                    } else if (msg.type === 'user' && (i === 0 || conversation[i - 1].type === 'user')) {
+                        // Orphan user message (shouldn't happen, but just in case)
+                        this.displayMessageInHistory(msg);
                     }
                     
-                    this.chatBody.appendChild(messageDiv);
-                });
+                    i++;
+                }
                 
                 // Display current options based on saved menu state
-                this.displayOptions();
+                const currentMenuData = chatbotData.menus[this.currentMenu];
+                const currentOptions = currentMenuData.options || [];
+                
+                if (currentOptions.length > 0 || this.currentMenu !== 'main') {
+                    this.displayOptionsInHistory(currentOptions, this.currentMenu, true);
+                }
+                
                 this.scrollToBottom();
             }
         } catch (error) {
@@ -462,12 +543,118 @@ class Chatbot {
         }
     }
 
+    displayMessageInHistory(msg) {
+        const formattedTime = this.getFormattedTime(msg.timestamp);
+        const messageDiv = document.createElement('div');
+        
+        if (msg.type === 'bot') {
+            messageDiv.className = 'd-flex flex-row justify-content-start mb-3';
+            messageDiv.innerHTML = `
+                <img src="assets/img/chatbot/chatbot1.svg" alt="bot" style="width: 45px; height: 45px; border-radius: 50%; margin-right: 10px;">
+                <div>
+                    <p class="small p-2 ms-3 mb-1 rounded-3 bg-body-tertiary text-wrap">${msg.content}</p>
+                    <small class="ms-3 text-muted" style="font-size: 0.75rem;">${formattedTime}</small>
+                </div>
+            `;
+        } else {
+            messageDiv.className = 'd-flex flex-row justify-content-end mb-3';
+            messageDiv.innerHTML = `
+                <div>
+                    <p class="small p-2 me-3 mb-1 text-white rounded-3 bg-primary">${msg.content}</p>
+                    <small class="me-3 text-muted" style="font-size: 0.75rem; display: block; text-align: right;">${formattedTime}</small>
+                </div>
+                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava4-bg.webp" alt="user" style="width: 45px; height: 45px; border-radius: 50%;">
+            `;
+        }
+        
+        this.chatBody.appendChild(messageDiv);
+    }
+
+    displayOptionsInHistory(options, menuId, isActive = false) {
+        const optionsDiv = document.createElement('div');
+        optionsDiv.className = 'options-container mt-2';
+        
+        // Display all options
+        options.forEach((option, index) => {
+            const optionBtn = document.createElement('button');
+            optionBtn.type = 'button';
+            
+            if (isActive) {
+                // Active options (current menu)
+                optionBtn.className = 'btn btn-outline-success btn-sm w-100 mb-2 text-start';
+                optionBtn.style.fontSize = '1rem';
+                optionBtn.style.padding = '0.6rem 0.8rem';
+                optionBtn.style.opacity = '1';
+                optionBtn.style.cursor = 'pointer';
+                optionBtn.style.border = '1px solid';
+                optionBtn.disabled = false;
+                optionBtn.dataset.optionId = index + 1;
+                optionBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    this.handleOptionClick(index + 1);
+                });
+            } else {
+                // Disabled options (previous messages)
+                optionBtn.className = 'btn btn-outline-secondary btn-sm w-100 mb-2 text-start';
+                optionBtn.style.fontSize = '1rem';
+                optionBtn.style.padding = '0.6rem 0.8rem';
+                optionBtn.style.opacity = '0.6';
+                optionBtn.style.cursor = 'not-allowed';
+                optionBtn.style.border = '2px solid #6c757d';
+                optionBtn.disabled = true;
+            }
+            
+            optionBtn.textContent = option.text;
+            optionsDiv.appendChild(optionBtn);
+        });
+        
+        // Add return button if not at main menu
+        if (menuId !== 'main') {
+            const returnBtn = document.createElement('button');
+            returnBtn.type = 'button';
+            
+            if (isActive) {
+                // Active return button
+                returnBtn.className = 'btn btn-outline-warning btn-sm w-100 mb-2 text-start';
+                returnBtn.style.fontSize = '1rem';
+                returnBtn.style.padding = '0.6rem 0.8rem';
+                returnBtn.style.opacity = '1';
+                returnBtn.style.cursor = 'pointer';
+                returnBtn.style.border = '1px solid';
+                returnBtn.disabled = false;
+                returnBtn.dataset.optionId = 'return-main';
+                returnBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    this.returnToMainMenu();
+                });
+            } else {
+                // Disabled return button
+                returnBtn.className = 'btn btn-outline-secondary btn-sm w-100 mb-2 text-start';
+                returnBtn.style.fontSize = '1rem';
+                returnBtn.style.padding = '0.6rem 0.8rem';
+                returnBtn.style.opacity = '0.6';
+                returnBtn.style.cursor = 'not-allowed';
+                returnBtn.style.border = '2px solid #6c757d';
+                returnBtn.disabled = true;
+            }
+            
+            const returnBtnNumber = options.length + 1;
+            returnBtn.textContent = `${returnBtnNumber}) Return to Main Menu`;
+            optionsDiv.appendChild(returnBtn);
+        }
+        
+        this.chatBody.appendChild(optionsDiv);
+    }
+
     clearChatHistory() {
         try {
-            localStorage.removeItem(this.storageKey);
+            localStorage.removeItem(this.conversationKey);
             localStorage.removeItem(this.menuStorageKey);
             this.chatBody.innerHTML = '';
             this.currentMenu = 'main';
+            this.saveMenuState(this.currentMenu);
             this.displayInitialMessage();
         } catch (error) {
             console.error('Error clearing chat history:', error);
