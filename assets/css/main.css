@@ -745,7 +745,7 @@ section[id] {
     left: 0;
     bottom: 0;
     right: 0;
-    height: 70px;
+    height: 90px;
     box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.2);
     background: rgba(194, 227, 198, 0.95);
     padding: 10px 12px;
@@ -779,13 +779,10 @@ section[id] {
     justify-content: center;
     gap: 4px;
     padding: 8px 0;
-    color: var(--black);
+    color: var(--theme-green);
     font-size: 12px;
     text-decoration: none;
-    transition:
-        color 0.25s ease,
-        transform 0.25s ease,
-        background 0.25s ease;
+    transition: all 0.25s ease;
 }
 
 .bottom-nav .tab span {
@@ -793,17 +790,19 @@ section[id] {
 }
 
 .bottom-nav .tab.active {
-    color: var(--theme-green);
+    color: var(--theme-gold);
 }
 
 .bottom-nav .tab.active > i,
 .bottom-nav .tab:hover > i {
-    color: var(--theme-green);
+    color: var(--theme-gold);
+    font-size: 30px;
+    transition: all 0.25s ease;
 }
 
 .bottom-nav .tab > i {
     font-size: 22px;
-    color: var(--black);
+    color: var(--theme-green);
 }
 
 .bottom-nav .tab span {
@@ -1467,18 +1466,18 @@ button:focus {
 		/* width: 70px; */
         left: -50px
 	}
+    .banner-shape.one img {
+        width: 200px;
+        right: -25px;
+    }
 	.banner-shape.two {
 		/* width: 70px; */
 		top: auto;
-		bottom: 40%;
-		opacity: 1;
+		bottom: 35%;
+		opacity: 0.5;
 	}
     .banner-shape.two img {
 		width: 150px;
-        right: -25px;
-	}
-    .banner-shape.one img {
-		width: 200px;
         right: -25px;
 	}
 	.banner-content .title {
