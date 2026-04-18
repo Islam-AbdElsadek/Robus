@@ -767,9 +767,9 @@ section[id] {
     padding-bottom: calc(15px + env(safe-area-inset-bottom));
     
     -webkit-mask: 
-    radial-gradient(circle 30px at 50% calc(0% + 8px), transparent 98%, black 100%);
+    radial-gradient(circle 33px at 50% calc(0% + 8px), transparent 98%, black 100%);
     mask: 
-    radial-gradient(circle 30px at 50% calc(0% + 8px), transparent 98%, black 100%);
+    radial-gradient(circle 33px at 50% calc(0% + 8px), transparent 98%, black 100%);
 }
 
 @media (max-width: 991px) {
@@ -819,6 +819,10 @@ section[id] {
     color: var(--theme-green);
 }
 
+.bottom-nav .tab > i.fa-whatsapp {
+    color: rgba(255, 255, 255, 0.08);
+}
+
 .bottom-nav .tab span {
     display: block;
     line-height: 1;
@@ -830,7 +834,7 @@ section[id] {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    bottom: 23px;
+    bottom: 40px;
     left: 50%;
     transform: translateX(-50%);
     z-index: 9999;
