@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <title>Robus Academy</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <!-- <link rel="stylesheet" href="assets/css/validnavs.css"> -->
@@ -31,26 +32,30 @@
             <i class="fas fa-moon"></i>
         </button>
         <button class="fixed-left-btn fixed-left-btn--help" type="button" aria-label="Help">
-            <i class="fas fa-question"></i>
+            <svg xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 640 640">
+                <path
+                    d="M192 64C209.7 64 224 78.3 224 96L224 128L352 128C369.7 128 384 142.3 384 160C384 177.7 369.7 192 352 192L342.4 192L334 215.1C317.6 260.3 292.9 301.6 261.8 337.1C276 345.9 290.8 353.7 306.2 360.6L356.6 383L418.8 243C423.9 231.4 435.4 224 448 224C460.6 224 472.1 231.4 477.2 243L605.2 531C612.4 547.2 605.1 566.1 589 573.2C572.9 580.3 553.9 573.1 546.8 557L526.8 512L369.3 512L349.3 557C342.1 573.2 323.2 580.4 307.1 573.2C291 566 283.7 547.1 290.9 531L330.7 441.5L280.3 419.1C257.3 408.9 235.3 396.7 214.5 382.7C193.2 399.9 169.9 414.9 145 427.4L110.3 444.6C94.5 452.5 75.3 446.1 67.4 430.3C59.5 414.5 65.9 395.3 81.7 387.4L116.2 370.1C132.5 361.9 148 352.4 162.6 341.8C148.8 329.1 135.8 315.4 123.7 300.9L113.6 288.7C102.3 275.1 104.1 254.9 117.7 243.6C131.3 232.3 151.5 234.1 162.8 247.7L173 259.9C184.5 273.8 197.1 286.7 210.4 298.6C237.9 268.2 259.6 232.5 273.9 193.2L274.4 192L64.1 192C46.3 192 32 177.7 32 160C32 142.3 46.3 128 64 128L160 128L160 96C160 78.3 174.3 64 192 64zM448 334.8L397.7 448L498.3 448L448 334.8z" />
+            </svg>
         </button>
     </div> -->
 
     <!-- Fixed Buttons Group -->
     <div class="fixed-buttons-group">
+
+
+        <!-- Chat Bot Tooltip -->
+        <div class="chatbot-tooltip" id="chatbotTooltip">
+            <span>Ask Me..</span>
+        </div>
+        <!-- Chat Bot Button -->
+        <button id="chatbot-btn" class="fixed-btn chatbot-btn" aria-label="Chat Bot">
+            <img src="assets/img/chatbot/chatbot1.svg" alt="">
+        </button>
         <!-- WhatsApp Button -->
         <a href="https://wa.me/robusacademy" target="_blank" class="fixed-btn whatsapp-btn" aria-label="WhatsApp">
             <i class="fab fa-whatsapp"></i>
         </a>
-
-        
-        <!-- Chat Bot Button -->
-        <button id="chatbot-btn" class="fixed-btn chatbot-btn" aria-label="Chat Bot" >
-            <img src="assets/img/chatbot/chatbot1.svg" alt="">
-            <!-- Chat Bot Tooltip -->
-            <div class="chatbot-tooltip" id="chatbotTooltip">
-                <span>Ask Me..</span>
-            </div>
-        </button>
 
         <!-- Back To Top -->
         <button id="back-to-top-btn" class="fixed-btn back-top">
@@ -73,7 +78,8 @@
                 <!-- Chat messages will be loaded here by chatbot.js -->
             </div>
             <div class="card-footer text-muted d-flex justify-content-start align-items-center p-3">
-                <input type="number" class="form-control form-control-lg" placeholder="Type choose number..." id="chatInput">
+                <input type="number" class="form-control form-control-lg" placeholder="Type choose number..."
+                    id="chatInput">
                 <a class="ms-3" href="#!"><i class="fas fa-paper-plane"></i></a>
             </div>
         </div>
@@ -211,13 +217,15 @@
                     <a href="#questions"><i class="fas fa-question-circle"></i><span>Questions</span></a>
                 </div>
                 <div>
-                    <button class="top-nav-mobile-box-button"><img src="assets/img/navbar/gift.svg" alt="" width="60%"></button>
+                    <button class="top-nav-mobile-box-button"><img src="assets/img/navbar/gift.svg" alt=""
+                            width="60%"></button>
                 </div>
             </div>
             <nav class="top-nav-mobile-box hidden" id="TopNavMobileBox">
                 <div class="brand">
                     <a href="#"><img src="assets/img/logo/logo 1.png" class="logo" alt="Robus Academy" width="160"></a>
-                    <button class="top-nav-mobile-box-button"><img src="assets/img/navbar/gift.svg" alt="" width="70%"></button>
+                    <button class="top-nav-mobile-box-button"><img src="assets/img/navbar/gift.svg" alt=""
+                            width="70%"></button>
                 </div>
             </nav>
 
@@ -241,8 +249,8 @@
                 </div>
             </div>
             <div class="banner-shape one">
-                <img src="assets/img/banner/laptop.svg" alt="shape" class="wow bannerFadeInLeft"
-                    data-wow-delay=".2s" data-wow-duration="2s"
+                <img src="assets/img/banner/laptop.svg" alt="shape" class="wow bannerFadeInLeft" data-wow-delay=".2s"
+                    data-wow-duration="2s"
                     style="visibility: visible; animation-duration: 2s; animation-delay: 0.2s; animation-name: bannerFadeInLeft;">
             </div>
             <div class="banner-shape two">
@@ -1202,7 +1210,7 @@
     </div>
 
 
-    
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
