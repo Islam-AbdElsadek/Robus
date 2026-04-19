@@ -758,21 +758,57 @@ chatbotBtn.addEventListener('click', () => {
     }
 });
 
-// // Update tooltip position to match chatbot button
-// function updateTooltipPosition() {
-//     const tooltip = document.getElementById('chatbotTooltip');
-//     const chatbotBtnGroup = document.querySelector('.fixed-buttons-group');
-    
-//     if (tooltip && chatbotBtnGroup) {
-//         const groupBottom = window.getComputedStyle(chatbotBtnGroup).bottom;
-//         const bottomValue = parseInt(groupBottom);
-        
-//         // Position tooltip 60px above the button
-//         tooltip.style.bottom = (bottomValue + 70) + 'px';
-//     }
-// }
 
-// // Update tooltip position on scroll and window resize
-// window.addEventListener('scroll', updateTooltipPosition);
-// window.addEventListener('resize', updateTooltipPosition);
-// window.addEventListener('load', updateTooltipPosition);
+
+
+/*=============================================
+	=    Odometer Counter Functionality           =
+=============================================*/
+
+// Odometer counter animation on scroll
+document.addEventListener('DOMContentLoaded', function() {
+    const odometerElements = document.querySelectorAll('.odometer');
+    
+    if (odometerElements.length === 0) return;
+
+    // Function to check if element is in viewport
+    function isElementInViewport(el) {
+        const rect = el.getBoundingClientRect();
+        return (
+            rect.top <= (window.innerHeight || document.documentElement.clientHeight) &&
+            rect.bottom >= 0
+        );
+    }
+
+    // Function to update odometer values
+    function updateOdometers() {
+        odometerElements.forEach(element => {
+            if (isElementInViewport(element) && !element.classList.contains('animated')) {
+                const countValue = element.getAttribute('data-count');
+                // Animate to the target count
+                let currentValue = 0;
+                const targetValue = parseFloat(countValue);
+                const increment = targetValue / 50; // Divide animation into 50 steps
+                const animationDuration = 2000; // 2 seconds
+                const stepDuration = animationDuration / 50;
+
+                const animationInterval = setInterval(() => {
+                    currentValue += increment;
+                    if (currentValue >= targetValue) {
+                        element.textContent = countValue;
+                        element.classList.add('animated');
+                        clearInterval(animationInterval);
+                    } else {
+                        element.textContent = currentValue.toFixed(1).replace(/\.0$/, '');
+                    }
+                }, stepDuration);
+            }
+        });
+    }
+
+    // Update odometeters on scroll and load
+    window.addEventListener('scroll', updateOdometers);
+    window.addEventListener('load', updateOdometers);
+    updateOdometers(); // Call once on page load
+});
+
