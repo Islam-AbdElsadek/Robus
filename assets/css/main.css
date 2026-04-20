@@ -523,8 +523,6 @@ html {
 }
 
 
-
-
 @media (min-width: 900px) {
     .nav-box {
         padding: 16px 40px;
@@ -539,13 +537,13 @@ html {
 
 @media (min-width: 1200px) {
     .nav-box {
-        padding: 16px 250px;
+        padding: 16px 150px;
     }
 }
 
 @media (min-width: 1500px) {
     .nav-box {
-        padding: 16px 300px;
+        padding: 16px 200px;
     }
 }
 
@@ -573,6 +571,7 @@ html {
     width: 100%;
     padding: 18px 24px;
     background: rgba(255, 255, 255, 0.94);
+    backdrop-filter: blur(2px);
     align-items: center;
     justify-content: space-between;
     box-shadow: 0 18px 40px rgba(0, 0, 0, 0.08);
@@ -619,10 +618,10 @@ html {
     gap: 16px;
 }
 
+.top-nav-button,
+.top-nav-box-button,
 .top-nav-mobile-button,
 .top-nav-mobile-box-button {
-    width: 60px;
-    height: 60px;
     border: none;
     border-radius: 50%;
     background: var(--theme-green);
@@ -639,6 +638,12 @@ html {
         transform 0.25s ease,
         box-shadow 0.25s ease;
     z-index: 21000;
+}
+
+.top-nav-mobile-button,
+.top-nav-mobile-box-button {
+    width: 50px;
+    height: 50px;
 }
 
 .top-nav-mobile-button:hover,
@@ -744,6 +749,24 @@ html {
     display: none !important;
     transition: all 0.4s ease;
     animation: fadeDown 0.4s ease reverse forwards;
+}
+
+.top-nav-box-button,
+.top-nav-button {
+    width: 120px;
+    height: 60px;
+    border-radius: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.top-nav-box-button span,
+.top-nav-button span {
+    padding: 0 12px;
+    font-size: 16px;
+    font-weight: 600;
 }
 
 section[id] {
@@ -1366,7 +1389,7 @@ section:nth-child(even) {
 
 
 /* 6. Banner */
-.banner-area {
+.banner-section {
     padding: 41px 0 15px;
     position: relative;
 }
@@ -3173,6 +3196,235 @@ body.video-modal-open {
     }
 }
 
+/* ==================== Marquee Section Styles ==================== */
+
+.marquee-section {
+    padding: 0;
+    position: relative;
+}
+
+.marquee-section.style-header {
+    position: relative;
+}
+
+.mycustom-marque {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+.mycustom-marque.header-marque {
+    background-color: var(--theme-blue);
+}
+
+.mycustom-marque.theme-blue-bg {
+    background-color: var(--theme-blue);
+}
+
+.mycustom-marque.theme-green-bg {
+    background-color: #102f25;
+}
+
+.mycustom-marque.theme-yellow-bg {
+    background-color: #fdc500;
+}
+
+.mycustom-marque.theme-green-bg-1 {
+    background-color: #00e2c5;
+}
+
+.mycustom-marque.theme-blue-bg-2 {
+    background-color: #553cdf;
+    position: static;
+}
+
+.scrolling-wrap {
+    overflow: hidden;
+    white-space: nowrap;
+    display: flex;
+    gap: 20px;
+    padding: 15px 0;
+}
+
+.scrolling-wrap .comm {
+    display: flex;
+    align-items: center;
+    animation: scroll 60s linear infinite;
+    gap: 30px;
+    cursor: pointer;
+}
+
+.scrolling-wrap .comm .cmn-textslide {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 32px;
+    text-transform: capitalize;
+    color: var(--white);
+    font-family: "Sora", system-ui, sans-serif;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+}
+
+.scrolling-wrap .comm .cmn-textslide i {
+    font-size: 21px;
+}
+
+.scrolling-wrap .comm .cmn-textslide.text-color-2 {
+    color: var(--header);
+}
+
+.scrolling-wrap:hover .comm {
+    animation-play-state: paused;
+}
+
+@media (max-width: 1399px) {
+    .scrolling-wrap .comm {
+        gap: 20px;
+    }
+}
+
+@media (max-width: 991px) {
+    .scrolling-wrap {
+        gap: 14px;
+    }
+    
+    .scrolling-wrap .comm {
+        gap: 14px;
+    }
+}
+
+@media (max-width: 575px) {
+    .scrolling-wrap .comm {
+        gap: 12px;
+    }
+    
+    .scrolling-wrap .comm .cmn-textslide {
+        font-size: 14px;
+    }
+}
+
+.scrolling-wrap.style-2 {
+    margin-top: -175px;
+}
+
+.scrolling-wrap.style-2 .comm .stroke-text {
+    -webkit-text-stroke: 1px var(--theme-green);
+    -webkit-text-fill-color: transparent;
+    font-size: 200px;
+    font-weight: 600;
+    line-height: 255px;
+    font-family: "Sora", system-ui;
+    animation: shine 3s infinite;
+    -webkit-mask-image: linear-gradient(-75deg, rgba(255, 255, 255, 0.07) 50%, #fff 50%, rgba(255, 255, 255, 0.07) 70%);
+    -webkit-mask-size: 200%;
+}
+
+.mycustom-marque.style-3 .scrolling-wrap {
+    padding: 0;
+}
+
+.mycustom-marque.style-3 .scrolling-wrap .cmn-textslide {
+    font-size: 55px;
+    font-weight: 600;
+    color: var(--header);
+}
+
+@media (max-width: 767px) {
+    .mycustom-marque.style-3 .scrolling-wrap .cmn-textslide {
+        font-size: 40px;
+    }
+}
+
+@media (max-width: 575px) {
+    .mycustom-marque.style-3 .scrolling-wrap .cmn-textslide {
+        font-size: 36px;
+    }
+}
+
+.mycustom-marque.style-3 .scrolling-wrap .cmn-textslide i {
+    font-size: 55px;
+    color: var(--theme-red);
+}
+
+@media (max-width: 575px) {
+    .mycustom-marque.style-3 .scrolling-wrap .cmn-textslide i {
+        font-size: 44px;
+    }
+}
+
+.mycustom-marque.theme-yellow-bg .scrolling-wrap .comm {
+    animation: scrolls 60s linear infinite;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    cursor: pointer;
+}
+
+.mycustom-marque.theme-yellow-bg .scrolling-wrap .cmn-textslide {
+    color: var(--header);
+}
+
+.mycustom-marque.theme-yellow-bg .scrolling-wrap .cmn-textslide i {
+    color: var(--header);
+}
+
+.mycustom-marque.style-two .scrolling-wrap.style-2 {
+    margin-top: -155px;
+}
+
+.mycustom-marque.style-two .scrolling-wrap.style-2 .comm {
+    color: rgba(3, 31, 66, 0.1);
+}
+
+.mycustom-marque.style-two .scrolling-wrap.style-2 .comm .stroke-text {
+    -webkit-text-stroke: 1px var(--text);
+    -webkit-text-fill-color: transparent;
+    font-size: 200px;
+    font-weight: 600;
+    line-height: 255px;
+    font-family: "Sora", system-ui;
+    animation: shine 3s infinite;
+    -webkit-mask-image: linear-gradient(-75deg, rgba(3, 31, 66, 0.1) 50%, var(--text) 50%, rgba(3, 31, 66, 0.1) 70%);
+    -webkit-mask-size: 200%;
+}
+
+.mycustom-marque.header-marque .scrolling-wrap {
+    padding: 5px 0;
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+    
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+@keyframes scrolls {
+    0% {
+        transform: translateX(0);
+    }
+    
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+@keyframes shine {
+    from {
+        -webkit-mask-position: 150%;
+    }
+    
+    to {
+        -webkit-mask-position: -50%;
+    }
+}
+
+/* ==================== End Marquee Section Styles ==================== */
 
 
 

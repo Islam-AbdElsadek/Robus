@@ -653,7 +653,8 @@ function closeMobileMenu() {
 // Use event delegation to handle button clicks
 document.body.addEventListener('click', (e) => {
     // Check if clicked element is a mobile menu button
-    if (e.target.closest('.top-nav-mobile-button') || e.target.closest('.top-nav-mobile-box-button')) {
+    if (e.target.closest('.top-nav-mobile-button') || e.target.closest('.top-nav-mobile-box-button')
+        || e.target.closest(".top-nav-button") || e.target.closest(".top-nav-box-button")) {
         console.log('Mobile menu button clicked via delegation');
         openMobileMenu();
     }
