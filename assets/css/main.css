@@ -815,7 +815,7 @@ section[id] {
     left: 0;
     bottom: 0;
     right: 0;
-    height: 90px;
+    height: 75px;
     box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.2);
     background: rgba(194, 227, 198, 0.95);
     padding: 10px 12px;
@@ -920,7 +920,7 @@ section[id] {
     height: 54px;
     border-radius: 50%;
     background: var(--theme-green);
-    margin-bottom: 15px;
+    margin-bottom: 0px;
     color: #fff;
     display: flex;
     align-items: center;
@@ -2882,27 +2882,26 @@ body.video-modal-open {
     left: 50%;
     transform: translate(-50%, -50%);
     content: "";
-    width: calc(100% - 24px);
-    max-width: 420px;
+    width: calc(100% + 64px);
     height: 2px;
-    background: rgba(115, 115, 115, 0.2);
+    background: rgba(7, 108, 0, 0.15);
     z-index: 1;
 }
 
 .review-wrapper .review-content .content .icon {
-    width: 86px;
-    height: 86px;
+    width: 65px;
+    height: 65px;
     font-size: 34px;
-    line-height: 86px;
+    line-height: 60px;
     border-radius: 50%;
-    border: 1px solid rgba(115, 115, 115, 0.25);
+    border: 1px solid rgba(7, 108, 0, 0.15);
     color: var(--theme-green);
     text-align: center;
     margin: 0 auto;
     background-color: var(--white);
     position: relative;
     z-index: 2;
-    box-shadow: 0 12px 30px rgba(20, 181, 117, 0.08);
+    /* box-shadow: 0 12px 30px rgba(7, 108, 0, 0.2); */
 }
 
 .review-wrapper .review-content .content .star {
@@ -3222,7 +3221,7 @@ body.video-modal-open {
 }
 
 .mycustom-marque.theme-green-bg {
-    background-color: #102f25;
+    background-color: var(--header);
 }
 
 .mycustom-marque.theme-yellow-bg {
