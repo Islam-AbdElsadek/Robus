@@ -1384,7 +1384,7 @@ section:nth-child(even) {
     font-weight: 600;
     letter-spacing: 1px;
     text-transform: uppercase;
-    margin-bottom: 15px;
+    margin-bottom: 0px;
     display: block;
 }
 
@@ -1404,8 +1404,39 @@ section:nth-child(even) {
 }
 
 .courses-section .section-title,
-.courses-section .section-title {
+.projects-section .section-title {
     text-align: center;
+}
+
+
+.title-warp {
+    width: fit-content;
+}
+
+.courses-section .section-title .title-warp,
+.projects-section .section-title .title-warp {
+    margin: 0 auto;
+    text-align: center;
+}
+
+.title-bar {
+    display: block;
+    width: 100%;
+    height: 10px;
+    background: url(../img/bar/gold-bar.svg) no-repeat center;
+    background-size: 100% 100%;
+}
+
+@media (max-width: 991px) {
+    .section-title,
+    .section-title .title-warp {
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .section-title h2 {
+        font-size: 36px;
+    }
 }
 
 @media (max-width: 767px) {
@@ -1414,17 +1445,6 @@ section:nth-child(even) {
     }
 }
 
-.section-title.color-green h6::before {
-    content: "";
-    position: absolute;
-    left: 50%;
-    bottom: 0;
-    transform: translateX(-50%);
-    width: 80px;
-    height: 5px;
-    background: url(../img/bar/blue-bar.png) center/cover no-repeat;
-    border-radius: 999px;
-}
 
 
 /* 6. Banner */
@@ -1537,6 +1557,11 @@ section:nth-child(even) {
 .banner-shape.four {
     bottom: 50px;
     right: 60px;
+}
+
+/* Pause animations until loader disappears */
+.pause-animation {
+    animation-play-state: paused !important;
 }
 
 /* floating shapes */
@@ -1856,7 +1881,7 @@ button:focus {
     flex-wrap: wrap;
     justify-content: center;
     gap: 0.85rem;
-    margin: 2rem 0 1.5rem;
+    margin: 2rem 0 0.5rem;
 }
 
 .projects-panel {
@@ -1893,12 +1918,12 @@ button:focus {
 /* Projects Slider CSS */
 .projects-panel {
     position: relative;
-    margin-top: 2rem;
+    margin-top: 0.5rem;
 }
 
 .projects-slider-wrapper {
     position: relative;
-    margin-top: 3rem;
+    margin-top: 0.5rem;
     display: none;
     /* overflow: hidden; */
 }
@@ -2188,15 +2213,17 @@ body.video-modal-open {
 
 
 
-
+.choose-us-icons {
+    position: relative;
+    display: block;
+    height: 100%;
+}
 
 .choose-us-wrapper .icon-items {
     position: absolute;
     max-width: 220px;
     min-width: 150px;
     display: block;
-    visibility: visible;
-    opacity: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -2214,8 +2241,6 @@ body.video-modal-open {
     justify-content: center;
     margin: 0 auto;
     flex-shrink: 0;
-    visibility: visible;
-    opacity: 1;
 }
 
 .choose-us-wrapper .icon-items.icon-item-2 {
@@ -2271,6 +2296,7 @@ body.video-modal-open {
     .choose-us-wrapper .icon-items.icon-item-2 {
         bottom: 100px;
         left: calc(50% - 40px);
+        transform: translateX(-50%);
     }
 
     .choose-us-wrapper .icon-items.icon-item-3 {
@@ -2322,12 +2348,14 @@ body.video-modal-open {
     .choose-us-wrapper .icon-items.icon-item-2 {
         top: 500px;
         left: 50%;
+        right: 50%;
         transform: translateX(-50%);
     }
 
     .choose-us-wrapper .icon-items.icon-item-3 {
         top: 820px;
         left: 50%;
+        right: 50%;
         transform: translateX(-50%);
     }
 }
@@ -2336,8 +2364,6 @@ body.video-modal-open {
     margin-top: 20px;
     text-align: center;
     display: block;
-    visibility: visible;
-    opacity: 1;
 }
 
 .choose-us-wrapper .icon-items .content h2 {
@@ -2346,8 +2372,6 @@ body.video-modal-open {
     color: var(--header);
     font-weight: 700;
     display: block;
-    visibility: visible;
-    opacity: 1;
 }
 
 .choose-us-wrapper .icon-items .content p {
@@ -2355,8 +2379,6 @@ body.video-modal-open {
     color: var(--text);
     line-height: 1.6;
     display: block;
-    visibility: visible;
-    opacity: 1;
 }
 
 
@@ -2388,14 +2410,10 @@ body.video-modal-open {
 .section-padding {
     padding: 60px 0;
     display: block;
-    visibility: visible;
-    opacity: 1;
 }
 
 .odometer {
     display: inline-block;
-    visibility: visible;
-    opacity: 1;
 }
 
 .wow {
@@ -3466,37 +3484,37 @@ body.video-modal-open {
     list-style: none;
 }
 
-.footer-instagram {
+.footer-images {
     position: relative;
     z-index: 3;
     margin: 0 0 -95px;
 }
 
 /* Footer Instagram Swiper Styles */
-.footer-instagram-slider {
+.footer-images-slider {
     overflow: hidden;
 }
 
-.footer-insta-item {
+.footer-image-item {
     width: 100%;
     aspect-ratio: 1;
 }
 
-.footer-insta-item a {
+.footer-image-item a {
     display: block;
     position: relative;
     width: 100%;
     height: 100%;
 }
 
-.footer-insta-item img {
+.footer-image-item img {
     display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
-.footer-insta-item a::before {
+.footer-image-item a::before {
     content: "";
     position: absolute;
     left: 0;
@@ -3512,18 +3530,18 @@ body.video-modal-open {
     transition: all 0.3s ease-out 0s;
 }
 
-.footer-insta-item a:hover::before {
+.footer-image-item a:hover::before {
     opacity: .8;
 }
 
-.footer-insta-item a::after {
-    content: "\f16d";
+.footer-image-item a::after {
+    content: "\f144";
     position: absolute;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
     color: var(--white);
-    font-family: "Font Awesome 5 Brands";
+    font-family: "Font Awesome 5 Free";
     font-weight: 400;
     font-size: 70px;
     line-height: 1;
@@ -3535,7 +3553,7 @@ body.video-modal-open {
     opacity: 0;
 }
 
-.footer-insta-item a:hover::after {
+.footer-image-item a:hover::after {
     opacity: 1;
 }
 
@@ -3751,7 +3769,7 @@ body.video-modal-open {
         width: 90%;
     }
 
-    .footer-insta-item a::after {
+    .footer-image-item a::after {
         font-size: 50px;
     }
 }
@@ -4030,4 +4048,122 @@ body.video-modal-open {
         transform: translateX(-50%);
         font-size: 12px;
     }
+}
+
+/* =============================================
+    =    Scroll Animation Effects                =
+    ============================================= */
+
+/* Animations Keyframes */
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Scroll Animation Classes */
+
+/* Hide elements before animation is triggered - only when NOT animating */
+[data-scroll-animate]:not(.scroll-animate) {
+    opacity: 0 !important;
+    visibility: hidden !important;
+}
+
+/* Override wow class visibility for scroll-animated elements */
+[data-scroll-animate].wow:not(.scroll-animate) {
+    visibility: hidden !important;
+}
+
+.scroll-animate {
+    animation-fill-mode: both !important;
+    animation-duration: 1.5s !important;
+    animation-timing-function: ease-out;
+    visibility: visible;
+}
+
+/* Before animation is triggered - invisible state */
+.scroll-animate.scroll-animate-fade-left {
+    animation-name: fadeInLeft;
+}
+
+.scroll-animate.scroll-animate-fade-right {
+    animation-name: fadeInRight;
+}
+
+.scroll-animate.scroll-animate-fade-up {
+    animation-name: fadeInUp;
+}
+
+.scroll-animate.scroll-animate-fade-down {
+    animation-name: fadeInDown;
+}
+
+.scroll-animate.scroll-animate-scale {
+    animation-name: scaleIn;
+}
+
+/* Stagger animation delay for multiple elements */
+.scroll-animate-stagger {
+    --stagger-delay: 0s;
+    animation-delay: var(--stagger-delay);
+}
+
+/* Default styles for elements with staggered animation in RTL languages (Arabic) */
+.scroll-animate-stagger-row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+/* Apply stagger effect based on grid position */
+.scroll-animate-stagger-row > * {
+    animation-delay: var(--stagger-delay, 0s);
 }

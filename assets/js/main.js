@@ -224,7 +224,7 @@ if (typeof Swiper !== 'undefined') {
     }
 
     // Instagram swiper initialization (separate instance)
-    const instagramSwiper = new Swiper('.instagram-swiper', {
+    const instagramSwiper = new Swiper('.footer-images-swiper', {
         loop: true,
         speed: 800,
         spaceBetween: 0,
@@ -751,6 +751,144 @@ window.addEventListener('load', () => {
     }
 });
 
+/*=============================================
+	=    Scroll Animation Effects                =
+=============================================*/
+
+// Initialize Intersection Observer for scroll animations
+function initScrollAnimations() {
+    // Animation types mapping
+    const animationTypes = {
+        'fade-left': 'scroll-animate-fade-left',
+        'fade-right': 'scroll-animate-fade-right',
+        'fade-up': 'scroll-animate-fade-up',
+        'fade-down': 'scroll-animate-fade-down',
+        'scale': 'scroll-animate-scale'
+    };
+
+    // Function to check if element is in viewport
+    function isInViewport(element, offset = 50) {
+        const rect = element.getBoundingClientRect();
+        return rect.top <= (window.innerHeight - offset) && rect.bottom >= 0;
+    }
+
+    // Function to trigger animation on element
+    function triggerAnimation(element) {
+        if (element.classList.contains('scroll-animate')) {
+            return; // Already animated
+        }
+
+        // Get animation type from data attribute
+        const animationType = element.dataset.scrollAnimate || 'fade-up';
+        const animationClass = animationTypes[animationType] || 'scroll-animate-fade-up';
+        
+        // Get parent container to check for staggered items
+        const parent = element.closest('[data-scroll-animate-group]');
+        
+        if (parent) {
+            // If element is in a group, calculate stagger delay
+            const siblings = Array.from(parent.querySelectorAll('[data-scroll-animate]'));
+            const indexInParent = siblings.indexOf(element);
+            const staggerDelay = indexInParent * 0.15; // 150ms delay between items
+            
+            element.style.setProperty('--stagger-delay', `${staggerDelay}s`);
+            element.classList.add('scroll-animate-stagger');
+        } else {
+            // Reset stagger delay if not in a group
+            element.style.setProperty('--stagger-delay', '0s');
+        }
+        
+        // Add animation classes
+        element.classList.add('scroll-animate', animationClass);
+    }
+
+    // Check all elements on initial load
+    function checkAllElements() {
+        const animatedElements = document.querySelectorAll('[data-scroll-animate]');
+        animatedElements.forEach(element => {
+            if (isInViewport(element)) {
+                triggerAnimation(element);
+            }
+        });
+    }
+
+    // Check elements on scroll
+    let scrollCheckTimeout;
+    function onScroll() {
+        // Debounce scroll event
+        clearTimeout(scrollCheckTimeout);
+        scrollCheckTimeout = setTimeout(() => {
+            checkAllElements();
+        }, 100);
+    }
+
+    // Initial check
+    checkAllElements();
+
+    // Add scroll event listener
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    return {
+        checkAllElements: checkAllElements,
+        triggerAnimation: triggerAnimation
+    };
+}
+
+// Initialize scroll animations when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+        // Wait for loader to disappear (4.2s: 3.2s delay + 1s animation duration)
+        // Adding extra 200ms buffer to ensure loader is completely gone
+        setTimeout(initScrollAnimations, 4400);
+    });
+} else {
+    // Wait for loader to disappear if page is already loaded
+    setTimeout(initScrollAnimations, 4400);
+}
+
+// Reinitialize animations for dynamically added elements
+function observeNewElements(container = document) {
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const animationTypes = {
+        'fade-left': 'scroll-animate-fade-left',
+        'fade-right': 'scroll-animate-fade-right',
+        'fade-up': 'scroll-animate-fade-up',
+        'fade-down': 'scroll-animate-fade-down',
+        'scale': 'scroll-animate-scale'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                const element = entry.target;
+                const animationType = element.dataset.scrollAnimate || 'fade-up';
+                const animationClass = animationTypes[animationType] || 'scroll-animate-fade-up';
+                
+                const parent = element.closest('[data-scroll-animate-group]');
+                if (parent) {
+                    const siblings = Array.from(parent.querySelectorAll('[data-scroll-animate]'));
+                    const indexInParent = siblings.indexOf(element);
+                    const staggerDelay = indexInParent * 0.15;
+                    element.style.setProperty('--stagger-delay', `${staggerDelay}s`);
+                    element.classList.add('scroll-animate-stagger');
+                }
+                
+                element.classList.add('scroll-animate', animationClass);
+                observer.unobserve(element);
+            }
+        });
+    }, observerOptions);
+
+    const newElements = container.querySelectorAll('[data-scroll-animate]');
+    newElements.forEach(element => {
+        observer.observe(element);
+    });
+}
+
 // Hide tooltip when chatbot button is clicked
 chatbotBtn.addEventListener('click', () => {
     const tooltip = document.getElementById('chatbotTooltip');
@@ -813,3 +951,50 @@ document.addEventListener('DOMContentLoaded', function() {
     updateOdometers(); // Call once on page load
 });
 
+// Delay banner animations until loader disappears
+// Loader animation: 1s duration + 3.2s delay = 4.2s total
+setTimeout(() => {
+    const pausedAnimations = document.querySelectorAll('.banner-section .pause-animation');
+    pausedAnimations.forEach(element => {
+        element.classList.remove('pause-animation');
+    });
+}, 4200);
+
+
+// Add wow fadeInUp animations with staggered delays to all page elements
+window.addEventListener('load', () => {
+    // Animate all student cards
+    const studentCards = document.querySelectorAll('.student-project-card');
+    studentCards.forEach((card, index) => {
+        if (!card.classList.contains('wow')) {
+            card.classList.add('wow', 'fadeInUp');
+            // Stagger delays for cards - 0.1s, 0.2s, 0.3s, 0.4s, 0.5s, then repeat
+            const delay = ((index % 5) * 0.1 + 0.1).toFixed(1);
+            card.setAttribute('data-wow-delay', delay + 's');
+        }
+    });
+    
+    // Animate course cards that aren't already animated
+    const courseCards = document.querySelectorAll('.courses-card');
+    courseCards.forEach((card, index) => {
+        if (!card.classList.contains('wow')) {
+            card.classList.add('wow', 'fadeInUp');
+            const delay = 0.1 + (index * 0.1);
+            card.setAttribute('data-wow-delay', delay.toFixed(1) + 's');
+        }
+    });
+    
+    // Animate choose-us items
+    const chooseUsItems = document.querySelectorAll('.choose-us-wrapper .icon-items');
+    chooseUsItems.forEach((item, index) => {
+        if (!item.classList.contains('wow')) {
+            item.classList.add('wow', 'fadeInUp');
+            item.setAttribute('data-wow-delay', (0.3 * index + 0.2).toFixed(1) + 's');
+        }
+    });
+    
+    // Reinitialize WOW.js to trigger animations for newly added classes
+    if (typeof WOW !== 'undefined') {
+        new WOW().init();
+    }
+});

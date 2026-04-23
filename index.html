@@ -20,12 +20,12 @@
 
 <body>
     <!-- From Uiverse.io by pradipkaityuiux -->
-    <!-- <div class="loader-cont">
+    <div class="loader-cont">
         <div class="loader">
             <img src="assets/img/logo/logo 1.png" alt="" width="100px">
             <span></span>
         </div>
-    </div> -->
+    </div>
 
     <!-- <div class="fixed-left-buttons">
         <button class="fixed-left-btn fixed-left-btn--dark" type="button" aria-label="Dark mode">
@@ -41,24 +41,25 @@
     </div> -->
 
     <!-- Fixed Buttons Group -->
-    <div class="fixed-buttons-group">
+    <div class="fixed-buttons-group" data-scroll-animate-group>
 
 
         <!-- Chat Bot Tooltip -->
-        <div class="chatbot-tooltip" id="chatbotTooltip">
+        <div class="chatbot-tooltip" id="chatbotTooltip" data-scroll-animate="fade-right">
             <span>Ask Me..</span>
         </div>
         <!-- Chat Bot Button -->
-        <button id="chatbot-btn" class="fixed-btn chatbot-btn" aria-label="Chat Bot">
+        <button id="chatbot-btn" class="fixed-btn chatbot-btn" aria-label="Chat Bot" data-scroll-animate="fade-right">
             <img src="assets/img/chatbot/chatbot1.svg" alt="">
         </button>
         <!-- WhatsApp Button -->
-        <a href="https://wa.me/robusacademy" target="_blank" class="fixed-btn whatsapp-btn" aria-label="WhatsApp">
+        <a href="https://wa.me/robusacademy" target="_blank" class="fixed-btn whatsapp-btn"
+            data-scroll-animate="fade-right">
             <i class="fab fa-whatsapp"></i>
         </a>
 
         <!-- Back To Top -->
-        <button id="back-to-top-btn" class="fixed-btn back-top">
+        <button id="back-to-top-btn" class="fixed-btn back-top" data-scroll-animate="fade-right">
             <svg class="progress-ring" width="60" height="60">
                 <circle class="progress-ring__circle" stroke="white" stroke-width="4" fill="transparent" r="26" cx="30"
                     cy="30" />
@@ -290,24 +291,24 @@
                 </div>
             </div>
             <div class="banner-shape one">
-                <img src="assets/img/banner/laptop.svg" alt="shape" class="wow bannerFadeInLeft" data-wow-delay=".2s"
-                    data-wow-duration="2s"
-                    style="visibility: visible; animation-duration: 2s; animation-delay: 0.2s; animation-name: bannerFadeInLeft;">
+                <img src="assets/img/banner/laptop.svg" alt="shape" class="wow bannerFadeInLeft pause-animation"
+                    data-wow-delay=".2s" data-wow-duration="2s"
+                    style="visibility: visible; animation-duration: 2s; animation-fill-mode: both; animation-delay: 0.2s; animation-name: bannerFadeInLeft;">
             </div>
             <div class="banner-shape two">
-                <img src="assets/img/banner/right-robot.png" alt="shape" class="wow bannerFadeInRight"
+                <img src="assets/img/banner/right-robot.png" alt="shape" class="wow bannerFadeInRight pause-animation"
                     data-wow-delay=".2s" data-wow-duration="2s"
-                    style="visibility: visible; animation-duration: 2s; animation-delay: 0.2s; animation-name: bannerFadeInRight;">
+                    style="visibility: visible; animation-duration: 2s; animation-fill-mode: both; animation-delay: 0.2s; animation-name: bannerFadeInRight;">
             </div>
             <div class="banner-shape three">
-                <img src="assets/img/banner/computer.svg" alt="shape" class="wow bannerFadeInDown" data-wow-delay=".2s"
-                    data-wow-duration="2s"
-                    style="visibility: visible; animation-duration: 2s; animation-delay: 0.2s; animation-name: bannerFadeInDown;">
+                <img src="assets/img/banner/computer.svg" alt="shape" class="wow bannerFadeInDown pause-animation"
+                    data-wow-delay=".2s" data-wow-duration="2s"
+                    style="visibility: visible; animation-duration: 2s; animation-fill-mode: both; animation-delay: 0.2s; animation-name: bannerFadeInDown;">
             </div>
             <div class="banner-shape four">
-                <img src="assets/img/banner/banner_shape04.png" alt="shape" class="wow bannerFadeInDown"
+                <img src="assets/img/banner/banner_shape04.png" alt="shape" class="wow bannerFadeInDown pause-animation"
                     data-wow-delay=".2s" data-wow-duration="2s"
-                    style="visibility: visible; animation-duration: 2s; animation-delay: 0.2s; animation-name: bannerFadeInDown;">
+                    style="visibility: visible; animation-duration: 2s; animation-fill-mode: both; animation-delay: 0.2s; animation-name: bannerFadeInDown;">
             </div>
 
 
@@ -319,25 +320,36 @@
 
         <section id="courses" class="courses-section section-padding">
             <div class="container">
-                <div class="section-title text-center">
-                    <h6>Our Courses</h6>
+                <div class="section-title text-center" data-scroll-animate="fade-up">
+                    <div class="title-warp">
+                        <h6>Our Courses</h6>
+                        <!-- <img src="assets/img/bar/gold-bar.svg" alt="bar" class="title-bar"> -->
+                        <span class="title-bar"></span>
+                    </div>
                     <h2>Your Learning Path</h2>
                     <p>Select your child's Grade/Age to explore a recommended learning path</p>
                 </div>
 
-                <div class="courses-buttons">
-                    <button type="button" class="path-btn active" data-course="1">Scratch</button>
-                    <button type="button" class="path-btn" data-course="2">M Block</button>
-                    <button type="button" class="path-btn" data-course="3">Mobile Div</button>
-                    <button type="button" class="path-btn" data-course="4">Python</button>
-                    <button type="button" class="path-btn" data-course="5">Python Ad</button>
-                    <button type="button" class="path-btn" data-course="6">HTML & CSS</button>
-                    <button type="button" class="path-btn" data-course="7">JavaScript</button>
-                    <button type="button" class="path-btn" data-course="8">Bootstrap</button>
-                    <button type="button" class="path-btn" data-course="9">JQuery</button>
+                <div class="courses-buttons" data-scroll-animate-group>
+                    <button type="button" class="path-btn active" data-course="1"
+                        data-scroll-animate="fade-up">Scratch</button>
+                    <button type="button" class="path-btn" data-course="2" data-scroll-animate="fade-up">M
+                        Block</button>
+                    <button type="button" class="path-btn" data-course="3" data-scroll-animate="fade-up">Mobile
+                        Div</button>
+                    <button type="button" class="path-btn" data-course="4" data-scroll-animate="fade-up">Python</button>
+                    <button type="button" class="path-btn" data-course="5" data-scroll-animate="fade-up">Python
+                        Ad</button>
+                    <button type="button" class="path-btn" data-course="6" data-scroll-animate="fade-up">HTML &
+                        CSS</button>
+                    <button type="button" class="path-btn" data-course="7"
+                        data-scroll-animate="fade-up">JavaScript</button>
+                    <button type="button" class="path-btn" data-course="8"
+                        data-scroll-animate="fade-up">Bootstrap</button>
+                    <button type="button" class="path-btn" data-course="9" data-scroll-animate="fade-up">JQuery</button>
                 </div>
 
-                <div class="courses-panel">
+                <div class="courses-panel" data-scroll-animate="fade-up">
                     <div class="courses-card active" data-course="1">
                         <div class="courses-card-images">
                             <img src="assets/img/grades/details-1.jpg" alt="Scratch" class="desktop-image" />
@@ -413,20 +425,26 @@
 
         <section id="projects" class="projects-section section-padding">
             <div class="container">
-                <div class="section-title text-center">
-                    <h6>Student Projects</h6>
+                <div class="section-title text-center" data-scroll-animate="fade-up">
+                    <div class="title-warp">
+                        <h6>Student Projects</h6>
+                        <span class="title-bar"></span>
+                    </div>
                     <h2>Student Projects at Our Academy</h2>
                     <p>Explore the amazing projects created by our talented students across different platforms and
                         technologies. Showcasing innovation, creativity, and technical excellence in action.</p>
                 </div>
 
-                <div class="projects-buttons">
-                    <button type="button" class="path-btn active" data-project="1">Web</button>
-                    <button type="button" class="path-btn" data-project="2">Desktop</button>
-                    <button type="button" class="path-btn" data-project="3">Mobile</button>
+                <div class="projects-buttons" data-scroll-animate-group>
+                    <button type="button" class="path-btn active" data-project="1"
+                        data-scroll-animate="fade-up">Web</button>
+                    <button type="button" class="path-btn" data-project="2"
+                        data-scroll-animate="fade-up">Desktop</button>
+                    <button type="button" class="path-btn" data-project="3"
+                        data-scroll-animate="fade-up">Mobile</button>
                 </div>
             </div>
-            <div class="projects-panel">
+            <div class="projects-panel" data-scroll-animate="fade-up">
                 <!-- Web Projects -->
                 <div class="projects-slider-wrapper swiper active" data-project="1">
                     <div class="projects-slider swiper-wrapper">
@@ -851,22 +869,23 @@
             <div class="container">
                 <div class="choose-us-wrapper">
                     <div class="line-shape">
-                        <img src="assets/img/line-shape.png" alt="">
+                        <img src="assets/img/choose/line-shape.svg" alt="">
                     </div>
-                    <div class="section-title">
-                        <h6 class="wow fadeInUp">
-                            Why Robus Academy
-                        </h6>
-                        <h2 class="wow fadeInUp" data-wow-delay=".3s">
+                    <div class="section-title" data-scroll-animate="fade-up">
+                        <div class="title-warp">
+                            <h6>Why Robus Academy</h6>
+                            <span class="title-bar"></span>
+                        </div>
+                        <h2>
                             Creative Minds Kindergarten <br>Where Learning Meets Fun
                         </h2>
                     </div>
 
-                    <div class="icon-items icon-item-1 wow fadeInUp" data-wow-delay=".3s">
-                        <div class="icon">
+                    <div class="icon-items icon-item-1">
+                        <div class="icon" data-scroll-animate="fade-up">
                             <i class="flaticon-satisfaction"></i>
                         </div>
-                        <div class="content">
+                        <div class="content" data-scroll-animate="fade-up">
                             <h2><span class="odometer" data-count="99">00</span>%</h2>
                             <p>
                                 Education is a vital process
@@ -874,11 +893,11 @@
                             </p>
                         </div>
                     </div>
-                    <div class="icon-items icon-item-2 wow fadeInUp" data-wow-delay=".5s">
-                        <div class="icon">
+                    <div class="icon-items icon-item-2">
+                        <div class="icon" data-scroll-animate="fade-up">
                             <i class="flaticon-instructor"></i>
                         </div>
-                        <div class="content">
+                        <div class="content" data-scroll-animate="fade-up">
                             <p>Instructors</p>
                             <h2><span class="odometer" data-count="250">00</span>+</h2>
                             <p>
@@ -887,11 +906,11 @@
                             </p>
                         </div>
                     </div>
-                    <div class="icon-items icon-item-3 wow fadeInUp" data-wow-delay=".3s">
-                        <div class="icon">
+                    <div class="icon-items icon-item-3">
+                        <div class="icon" data-scroll-animate="fade-up">
                             <i class="flaticon-graduation"></i>
                         </div>
-                        <div class="content">
+                        <div class="content" data-scroll-animate="fade-up">
                             <p>Student Enrolled</p>
                             <h2><span class="odometer" data-count="48.5">00</span>k</h2>
                             <p>
@@ -911,16 +930,18 @@
                     <div class="row g-4 justify-content-between">
                         <div class="col-xxl-6 col-xl-6 col-lg-6">
                             <div class="review-content">
-                                <div class="section-title">
-                                    <h6 class="wow fadeInUp" style="visibility: visible">
-                                        Students Reviews
-                                    </h6>
-                                    <h2 class="wow fadeInUp" data-wow-delay=".3s"
-                                        style="visibility: visible; animation-delay: 0.3s">
+                                <div class="section-title" data-scroll-animate="fade-up">
+                                    <div class="title-warp">
+                                        <h6 style="visibility: visible">
+                                            Students Reviews
+                                        </h6>
+                                        <span class="title-bar"></span>
+                                    </div>
+                                    <h2 style="visibility: visible;">
                                         Students Say About <br /> Our Courses
                                     </h2>
                                 </div>
-                                <div class="swiper review-slider-2 mt-3 mt-md-0">
+                                <div class="swiper review-slider-2 mt-3 mt-md-0" data-scroll-animate="fade-up">
                                     <div class="swiper-wrapper">
                                         <div class="swiper-slide">
                                             <div class="content">
@@ -1067,29 +1088,11 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xxl-4 col-xl-5 col-lg-5 d-none d-md-flex">
+                        <div class="col-xxl-4 col-xl-5 col-lg-5 d-none d-md-flex" data-scroll-animate="fade-up">
                             <div class="review-image-items">
                                 <div class="box-shape bg-cover">
                                     <img src="assets/img/grades/details-2.png" alt="img" />
                                 </div>
-                                <!-- <div class="row g-4">
-                                    <div class="col-md-6 col-sm-6">
-                                        <div class="client-img-1 bg-cover"
-                                            style="background-image: url(&quot;assets/img/reviews/01.jpg&quot;);"></div>
-                                        <div class="client-img-2 bg-cover"
-                                            style="background-image: url(&quot;assets/img/reviews/02.jpg&quot;);"></div>
-                                        <div class="client-img-3 bg-cover"
-                                            style="background-image: url(&quot;assets/img/reviews/03.jpg&quot;);"></div>
-                                    </div>
-                                    <div class="col-md-6 col-sm-6">
-                                        <div class="client-img-4 bg-cover"
-                                            style="background-image: url(&quot;assets/img/reviews/04.jpg&quot;);"></div>
-                                        <div class="client-img-5 bg-cover"
-                                            style="background-image: url(&quot;assets/img/reviews/05.jpg&quot;);"></div>
-                                        <div class="client-img-6 bg-cover"
-                                            style="background-image: url(&quot;assets/img/reviews/06.jpg&quot;);"></div>
-                                    </div>
-                                </div> -->
                             </div>
                         </div>
                     </div>
@@ -1098,7 +1101,7 @@
         </section>
 
         <section id="questions" class="q-section-5 section-padding">
-            <div class="q-image wow img-custom-anim-right" style="visibility: visible">
+            <div class="q-image wow img-custom-anim-right" style="visibility: visible" data-scroll-animate="fade-up">
                 <img src="assets/img/questions/04.jpg" alt="img" />
             </div>
             <div class="container">
@@ -1106,19 +1109,21 @@
                     <div class="row g-4 align-items-center">
                         <div class="col-lg-6">
                             <div class="q-content">
-                                <div class="section-title">
-                                    <h6 class="wow fadeInUp" style="visibility: visible">
-                                        Question & Answer
-                                    </h6>
-                                    <h2 class="wow fadeInUp" data-wow-delay=".3s"
-                                        style="visibility: visible;animation-delay: 0.3s;color: black;">
+                                <div class="section-title" data-scroll-animate="fade-up">
+                                    <div class="title-warp">
+                                        <h6 style="visibility: visible">
+                                            Question & Answer
+                                        </h6>
+                                        <span class="title-bar"></span>
+                                    </div>
+                                    <h2 style="visibility: visible;animation-delay: 0.3s;color: black;">
                                         Asked Questions?
                                     </h2>
                                 </div>
                                 <div class="q-items mt-4 mt-md-0">
-                                    <div class="accordion" id="accordionExample">
-                                        <div class="accordion-item wow fadeInUp"
-                                            style="visibility: visible; animation-name: fadeInUp">
+                                    <div class="accordion" id="accordionExample" data-scroll-animate-group>
+                                        <div class="accordion-item" style="visibility: visible;"
+                                            data-scroll-animate="fade-up">
                                             <h2 class="accordion-header" id="headingOne">
                                                 <button class="accordion-button collapsed" type="button"
                                                     data-bs-toggle="collapse" data-bs-target="#collapseOne"
@@ -1138,8 +1143,8 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="accordion-item wow fadeInUp" data-wow-delay=".2s"
-                                            style="visibility: visible; animation-delay: 0.2s">
+                                        <div class="accordion-item" data-wow-delay=".2s" style="visibility: visible;"
+                                            data-scroll-animate="fade-up">
                                             <h2 class="accordion-header" id="headingTwo">
                                                 <button class="accordion-button collapsed" type="button"
                                                     data-bs-toggle="collapse" data-bs-target="#collapseTwo"
@@ -1159,8 +1164,8 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="accordion-item wow fadeInUp" data-wow-delay=".4s"
-                                            style="visibility: visible; animation-delay: 0.4s">
+                                        <div class="accordion-item" data-wow-delay=".4s" style="visibility: visible;"
+                                            data-scroll-animate="fade-up">
                                             <h2 class="accordion-header" id="headingthree">
                                                 <button class="accordion-button collapsed" type="button"
                                                     data-bs-toggle="collapse" data-bs-target="#collapsethree"
@@ -1180,8 +1185,8 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="accordion-item mb-0 wow fadeInUp" data-wow-delay=".6s"
-                                            style="visibility: visible;animation-delay: 0.6s;animation-name: fadeInUp;">
+                                        <div class="accordion-item mb-0" data-wow-delay=".6s"
+                                            style="visibility: visible;" data-scroll-animate="fade-up">
                                             <h2 class="accordion-header" id="headingfour">
                                                 <button class="accordion-button collapsed" type="button"
                                                     data-bs-toggle="collapse" data-bs-target="#collapsefour"
@@ -1213,42 +1218,42 @@
 
 
     <footer class="footer-area">
-        <div class="footer-instagram">
+        <div class="footer-images" data-scroll-animate="fade-up">
             <div class="container">
-                <div class="instagram-swiper swiper">
+                <div class="footer-images-swiper swiper">
                     <div class="swiper-wrapper">
                         <div class="swiper-slide">
-                            <div class="footer-insta-item">
+                            <div class="footer-image-item">
                                 <a href="assets/img/footer/instagram_post01.jpg" class="popup-image"><img
                                         src="assets/img/footer/instagram_post01.jpg" alt="img"></a>
                             </div>
                         </div>
                         <div class="swiper-slide">
-                            <div class="footer-insta-item">
+                            <div class="footer-image-item">
                                 <a href="assets/img/footer/instagram_post02.jpg" class="popup-image"><img
                                         src="assets/img/footer/instagram_post02.jpg" alt="img"></a>
                             </div>
                         </div>
                         <div class="swiper-slide">
-                            <div class="footer-insta-item">
+                            <div class="footer-image-item">
                                 <a href="assets/img/footer/instagram_post03.jpg" class="popup-image"><img
                                         src="assets/img/footer/instagram_post03.jpg" alt="img"></a>
                             </div>
                         </div>
                         <div class="swiper-slide">
-                            <div class="footer-insta-item">
+                            <div class="footer-image-item">
                                 <a href="assets/img/footer/instagram_post04.jpg" class="popup-image"><img
                                         src="assets/img/footer/instagram_post04.jpg" alt="img"></a>
                             </div>
                         </div>
                         <div class="swiper-slide">
-                            <div class="footer-insta-item">
+                            <div class="footer-image-item">
                                 <a href="assets/img/footer/instagram_post05.jpg" class="popup-image"><img
                                         src="assets/img/footer/instagram_post05.jpg" alt="img"></a>
                             </div>
                         </div>
                         <div class="swiper-slide">
-                            <div class="footer-insta-item">
+                            <div class="footer-image-item">
                                 <a href="assets/img/footer/instagram_post06.jpg" class="popup-image"><img
                                         src="assets/img/footer/instagram_post06.jpg" alt="img"></a>
                             </div>
@@ -1260,8 +1265,8 @@
         <div class="footer-top-wrap">
             <div class="container">
                 <div class="footer-widgets-wrap">
-                    <div class="row">
-                        <div class="col-lg-4 col-md-7">
+                    <div class="row" data-scroll-animate-group>
+                        <div class="col-lg-4 col-md-7" data-scroll-animate="fade-up">
                             <div class="footer-widget">
                                 <div class="footer-about">
                                     <div class="footer-logo logo">
@@ -1273,19 +1278,20 @@
                                             recur through posts or queries standards vary orem donor command tei.</p>
                                     </div>
                                     <div class="footer-social">
-                                        <a href="https://themegenix.net/html/suxnix/#"><i
+                                        <a href="https://www.facebook.com/robusacademy/"><i
                                                 class="fab fa-facebook-f"></i></a>
-                                        <a href="https://themegenix.net/html/suxnix/#"><i
-                                                class="fab fa-twitter"></i></a>
-                                        <a href="https://themegenix.net/html/suxnix/#"><i
-                                                class="fab fa-pinterest-p"></i></a>
-                                        <a href="https://themegenix.net/html/suxnix/#"><i
+                                        <a href="https://www.instagram.com/robusacademy/"><i
+                                                class="fab fa-instagram"></i></a>
+                                        <a href="https://www.linkedin.com/in/robusacademy"><i
                                                 class="fab fa-linkedin-in"></i></a>
+                                        <a href="https://www.tiktok.com/@robusacademy/"><i
+                                                class="fab fa-tiktok"></i></a>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-3 col-md-5 col-sm-6">
+                        <div class="col-lg-3 col-md-5 col-sm-6" data-scroll-animate="fade-up"
+                            style="animation-delay: 0.3s;">
                             <div class="footer-widget">
                                 <h4 class="fw-title">About Us</h4>
                                 <ul class="list-wrap">
@@ -1298,7 +1304,8 @@
                                 </ul>
                             </div>
                         </div>
-                        <div class="col-lg-2 col-md-5 col-sm-6">
+                        <div class="col-lg-2 col-md-5 col-sm-6" data-scroll-animate="fade-up"
+                            style="animation-delay: 0.6s;">
                             <div class="footer-widget">
                                 <h4 class="fw-title">Support</h4>
                                 <ul class="list-wrap">
@@ -1311,7 +1318,7 @@
                                 </ul>
                             </div>
                         </div>
-                        <div class="col-lg-3 col-md-5">
+                        <div class="col-lg-3 col-md-5" data-scroll-animate="fade-up" style="animation-delay: 0.9s;">
                             <div class="footer-widget">
                                 <h4 class="fw-title">CONTACT US</h4>
                                 <div class="footer-contact-wrap">
@@ -1327,15 +1334,11 @@
                     </div>
                 </div>
             </div>
-            <div class="footer-shape one">
-                <img src="assets/img/footer/footer_shape01.png" alt="img" class="wow fadeInLeft" data-wow-delay=".3s"
-                    data-wow-duration="1s"
-                    style="visibility: visible; animation-duration: 1s; animation-delay: 0.3s; animation-name: fadeInLeft;">
+            <div class="footer-shape one" data-scroll-animate="fade-left">
+                <img src="assets/img/footer/footer_shape01.png" alt="img" data-wow-duration="1s">
             </div>
-            <div class="footer-shape two">
-                <img src="assets/img/footer/footer_shape02.png" alt="img" class="wow fadeInRight" data-wow-delay=".3s"
-                    data-wow-duration="1s"
-                    style="visibility: visible; animation-duration: 1s; animation-delay: 0.3s; animation-name: fadeInRight;">
+            <div class="footer-shape two" data-scroll-animate="fade-right">
+                <img src="assets/img/footer/footer_shape02.png" alt="img" data-wow-duration="1s">
             </div>
         </div>
         <div class="copyright-wrap">
