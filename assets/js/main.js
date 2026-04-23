@@ -763,7 +763,21 @@ function initScrollAnimations() {
         'fade-right': 'scroll-animate-fade-right',
         'fade-up': 'scroll-animate-fade-up',
         'fade-down': 'scroll-animate-fade-down',
-        'scale': 'scroll-animate-scale'
+        'scale': 'scroll-animate-scale',
+        'zoom-in': 'scroll-animate-zoom-in',
+        'slide-right': 'scroll-animate-slide-right',
+        'slide-left': 'scroll-animate-slide-left',
+        'slide-down': 'scroll-animate-slide-down',
+        'slide-up': 'scroll-animate-slide-up',
+        'swing': 'scroll-animate-swing',
+        'tada': 'scroll-animate-tada',
+        'back-in-right': 'scroll-animate-back-in-right',
+        'back-in-left': 'scroll-animate-back-in-left',
+        'back-in-up': 'scroll-animate-back-in-up',
+        'back-in-down': 'scroll-animate-back-in-down',
+        'flip': 'scroll-animate-flip',
+        'flip-in-x': 'scroll-animate-flip-in-x',
+        'flip-in-y': 'scroll-animate-flip-in-y'
     };
 
     // Function to check if element is in viewport
@@ -858,7 +872,21 @@ function observeNewElements(container = document) {
         'fade-right': 'scroll-animate-fade-right',
         'fade-up': 'scroll-animate-fade-up',
         'fade-down': 'scroll-animate-fade-down',
-        'scale': 'scroll-animate-scale'
+        'scale': 'scroll-animate-scale',
+        'zoom-in': 'scroll-animate-zoom-in',
+        'slide-right': 'scroll-animate-slide-right',
+        'slide-left': 'scroll-animate-slide-left',
+        'slide-down': 'scroll-animate-slide-down',
+        'slide-up': 'scroll-animate-slide-up',
+        'swing': 'scroll-animate-swing',
+        'tada': 'scroll-animate-tada',
+        'back-in-right': 'scroll-animate-back-in-right',
+        'back-in-left': 'scroll-animate-back-in-left',
+        'back-in-up': 'scroll-animate-back-in-up',
+        'back-in-down': 'scroll-animate-back-in-down',
+        'flip': 'scroll-animate-flip',
+        'flip-in-x': 'scroll-animate-flip-in-x',
+        'flip-in-y': 'scroll-animate-flip-in-y'
     };
 
     const observer = new IntersectionObserver((entries) => {
@@ -998,3 +1026,39 @@ window.addEventListener('load', () => {
         new WOW().init();
     }
 });
+
+/*=============================================
+	=    Repeating Tada Animation Every 5 Seconds =
+=============================================*/
+
+// Function to repeat tada animation every 5 seconds
+function initRepeatTadaAnimation() {
+    // Find all gift images with tada animation
+    const giftImages = document.querySelectorAll('img[data-scroll-animate="tada"]');
+    
+    giftImages.forEach(element => {
+        // Apply initial animation
+        element.classList.add('scroll-animate', 'scroll-animate-tada');
+        
+        // Repeat animation every 5 seconds
+        setInterval(() => {
+            // Remove animation classes
+            element.classList.remove('scroll-animate-tada');
+            
+            // Trigger reflow to restart animation
+            void element.offsetWidth;
+            
+            // Re-apply animation classes
+            element.classList.add('scroll-animate-tada');
+        }, 5000);
+    });
+}
+
+// Initialize repeating tada animation when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+        setTimeout(initRepeatTadaAnimation, 4400);
+    });
+} else {
+    setTimeout(initRepeatTadaAnimation, 4400);
+}

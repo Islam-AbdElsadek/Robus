@@ -629,6 +629,29 @@ html {
     gap: 16px;
 }
 
+.nav-actions {
+    display: flex;
+    align-items: center;
+
+}
+
+.language {
+    color: var(--theme-green);
+    padding: 8px 16px;
+    border-radius: 40px;
+    font-size: 14px;
+    font-weight: 600;
+    display: inline-flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.language:hover {
+    color: var(--theme-gold);
+}
+
 .top-nav-button,
 .top-nav-box-button,
 .top-nav-mobile-button,
@@ -693,7 +716,7 @@ html {
 .top-nav .nav-links a i {
     color: var(--theme-green);
     font-size: 20px;
-    padding-right: 10px;
+    padding: 0 10px;
     font-weight: 700;
     transition: color 0.25s ease;
 }
@@ -3593,8 +3616,15 @@ body.video-modal-open {
 }
 
 .footer-shape.two {
+    max-width: 150px;
     right: 0;
     bottom: 170px;
+}
+
+.footer-shape.two img{
+    width: 100%;
+    position: relative;
+    right: -25px;
 }
 
 .footer-widget {
@@ -3742,8 +3772,8 @@ body.video-modal-open {
 
 /* home-three-css */
 @media (max-width: 1500px) {
-    .footer-widgets-wrap-two .row [class*="col-"]:nth-child(4n+4) .footer-widget {
-        padding-left: 0px;
+    .footer-shape.two {
+        max-width: 150px;
     }
 }
 
@@ -3754,7 +3784,11 @@ body.video-modal-open {
     }
 
     .footer-shape.two {
-        max-width: 80px;
+        max-width: 100px;
+    }
+
+    .footer-shape.two img {
+        right: -17px;
     }
 
     .footer-widgets-wrap .row [class*="col-"]:nth-child(4n+4) .footer-widget {
@@ -3794,12 +3828,6 @@ body.video-modal-open {
     }
 }
 
-/* home-three-css */
-@media (max-width: 991.98px) {
-    .footer-widgets-wrap-two .row [class*="col-"]:nth-child(4n+2) .footer-widget {
-        padding-left: 0;
-    }
-}
 
 /* Medium devices (tablets, 768px and up) */
 @media (max-width: 767.98px) {
@@ -4125,7 +4153,7 @@ body.video-modal-open {
 
 .scroll-animate {
     animation-fill-mode: both !important;
-    animation-duration: 1.5s !important;
+    animation-duration: 1.5s;
     animation-timing-function: ease-out;
     visibility: visible;
 }
@@ -4149,6 +4177,98 @@ body.video-modal-open {
 
 .scroll-animate.scroll-animate-scale {
     animation-name: scaleIn;
+}
+
+.scroll-animate.scroll-animate-zoom-in {
+    animation-name: zoomIn;
+}
+
+.scroll-animate.scroll-animate-slide-right {
+    animation-name: slideInRight;
+}
+
+.scroll-animate.scroll-animate-slide-left {
+    animation-name: slideInLeft;
+}
+
+.scroll-animate.scroll-animate-slide-down {
+    animation-name: slideInDown;
+}
+
+.scroll-animate.scroll-animate-slide-up {
+    animation-name: slideInUp;
+}
+
+.scroll-animate.scroll-animate-swing {
+    animation-name: swing;
+}
+
+.scroll-animate.scroll-animate-tada {
+    animation-name: tada;
+    /* animation-iteration-count: 1; */
+}
+
+.scroll-animate.scroll-animate-back-in-right {
+    animation-name: backInRight;
+}
+
+.scroll-animate.scroll-animate-back-in-left {
+    animation-name: backInLeft;
+}
+
+.scroll-animate.scroll-animate-back-in-up {
+    animation-name: backInUp;
+}
+
+.scroll-animate.scroll-animate-back-in-down {
+    animation-name: backInDown;
+}
+
+.scroll-animate.scroll-animate-flip {
+    animation-name: flip;
+}
+
+.scroll-animate.scroll-animate-flip-in-x {
+    animation-name: flipInX;
+}
+
+.scroll-animate.scroll-animate-flip-in-y {
+    animation-name: flipInY;
+}
+
+/* Custom keyframes missing from animate.min.css */
+@keyframes slideInUp {
+    from {
+        transform: translate3d(0, 100%, 0);
+        visibility: visible;
+    }
+    to {
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+@keyframes backInDown {
+    0% { transform: translateY(-1200px) scale(0.7); opacity: 0.7; }
+    80% { transform: translateY(0px) scale(0.7); opacity: 0.7; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes backInLeft {
+    0% { transform: translateX(-2000px) scale(0.7); opacity: 0.7; }
+    80% { transform: translateX(0px) scale(0.7); opacity: 0.7; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes backInRight {
+    0% { transform: translateX(2000px) scale(0.7); opacity: 0.7; }
+    80% { transform: translateX(0px) scale(0.7); opacity: 0.7; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes backInUp {
+    0% { transform: translateY(1200px) scale(0.7); opacity: 0.7; }
+    80% { transform: translateY(0px) scale(0.7); opacity: 0.7; }
+    100% { transform: scale(1); opacity: 1; }
 }
 
 /* Stagger animation delay for multiple elements */
