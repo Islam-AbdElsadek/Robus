@@ -1855,12 +1855,18 @@ button:focus {
     }
 
     .banner-images .bg-shape {
-        display: none;
+        max-width: max-content;
+        width: 500px;
+        display: block;
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%) translateY(-40px);
     }
 
     .banner-images .main-img {
+
         max-width: 100%;
-        position: unset;
+        /* position: unset; */
     }
 
     .banner-images::after {
