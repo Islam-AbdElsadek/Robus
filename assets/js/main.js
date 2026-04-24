@@ -737,19 +737,25 @@ document.addEventListener('DOMContentLoaded', () => {
 	=    Chatbot Tooltip Functionality            =
 =============================================*/
 
-// Show tooltip when page loads
-window.addEventListener('load', () => {
+// Chatbot tooltip timeout ID
+let tooltipTimeoutId = null;
+
+// Function to initialize tooltip
+function initTooltip() {
     const tooltip = document.getElementById('chatbotTooltip');
-    if (tooltip) {
+    if (tooltip && !tooltip.classList.contains('show')) {
         // Show tooltip
         tooltip.classList.add('show');
         
         // Hide tooltip after 15 seconds
-        setTimeout(() => {
+        tooltipTimeoutId = setTimeout(() => {
             tooltip.classList.remove('show');
+            tooltipTimeoutId = null;
         }, 15000);
     }
-});
+}
+
+// Tooltip is initialized together with scroll animations (after loader disappears)
 
 /*=============================================
 	=    Scroll Animation Effects                =
@@ -853,11 +859,17 @@ if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
         // Wait for loader to disappear (4.2s: 3.2s delay + 1s animation duration)
         // Adding extra 200ms buffer to ensure loader is completely gone
-        setTimeout(initScrollAnimations, 4400);
+        setTimeout(() => {
+            initScrollAnimations();
+            initTooltip();
+        }, 4400);
     });
 } else {
     // Wait for loader to disappear if page is already loaded
-    setTimeout(initScrollAnimations, 4400);
+    setTimeout(() => {
+        initScrollAnimations();
+        initTooltip();
+    }, 4400);
 }
 
 // Reinitialize animations for dynamically added elements
@@ -922,6 +934,11 @@ chatbotBtn.addEventListener('click', () => {
     const tooltip = document.getElementById('chatbotTooltip');
     if (tooltip) {
         tooltip.classList.remove('show');
+        // Clear the timeout if it exists
+        if (tooltipTimeoutId) {
+            clearTimeout(tooltipTimeoutId);
+            tooltipTimeoutId = null;
+        }
     }
 });
 

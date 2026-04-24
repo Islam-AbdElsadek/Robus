@@ -4,43 +4,51 @@ const chatbotData = {
     menus: {
         'main': {
             message: 'Choose one of the following options:',
+            messageAr: 'اختر أحد الخيارات التالية:',
             options: [
-                { id: 1, text: '1) About the Academy', nextMenu: 'academy-info' },
-                { id: 2, text: '2) Available Courses', nextMenu: 'courses' },
-                { id: 3, text: '3) Membership Prices', nextMenu: 'pricing' },
-                { id: 4, text: '4) Contact Us', nextMenu: 'contact' }
+                { id: 1, text: '1) About the Academy', textAr: '1) عن الأكاديمية', nextMenu: 'academy-info' },
+                { id: 2, text: '2) Available Courses', textAr: '2) الدورات المتاحة', nextMenu: 'courses' },
+                { id: 3, text: '3) Membership Prices', textAr: '3) أسعار العضويات', nextMenu: 'pricing' },
+                { id: 4, text: '4) Contact Us', textAr: '4) اتصل بنا', nextMenu: 'contact' }
             ]
         },
         'academy-info': {
             message: 'Robus Academy is a specialized academy for teaching programming and web development. We offer practical and comprehensive courses for all levels.',
+            messageAr: 'أكاديمية روبس متخصصة في تعليم البرمجة وتطوير الويب. نقدم دورات عملية وشاملة لجميع المستويات.',
             options: []
         },
         'courses': {
             message: 'Choose the course you want to know about:',
+            messageAr: 'اختر الدورة التي تريد معرفة المزيد عنها:',
             options: [
-                { id: 1, text: '1) JavaScript', nextMenu: 'course-js' },
-                { id: 2, text: '2) React', nextMenu: 'course-react' },
-                { id: 3, text: '3) Python', nextMenu: 'course-python' }
+                { id: 1, text: '1) JavaScript', textAr: '1) جافا سكريبت', nextMenu: 'course-js' },
+                { id: 2, text: '2) React', textAr: '2) ريأكت', nextMenu: 'course-react' },
+                { id: 3, text: '3) Python', textAr: '3) بايثون', nextMenu: 'course-python' }
             ]
         },
         'course-js': {
             message: 'JavaScript course includes basics and advanced levels. Duration: 8 weeks.',
+            messageAr: 'دورة جافا سكريبت تتضمن مستويات أساسية ومتقدمة. المدة: 8 أسابيع.',
             options: []
         },
         'course-react': {
             message: 'React course specializes in building modern web applications. Duration: 6 weeks.',
+            messageAr: 'دورة ريأكت متخصصة في بناء تطبيقات ويب حديثة. المدة: 6 أسابيع.',
             options: []
         },
         'course-python': {
             message: 'Python course for beginners to advanced level. Duration: 10 weeks.',
+            messageAr: 'دورة بايثون للمبتدئين إلى المستوى المتقدم. المدة: 10 أسابيع.',
             options: []
         },
         'pricing': {
             message: 'Our memberships:\n💳 Basic Plan: $99/month\n💳 Premium Plan: $199/month\n💳 Best Plan: $299/month',
+            messageAr: 'عضوياتنا:\n💳 الخطة الأساسية: 99$/شهر\n💳 الخطة المميزة: 199$/شهر\n💳 أفضل خطة: 299$/شهر',
             options: []
         },
         'contact': {
             message: 'You can contact us via:\n📱 WhatsApp: https://wa.me/robusacademy\n📧 Email: contact@robusacademy.com\n🌐 Website: www.robusacademy.com',
+            messageAr: 'يمكنك التواصل معنا عبر:\n📱 واتساب: https://wa.me/robusacademy\n📧 البريد الإلكتروني: contact@robusacademy.com\n🌐 الموقع الإلكتروني: www.robusacademy.com',
             options: []
         }
     }
@@ -61,8 +69,14 @@ class Chatbot {
         this.storageKey = 'chatbotMessages'; // LocalStorage key
         this.menuStorageKey = 'chatbotCurrentMenu'; // Store current menu state
         this.conversationKey = 'chatbotConversation'; // Store full conversation with options
+        this.currentLanguage = this.detectLanguage(); // Detect current page language
         
         this.init();
+    }
+
+    detectLanguage() {
+        // Check if page is Arabic
+        return (document.documentElement.dir === 'rtl' || document.documentElement.lang === 'ar') ? 'ar' : 'en';
     }
 
     init() {
@@ -84,18 +98,29 @@ class Chatbot {
 
     toggleChat() {
         this.chatWindow.classList.toggle('hidden');
+        // Hide the tooltip when toggling chat
+        const tooltip = document.getElementById('chatbotTooltip');
+        if (tooltip) {
+            tooltip.classList.remove('show');
+        }
     }
 
     closeChat() {
         this.chatWindow.classList.add('hidden');
+        // Hide the tooltip when closing chat
+        const tooltip = document.getElementById('chatbotTooltip');
+        if (tooltip) {
+            tooltip.classList.remove('show');
+        }
     }
 
     displayInitialMessage() {
         // Check if there are saved conversations
         try {
             const savedConversation = JSON.parse(localStorage.getItem(this.conversationKey)) || [];
+            
             if (savedConversation.length > 0) {
-                // Load saved conversation
+                // Load saved conversation with current language
                 this.loadChatHistory();
                 return;
             }
@@ -109,7 +134,10 @@ class Chatbot {
         this.saveMenuState(this.currentMenu);
 
         // Display bot initial message
-        this.displayBotMessage(chatbotData.menus['main'].message);
+        const isArabic = document.documentElement.dir === 'rtl' || document.documentElement.lang === 'ar';
+        const mainMenuData = chatbotData.menus['main'];
+        const message = isArabic ? mainMenuData.messageAr : mainMenuData.message;
+        this.displayBotMessage(message);
 
         // Display options
         this.displayOptions();
@@ -117,18 +145,30 @@ class Chatbot {
 
     displayBotMessage(message) {
         const messageDiv = document.createElement('div');
-        messageDiv.className = 'd-flex flex-row justify-content-start mb-3';
+        const isRTL = document.documentElement.dir === 'rtl' || document.documentElement.lang === 'ar';
+        messageDiv.className = isRTL ? 'd-flex flex-row justify-content-end mb-3' : 'd-flex flex-row justify-content-start mb-3';
         
         const timestamp = new Date().getTime();
         const formattedTime = this.getFormattedTime(timestamp);
         
-        const botMessageContent = `
-            <img src="assets/img/chatbot/chatbot1.svg" alt="bot" style="width: 45px; height: 45px; border-radius: 50%; margin-right: 10px;">
-            <div>
-                <p class="small p-2 ms-3 mb-1 rounded-3 bg-body-tertiary text-wrap">${message}</p>
-                <small class="ms-3 text-muted" style="font-size: 0.75rem;">${formattedTime}</small>
-            </div>
-        `;
+        let botMessageContent;
+        if (isRTL) {
+            botMessageContent = `
+                <img src="../assets/img/chatbot/chatbot1.svg" alt="bot" style="width: 45px; height: 45px; border-radius: 50%; margin-left: 10px;">
+                <div>
+                    <p class="small p-2 ms-3 mb-1 rounded-3 bg-body-tertiary text-wrap" style="word-break: break-word; white-space: pre-wrap; padding-right: 30px;">${message}</p>
+                    <small class="ms-3 text-muted" style="font-size: 0.75rem;">${formattedTime}</small>
+                </div>
+            `;
+        } else {
+            botMessageContent = `
+                <img src="assets/img/chatbot/chatbot1.svg" alt="bot" style="width: 45px; height: 45px; border-radius: 50%; margin-right: 10px;">
+                <div>
+                    <p class="small p-2 ms-3 mb-1 rounded-3 bg-body-tertiary text-wrap" style="word-break: break-word; white-space: pre-wrap;">${message}</p>
+                    <small class="ms-3 text-muted" style="font-size: 0.75rem;">${formattedTime}</small>
+                </div>
+            `;
+        }
         
         messageDiv.innerHTML = botMessageContent;
         this.chatBody.appendChild(messageDiv);
@@ -150,23 +190,36 @@ class Chatbot {
 
     displayUserMessage(message) {
         const messageDiv = document.createElement('div');
-        messageDiv.className = 'd-flex flex-row justify-content-end mb-3';
+        const isRTL = document.documentElement.dir === 'rtl' || document.documentElement.lang === 'ar';
+        messageDiv.className = isRTL ? 'd-flex flex-row justify-content-start mb-3' : 'd-flex flex-row justify-content-end mb-3';
         
         const timestamp = new Date().getTime();
         const formattedTime = this.getFormattedTime(timestamp);
         
-        const userMessageContent = `
-            <div>
-                <p class="small p-2 me-3 mb-1 text-white rounded-3 bg-primary">${message}</p>
-                <small class="me-3 text-muted" style="font-size: 0.75rem; display: block; text-align: right;">${formattedTime}</small>
-            </div>
-            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava4-bg.webp" alt="user" style="width: 45px; height: 45px; border-radius: 50%;">
-        `;
+        let userMessageContent;
+        
+        if (isRTL) {
+            userMessageContent = `
+                <div>
+                    <p class="small p-2 me-3 mb-1 text-white rounded-3 bg-primary">${message}</p>
+                    <small class="me-3 text-muted" style="font-size: 0.75rem; display: block; text-align: left;">${formattedTime}</small>
+                </div>
+                <img src="../assets/img/chatbot/user.svg" alt="user" style="width: 45px; height: 45px; border-radius: 50%;">
+            `;
+        } else {
+            userMessageContent = `
+                <div>
+                    <p class="small p-2 me-3 mb-1 text-white rounded-3 bg-primary">${message}</p>
+                    <small class="me-3 text-muted" style="font-size: 0.75rem; display: block; text-align: right;">${formattedTime}</small>
+                </div>
+                <img src="assets/img/chatbot/user.svg" alt="user" style="width: 45px; height: 45px; border-radius: 50%;">
+            `;
+        }
         
         messageDiv.innerHTML = userMessageContent;
         this.chatBody.appendChild(messageDiv);
         
-        // Save message to localStorage with selected option
+        // Save message to localStorage
         this.saveMessage({
             type: 'user',
             content: message,
@@ -183,15 +236,17 @@ class Chatbot {
         
         const currentMenuData = chatbotData.menus[this.currentMenu];
         const options = currentMenuData.options || [];
+        const isArabic = document.documentElement.dir === 'rtl' || document.documentElement.lang === 'ar';
         
         // Display all options with numbering
         options.forEach((option, index) => {
             const optionBtn = document.createElement('button');
             optionBtn.type = 'button';
-            optionBtn.className = 'btn btn-outline-success btn-sm w-100 mb-2 text-start';
+            const textAlign = isArabic ? 'text-end' : 'text-start';
+            optionBtn.className = `btn btn-outline-success btn-sm w-100 mb-2 ${textAlign}`;
             optionBtn.style.fontSize = '1rem';
             optionBtn.style.padding = '0.6rem 0.8rem';
-            optionBtn.textContent = option.text;
+            optionBtn.textContent = isArabic ? option.textAr : option.text;
             optionBtn.dataset.optionId = index + 1;
             optionBtn.addEventListener('click', (e) => {
                 e.preventDefault();
@@ -205,11 +260,12 @@ class Chatbot {
         if (this.currentMenu !== 'main') {
             const returnBtn = document.createElement('button');
             returnBtn.type = 'button';
-            returnBtn.className = 'btn btn-outline-warning btn-sm w-100 mb-2 text-start';
+            const textAlign = isArabic ? 'text-end' : 'text-start';
+            returnBtn.className = `btn btn-outline-warning btn-sm w-100 mb-2 ${textAlign}`;
             returnBtn.style.fontSize = '1rem';
             returnBtn.style.padding = '0.6rem 0.8rem';
             const returnBtnNumber = options.length + 1;
-            returnBtn.textContent = `${returnBtnNumber}) Return to Main Menu`;
+            returnBtn.textContent = isArabic ? `${returnBtnNumber}) العودة للقائمة الرئيسية` : `${returnBtnNumber}) Return to Main Menu`;
             returnBtn.dataset.optionId = 'return-main';
             returnBtn.addEventListener('click', (e) => {
                 e.preventDefault();
@@ -281,9 +337,11 @@ class Chatbot {
             this.currentMenu = nextMenuId;
             this.saveMenuState(this.currentMenu);
             const nextMenuData = chatbotData.menus[nextMenuId];
+            const isArabic = document.documentElement.dir === 'rtl' || document.documentElement.lang === 'ar';
+            const message = isArabic ? nextMenuData.messageAr : nextMenuData.message;
             
             setTimeout(() => {
-                this.displayBotMessage(nextMenuData.message);
+                this.displayBotMessage(message);
                 this.displayOptions();
             }, 500);
         }
@@ -306,9 +364,11 @@ class Chatbot {
         this.currentMenu = 'main';
         this.saveMenuState(this.currentMenu);
         const mainMenuData = chatbotData.menus['main'];
+        const isArabic = document.documentElement.dir === 'rtl' || document.documentElement.lang === 'ar';
+        const returnMessage = isArabic ? 'تم العودة للقائمة الرئيسية. يرجى اختيار خيار:' : 'Returned to Main Menu. Please choose an option:';
         
         setTimeout(() => {
-            this.displayBotMessage('Returned to Main Menu. Please choose an option:');
+            this.displayBotMessage(returnMessage);
             this.displayOptions();
         }, 500);
 
@@ -343,8 +403,12 @@ class Chatbot {
             }
         } else {
             // Invalid option
+            const isArabic = document.documentElement.dir === 'rtl' || document.documentElement.lang === 'ar';
+            const errorMessage = isArabic 
+                ? `عذراً، الخيار غير صحيح. يرجى اختيار رقم من 1 إلى ${maxOptionNumber}.`
+                : `Sorry, the option is incorrect. Please choose a number from 1 to ${maxOptionNumber}.`;
             setTimeout(() => {
-                this.displayBotMessage(`Sorry, the option is incorrect. Please choose a number from 1 to ${maxOptionNumber}.`);
+                this.displayBotMessage(errorMessage);
             }, 500);
         }
 
@@ -364,9 +428,11 @@ class Chatbot {
             this.currentMenu = nextMenuId;
             this.saveMenuState(this.currentMenu);
             const nextMenuData = chatbotData.menus[nextMenuId];
+            const isArabic = document.documentElement.dir === 'rtl' || document.documentElement.lang === 'ar';
+            const message = isArabic ? nextMenuData.messageAr : nextMenuData.message;
             
             setTimeout(() => {
-                this.displayBotMessage(nextMenuData.message);
+                this.displayBotMessage(message);
                 this.displayOptions();
             }, 500);
         }
@@ -377,9 +443,11 @@ class Chatbot {
         this.currentMenu = 'main';
         this.saveMenuState(this.currentMenu);
         const mainMenuData = chatbotData.menus['main'];
+        const isArabic = document.documentElement.dir === 'rtl' || document.documentElement.lang === 'ar';
+        const returnMessage = isArabic ? 'تم العودة للقائمة الرئيسية. يرجى اختيار خيار:' : 'Returned to Main Menu. Please choose an option:';
         
         setTimeout(() => {
-            this.displayBotMessage('Returned to Main Menu. Please choose an option:');
+            this.displayBotMessage(returnMessage);
             this.displayOptions();
         }, 500);
     }
@@ -485,8 +553,17 @@ class Chatbot {
                     const msg = conversation[i];
                     
                     if (msg.type === 'bot') {
+                        // Get the message in current language from chatbotData
+                        const menuData = chatbotData.menus[msg.menuId];
+                        let displayContent = msg.content;
+                        
+                        if (menuData) {
+                            const isArabic = document.documentElement.dir === 'rtl' || document.documentElement.lang === 'ar';
+                            displayContent = isArabic ? (menuData.messageAr || msg.content) : (menuData.message || msg.content);
+                        }
+                        
                         // Display bot message
-                        this.displayMessageInHistory(msg);
+                        this.displayMessageInHistory({...msg, content: displayContent});
                         
                         // Check if this is the last bot message (don't show disabled options for it)
                         let isLastBotMessage = false;
@@ -546,25 +623,46 @@ class Chatbot {
     displayMessageInHistory(msg) {
         const formattedTime = this.getFormattedTime(msg.timestamp);
         const messageDiv = document.createElement('div');
+        const isRTL = document.documentElement.dir === 'rtl' || document.documentElement.lang === 'ar';
         
         if (msg.type === 'bot') {
-            messageDiv.className = 'd-flex flex-row justify-content-start mb-3';
-            messageDiv.innerHTML = `
-                <img src="assets/img/chatbot/chatbot1.svg" alt="bot" style="width: 45px; height: 45px; border-radius: 50%; margin-right: 10px;">
-                <div>
-                    <p class="small p-2 ms-3 mb-1 rounded-3 bg-body-tertiary text-wrap">${msg.content}</p>
-                    <small class="ms-3 text-muted" style="font-size: 0.75rem;">${formattedTime}</small>
-                </div>
-            `;
+            messageDiv.className = isRTL ? 'd-flex flex-row justify-content-end mb-3' : 'd-flex flex-row justify-content-start mb-3';
+            if (isRTL) {
+                messageDiv.innerHTML = `
+                    <img src="../assets/img/chatbot/chatbot1.svg" alt="bot" style="width: 45px; height: 45px; border-radius: 50%; margin-left: 10px;">
+                    <div>
+                        <p class="small p-2 ms-3 mb-1 rounded-3 bg-body-tertiary text-wrap" style="word-break: break-word; white-space: pre-wrap; padding-right: 30px;">${msg.content}</p>
+                        <small class="ms-3 text-muted" style="font-size: 0.75rem;">${formattedTime}</small>
+                    </div>
+                `;
+            } else {
+                messageDiv.innerHTML = `
+                    <img src="assets/img/chatbot/chatbot1.svg" alt="bot" style="width: 45px; height: 45px; border-radius: 50%; margin-right: 10px;">
+                    <div>
+                        <p class="small p-2 ms-3 mb-1 rounded-3 bg-body-tertiary text-wrap" style="word-break: break-word; white-space: pre-wrap;">${msg.content}</p>
+                        <small class="ms-3 text-muted" style="font-size: 0.75rem;">${formattedTime}</small>
+                    </div>
+                `;
+            }
         } else {
-            messageDiv.className = 'd-flex flex-row justify-content-end mb-3';
-            messageDiv.innerHTML = `
-                <div>
-                    <p class="small p-2 me-3 mb-1 text-white rounded-3 bg-primary">${msg.content}</p>
-                    <small class="me-3 text-muted" style="font-size: 0.75rem; display: block; text-align: right;">${formattedTime}</small>
-                </div>
-                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava4-bg.webp" alt="user" style="width: 45px; height: 45px; border-radius: 50%;">
-            `;
+            messageDiv.className = isRTL ? 'd-flex flex-row justify-content-start mb-3' : 'd-flex flex-row justify-content-end mb-3';
+            if (isRTL) {
+                messageDiv.innerHTML = `
+                    <div>
+                        <p class="small p-2 me-3 mb-1 text-white rounded-3 bg-primary" style="word-break: break-word; white-space: pre-wrap;">${msg.content}</p>
+                        <small class="me-3 text-muted" style="font-size: 0.75rem; display: block; text-align: left;">${formattedTime}</small>
+                    </div>
+                    <img src="../assets/img/chatbot/user.svg" alt="user" style="width: 45px; height: 45px; border-radius: 50%;">
+                `;
+            } else {
+                messageDiv.innerHTML = `
+                    <div>
+                        <p class="small p-2 me-3 mb-1 text-white rounded-3 bg-primary" style="word-break: break-word; white-space: pre-wrap;">${msg.content}</p>
+                        <small class="me-3 text-muted" style="font-size: 0.75rem; display: block; text-align: right;">${formattedTime}</small>
+                    </div>
+                    <img src="assets/img/chatbot/user.svg" alt="user" style="width: 45px; height: 45px; border-radius: 50%;">
+                `;
+            }
         }
         
         this.chatBody.appendChild(messageDiv);
@@ -573,15 +671,17 @@ class Chatbot {
     displayOptionsInHistory(options, menuId, isActive = false) {
         const optionsDiv = document.createElement('div');
         optionsDiv.className = 'options-container mt-2';
+        const isArabic = document.documentElement.dir === 'rtl' || document.documentElement.lang === 'ar';
         
         // Display all options
         options.forEach((option, index) => {
             const optionBtn = document.createElement('button');
             optionBtn.type = 'button';
+            const textAlign = isArabic ? 'text-end' : 'text-start';
             
             if (isActive) {
                 // Active options (current menu)
-                optionBtn.className = 'btn btn-outline-success btn-sm w-100 mb-2 text-start';
+                optionBtn.className = `btn btn-outline-success btn-sm w-100 mb-2 ${textAlign}`;
                 optionBtn.style.fontSize = '1rem';
                 optionBtn.style.padding = '0.6rem 0.8rem';
                 optionBtn.style.opacity = '1';
@@ -596,7 +696,7 @@ class Chatbot {
                 });
             } else {
                 // Disabled options (previous messages)
-                optionBtn.className = 'btn btn-outline-secondary btn-sm w-100 mb-2 text-start';
+                optionBtn.className = `btn btn-outline-secondary btn-sm w-100 mb-2 ${textAlign}`;
                 optionBtn.style.fontSize = '1rem';
                 optionBtn.style.padding = '0.6rem 0.8rem';
                 optionBtn.style.opacity = '0.6';
@@ -605,7 +705,7 @@ class Chatbot {
                 optionBtn.disabled = true;
             }
             
-            optionBtn.textContent = option.text;
+            optionBtn.textContent = isArabic ? option.textAr : option.text;
             optionsDiv.appendChild(optionBtn);
         });
         
@@ -613,10 +713,11 @@ class Chatbot {
         if (menuId !== 'main') {
             const returnBtn = document.createElement('button');
             returnBtn.type = 'button';
+            const textAlign = isArabic ? 'text-end' : 'text-start';
             
             if (isActive) {
                 // Active return button
-                returnBtn.className = 'btn btn-outline-warning btn-sm w-100 mb-2 text-start';
+                returnBtn.className = `btn btn-outline-warning btn-sm w-100 mb-2 ${textAlign}`;
                 returnBtn.style.fontSize = '1rem';
                 returnBtn.style.padding = '0.6rem 0.8rem';
                 returnBtn.style.opacity = '1';
@@ -631,7 +732,7 @@ class Chatbot {
                 });
             } else {
                 // Disabled return button
-                returnBtn.className = 'btn btn-outline-secondary btn-sm w-100 mb-2 text-start';
+                returnBtn.className = `btn btn-outline-secondary btn-sm w-100 mb-2 ${textAlign}`;
                 returnBtn.style.fontSize = '1rem';
                 returnBtn.style.padding = '0.6rem 0.8rem';
                 returnBtn.style.opacity = '0.6';
@@ -641,7 +742,7 @@ class Chatbot {
             }
             
             const returnBtnNumber = options.length + 1;
-            returnBtn.textContent = `${returnBtnNumber}) Return to Main Menu`;
+            returnBtn.textContent = isArabic ? `${returnBtnNumber}) العودة للقائمة الرئيسية` : `${returnBtnNumber}) Return to Main Menu`;
             optionsDiv.appendChild(returnBtn);
         }
         

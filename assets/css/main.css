@@ -219,6 +219,8 @@ html {
     z-index: 9998;
 }
 
+
+
 .fixed-btn {
     border-radius: 50%;
     width: 50px;
@@ -273,6 +275,10 @@ html {
     transform: translateY(3px);
 }
 
+html[dir="rtl"] .chatbot-btn img  {
+    transform: translateY(3px) rotateY(180deg);
+}
+
 /* Chatbot Tooltip Styling */
 .chatbot-tooltip {
     display: flex;
@@ -303,6 +309,22 @@ html {
     opacity: 1;
     transform: scale(1);
     pointer-events: auto;
+}
+
+/* When show is active: ensure element is interactive and visible */
+#chatbotTooltip.show {
+    visibility: visible !important;
+    pointer-events: auto !important;
+}
+
+/* After scroll-animate fires, hide tooltip when show class is removed */
+#chatbotTooltip.scroll-animate:not(.show) {
+    animation: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    transform: scale(0.1) !important;
+    pointer-events: none !important;
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
 }
 
 @media (max-width: 991px) {
@@ -447,7 +469,7 @@ html {
 }
 
 /* Mobile responsiveness */
-@media (max-width: 768px) {
+@media (max-width: 991px) {
     .chat-window {
         bottom: 100px;
         right: 70px;
@@ -494,7 +516,7 @@ html {
     pointer-events: none;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 991px) {
     .fixed-buttons-group {
         right: 10px;
         bottom: 100px;
@@ -540,21 +562,21 @@ html {
 @media (min-width: 1200px) {
     .top-nav,
     .top-nav-box {
-        padding: 8px 150px;
+        padding: 8px 100px;
     }
 }
 
 @media (min-width: 1350px) {
     .top-nav,
     .top-nav-box {
-        padding: 8px 250px;
+        padding: 8px 125px;
     }
 }
 
 @media (min-width: 1500px) {
     .top-nav,
     .top-nav-box {
-        padding: 8px 350px;
+        padding: 8px 200px;
     }
 }
 
@@ -697,7 +719,7 @@ html {
 .top-nav-box .nav-links,
 .top-nav .nav-links {
     display: flex;
-    gap: 30px;
+    gap: 15px;
     align-items: center;
     flex-wrap: wrap;
 }
@@ -1418,6 +1440,15 @@ section:nth-child(even) {
     font-weight: 700;
 }
 
+html[dir="rtl"] .section-title h2 {
+    text-align: right;
+}
+
+html[dir="rtl"] .courses-section .section-title h2,
+html[dir="rtl"] .projects-section .section-title h2 {
+    text-align: center;
+}
+
 .section-title p {
     max-width: 760px;
     margin: 0 auto;
@@ -1452,13 +1483,18 @@ section:nth-child(even) {
 
 @media (max-width: 991px) {
     .section-title,
-    .section-title .title-warp {
+    .section-title .title-warp,
+    .section-title h2 {
         margin: 0 auto;
         text-align: center;
     }
 
     .section-title h2 {
         font-size: 36px;
+    }
+
+    html[dir="rtl"] .section-title h2 {
+        text-align: center;
     }
 }
 
@@ -1602,6 +1638,20 @@ section:nth-child(even) {
     }
 }
 
+@keyframes floatLeftRight {
+    0% {
+        transform: translateX(0);
+    }
+
+    50% {
+        transform: translateX(-20px);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
 
 .floating-shape {
     position: absolute;
@@ -1609,17 +1659,28 @@ section:nth-child(even) {
     z-index: 0;
 }
 
-.floating-shape.shape1 {
-    right: 15%;
-    top: 20%;
+.floating-shape img {
+    width: 80px;
 }
 
-.floating-shape.shape1 img {
-    width: 80px;
+.floating-shape.shape-1 {
+    right: 15%;
+    top: 20%;
     rotate: 45deg;
     animation: floatUpDown 3s ease-in-out infinite;
 }
 
+.floating-shape.shape-2 {
+    left: 15%;
+    top: 20%;
+    animation: floatLeftRight 3s ease-in-out infinite;
+}
+
+.floating-shape.shape-3 {
+    right: 10%;
+    bottom: 20%;
+    animation: floatUpDown 3s ease-in-out infinite;
+}
 
 
 /* button style */
@@ -2428,6 +2489,89 @@ body.video-modal-open {
     pointer-events: none;
 }
 
+/* RTL (Arabic) Specific Choose Us Styles */
+html[dir="rtl"] .choose-us-wrapper .line-shape {
+    transform: rotateY(180deg);
+}
+
+html[dir="rtl"] .choose-us-wrapper .icon-items.icon-item-1 {
+    top: 0;
+    right: auto;
+    left: 0;
+}
+
+html[dir="rtl"] .choose-us-wrapper .icon-items.icon-item-2 {
+    bottom: 150px;
+    left: auto;
+    right: calc(50% - 40px);
+}
+
+html[dir="rtl"] .choose-us-wrapper .icon-items.icon-item-3 {
+    bottom: -20px;
+    left: auto;
+    right: 30px;
+}
+
+@media (max-width: 1399px) {
+    html[dir="rtl"] .choose-us-wrapper .icon-items.icon-item-2 {
+        bottom: 120px;
+        left: auto;
+        right: calc(50% - 60px);
+    }
+
+    html[dir="rtl"] .choose-us-wrapper .icon-items.icon-item-3 {
+        bottom: 20px;
+        right: 30px;
+    }
+}
+
+@media (max-width: 1199px) {
+    html[dir="rtl"] .choose-us-wrapper .icon-items.icon-item-2 {
+        bottom: 100px;
+        left: auto;
+        right: calc(50% - 150px);
+    }
+
+    html[dir="rtl"] .choose-us-wrapper .icon-items.icon-item-3 {
+        bottom: 0;
+        right: 30px;
+    }
+}
+
+@media (max-width: 991px) {
+    html[dir="rtl"] .choose-us-wrapper .icon-items.icon-item-1 {
+        top: 200px;
+        left: auto;
+        right: calc(50% - 110px);
+    }
+
+    html[dir="rtl"] .choose-us-wrapper .icon-items.icon-item-2 {
+        top: 500px;
+        left: auto;
+        right: calc(75% - 110px);
+    }
+
+    html[dir="rtl"] .choose-us-wrapper .icon-items.icon-item-3 {
+        top: 500px;
+        left: auto;
+        right: calc(25% - 110px);
+    }
+}
+
+@media (max-width: 575px) {
+    html[dir="rtl"] .choose-us-wrapper .icon-items.icon-item-2 {
+        top: 500px;
+        left: auto;
+        right: calc(50% - 110px);
+    }
+
+    html[dir="rtl"] .choose-us-wrapper .icon-items.icon-item-3 {
+        top: 820px;
+        left: auto;
+        right: calc(50% - 110px);
+    }
+}
+
 
 
 .section-padding {
@@ -2767,6 +2911,33 @@ body.video-modal-open {
     position: relative;
 }
 
+/* RTL (Arabic) Specific Accordion Styles */
+html[dir="rtl"] .q-wrapper .q-content .q-items .accordion .accordion-item h2 button {
+    padding-left: 0;
+    padding-right: 105px;
+}
+
+html[dir="rtl"] .q-wrapper .q-content .q-items .accordion .accordion-button {
+    padding-left: 0;
+    padding-right: 105px;
+}
+
+html[dir="rtl"] .q-wrapper .q-content .q-items .accordion .accordion-button::before {
+    left: auto;
+    right: 50px;
+}
+
+html[dir="rtl"] .q-wrapper .q-content .q-items .accordion .accordion-button.collapsed::before {
+    content: "\f0a8";
+}
+
+@media (max-width: 1199px) {
+    html[dir="rtl"] .q-wrapper .q-content .q-items .accordion .accordion-button::before {
+        left: auto;
+        right: 30px;
+    }
+}
+
 @media (max-width: 1199px) {
     .q-wrapper.style-2 .q-image-2 img {
         width: 100%;
@@ -2873,7 +3044,7 @@ body.video-modal-open {
 .q-section-5 .q-image {
     position: absolute;
     top: 100px;
-    right: 0;
+    /* right: 0; */
 }
 
 @media (max-width: 1399px) {
@@ -3575,6 +3746,146 @@ body.video-modal-open {
     transition: all 0.3s ease-out 0s;
     opacity: 0;
 }
+
+/* ========================== RTL (Arabic) Layout Fixes ========================== */
+
+/* RTL: Fixed Buttons Group */
+[dir="rtl"] .fixed-buttons-group,
+html[lang="ar"] .fixed-buttons-group {
+    right: auto;
+    left: 30px;
+}
+
+@media (max-width: 767px) {
+    [dir="rtl"] .fixed-buttons-group,
+    html[lang="ar"] .fixed-buttons-group {
+        right: auto;
+        left: 10px;
+    }
+}
+
+/* RTL: Chatbot Tooltip */
+[dir="rtl"] .chatbot-tooltip,
+html[lang="ar"] .chatbot-tooltip {
+    right: auto;
+    left: 50px;
+    border-bottom-right-radius: 24px;
+    border-bottom-left-radius: 0;
+    transform-origin: bottom left;
+}
+
+@media (max-width: 991px) {
+    [dir="rtl"] .chatbot-tooltip,
+    html[lang="ar"] .chatbot-tooltip {
+        right: auto;
+        left: 20px;
+    }
+}
+
+/* RTL: Chat Window */
+[dir="rtl"] .chat-window,
+html[lang="ar"] .chat-window {
+    right: auto;
+    left: 100px;
+}
+
+@media (max-width: 768px) {
+    [dir="rtl"] .chat-window,
+    html[lang="ar"] .chat-window {
+        right: auto;
+        left: 10px;
+    }
+}
+
+/* RTL: Bot Message Styling */
+[dir="rtl"] .chat-card .card-body .bg-body-tertiary,
+html[lang="ar"] .chat-card .card-body .bg-body-tertiary {
+    border-left: none;
+    border-right: 3px solid var(--theme-green-4);
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+}
+
+/* RTL: Card Footer */
+[dir="rtl"] .chat-card .card-footer,
+html[lang="ar"] .chat-card .card-footer {
+    justify-content: flex-end;
+}
+
+[dir="rtl"] .chat-card .card-footer input,
+html[lang="ar"] .chat-card .card-footer input {
+    margin-left: 10px;
+    margin-right: 0;
+}
+
+[dir="rtl"] .chat-card .card-footer a,
+html[lang="ar"] .chat-card .card-footer a {
+    margin-right: 0;
+    margin-left: 10px;
+}
+
+/* RTL: Message Container Alignment */
+[dir="rtl"] .d-flex.flex-row.justify-content-start,
+html[lang="ar"] .d-flex.flex-row.justify-content-start {
+    justify-content: flex-end !important;
+}
+
+[dir="rtl"] .d-flex.flex-row.justify-content-end,
+html[lang="ar"] .d-flex.flex-row.justify-content-end {
+    justify-content: flex-start !important;
+}
+
+/* RTL: Options Container */
+[dir="rtl"] .options-container button,
+html[lang="ar"] .options-container button {
+    text-align: right;
+}
+
+/* RTL: Message Margin Adjustment */
+[dir="rtl"] .chat-card .card-body p.small.ms-3,
+html[lang="ar"] .chat-card .card-body p.small.ms-3 {
+    margin-left: 0 !important;
+    margin-right: 12px !important;
+}
+
+[dir="rtl"] .chat-card .card-body p.small.me-3,
+html[lang="ar"] .chat-card .card-body p.small.me-3 {
+    margin-right: 0 !important;
+    margin-left: 12px !important;
+}
+
+[dir="rtl"] .chat-card .card-body small.ms-3,
+html[lang="ar"] .chat-card .card-body small.ms-3 {
+    margin-left: 0 !important;
+    margin-right: 12px !important;
+}
+
+[dir="rtl"] .chat-card .card-body small.me-3,
+html[lang="ar"] .chat-card .card-body small.me-3 {
+    margin-right: 0 !important;
+    margin-left: 12px !important;
+    text-align: right;
+}
+
+/* RTL: Image Margin in Messages */
+[dir="rtl"] .chat-card .card-body img,
+html[lang="ar"] .chat-card .card-body img {
+    margin-left: 10px !important;
+    margin-right: 0 !important;
+}
+
+/* RTL: Bot Message Image Positioning */
+[dir="rtl"] .d-flex.flex-row.justify-content-start img,
+html[lang="ar"] .d-flex.flex-row.justify-content-start img {
+    order: 2;
+}
+
+[dir="rtl"] .d-flex.flex-row.justify-content-start > div,
+html[lang="ar"] .d-flex.flex-row.justify-content-start > div {
+    order: 1;
+}
+    
+
 
 .footer-image-item a:hover::after {
     opacity: 1;
