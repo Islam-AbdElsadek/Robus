@@ -266,15 +266,40 @@ if (typeof Swiper !== 'undefined') {
 // Section 2 - Courses (Learning Path)
 const courseButtons = document.querySelectorAll('#courses .path-btn');
 const courseCards = document.querySelectorAll('#courses .courses-card');
+const courseFloatingShapes = document.querySelectorAll('#courses .floating-shape');
+
+// Determine the correct path prefix based on page location
+const isArabicPage = document.documentElement.dir === 'rtl' || document.documentElement.lang === 'ar';
+const shapePathPrefix = isArabicPage ? '../assets/img/shapes/' : 'assets/img/shapes/';
 
 courseButtons.forEach(button => {
     button.addEventListener('click', () => {
         const course = button.dataset.course;
+        const shapesData = button.dataset.shapes ? JSON.parse(button.dataset.shapes) : null;
 
         courseButtons.forEach(item => item.classList.toggle('active', item === button));
         courseCards.forEach(card => {
             card.classList.toggle('active', card.dataset.course === course);
         });
+
+        // Change floating shapes based on course selection
+        if (shapesData && courseFloatingShapes.length > 0) {
+            if (courseFloatingShapes[0]) {
+                const shape1Img = courseFloatingShapes[0].querySelector('img');
+                if (shape1Img && shapesData.shape1) {
+                    shape1Img.src = shapePathPrefix + shapesData.shape1;
+                    shape1Img.style.transition = 'opacity 0.3s ease';
+                }
+            }
+            
+            if (courseFloatingShapes[1]) {
+                const shape2Img = courseFloatingShapes[1].querySelector('img');
+                if (shape2Img && shapesData.shape2) {
+                    shape2Img.src = shapePathPrefix + shapesData.shape2;
+                    shape2Img.style.transition = 'opacity 0.3s ease';
+                }
+            }
+        }
     });
 });
 
@@ -641,13 +666,13 @@ window.addEventListener('load', initLightbox);
 // Function to open mobile menu
 function openMobileMenu() {
     console.log('Opening mobile menu');
-    document.body.classList.add('mobile-menu-visible');
+    document.body.classList.add('gift-menu-visible');
 }
 
 // Function to close mobile menu
 function closeMobileMenu() {
     console.log('Closing mobile menu');
-    document.body.classList.remove('mobile-menu-visible');
+    document.body.classList.remove('gift-menu-visible');
 }
 
 // Use event delegation to handle button clicks
@@ -660,19 +685,19 @@ document.body.addEventListener('click', (e) => {
     }
     
     // Check if clicked element is the close button
-    if (e.target.closest('.mobile-menu .close-btn')) {
+    if (e.target.closest('.gift-menu .close-btn')) {
         console.log('Close button clicked via delegation');
         closeMobileMenu();
     }
     
     // Check if clicked element is a menu link (but not dropdown buttons)
-    if (e.target.closest('.mobile-menu .navigation a') && !e.target.closest('.dropdown-btn')) {
+    if (e.target.closest('.gift-menu .navigation a') && !e.target.closest('.dropdown-btn')) {
         console.log('Menu link clicked via delegation');
         closeMobileMenu();
     }
 
     // Handle dropdown button clicks
-    const dropdownBtn = e.target.closest('.mobile-menu .dropdown-btn');
+    const dropdownBtn = e.target.closest('.gift-menu .dropdown-btn');
     if (dropdownBtn) {
         e.preventDefault();
         e.stopPropagation();
@@ -708,7 +733,7 @@ document.body.addEventListener('click', (e) => {
 
 // Close menu when clicking backdrop
 document.addEventListener('click', (e) => {
-    if (e.target.classList.contains('menu-backdrop') && document.body.classList.contains('mobile-menu-visible')) {
+    if (e.target.classList.contains('menu-backdrop') && document.body.classList.contains('gift-menu-visible')) {
         console.log('Backdrop clicked');
         closeMobileMenu();
     }
@@ -721,8 +746,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const mobileMenuButton = document.querySelector('.top-nav-mobile-button');
     const mobileMenuBoxButton = document.querySelector('.top-nav-mobile-box-button');
     const menuBackdrop = document.querySelector('.menu-backdrop');
-    const closeBtn = document.querySelector('.mobile-menu .close-btn');
-    const mobileMenuLinks = document.querySelectorAll('.mobile-menu .navigation a');
+    const closeBtn = document.querySelector('.gift-menu .close-btn');
+    const mobileMenuLinks = document.querySelectorAll('.gift-menu .navigation a');
 
     console.log('Mobile Menu Elements:', {
         mobileMenuButton: !!mobileMenuButton,
