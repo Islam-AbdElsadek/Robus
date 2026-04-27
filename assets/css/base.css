@@ -1,0 +1,357 @@
+/* =============================================
+   Base / Global Styles
+   ============================================= */
+
+/* --- Smooth Scroll --- */
+html {
+    scroll-behavior: smooth;
+}
+
+/* --- Text Selection --- */
+html::selection {
+    color: var(--white);
+    background-color: var(--theme-green-2);
+}
+
+/* --- Links --- */
+a {
+    text-decoration: none;
+}
+
+/* --- Overflow Fix on Mobile --- */
+@media (max-width: 991px) {
+    html,
+    body {
+        overflow-x: hidden;
+    }
+}
+
+/* =============================================
+   Scrollbar
+   ============================================= */
+
+::-webkit-scrollbar {
+    width: 6px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--theme-green-4);
+    box-shadow: inset 0 0 5px var(--theme-green);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--theme-green);
+    border-radius: 15px;
+    transition: all 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--theme-green-2);
+    box-shadow: 0 0 6px rgba(0, 91, 255, 0.3);
+}
+
+/* =============================================
+   Font Awesome Icon Fixes
+   ============================================= */
+
+.fas {
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    display: inline-block;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    line-height: 1;
+}
+
+.fa-arrow-up:before {
+    content: "\f176";
+}
+
+/* =============================================
+   Flaticon Icons (Font Awesome Replacement)
+   ============================================= */
+
+.flaticon-satisfaction::before {
+    content: "\f5a2";
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    font-size: 60px;
+    color: inherit;
+    display: inline-block;
+    line-height: 1;
+}
+
+.flaticon-satisfaction {
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    display: inline-block;
+}
+
+.flaticon-graduation::before {
+    content: "\f19d";
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    font-size: 60px;
+    color: inherit;
+    display: inline-block;
+    line-height: 1;
+}
+
+.flaticon-graduation {
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    display: inline-block;
+}
+
+.flaticon-instructor::before {
+    content: "\f51c";
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    font-size: 60px;
+    color: inherit;
+    display: inline-block;
+    line-height: 1;
+}
+
+.flaticon-instructor {
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    display: inline-block;
+}
+
+/* =============================================
+   Utility Classes
+   ============================================= */
+
+.fix {
+    overflow: hidden;
+}
+
+.list-wrap {
+    margin: 0px;
+    padding: 0px;
+}
+
+.list-wrap li {
+    list-style: none;
+}
+
+/* Show/hide by device type */
+.mobile-image {
+    display: none !important;
+}
+
+@media (max-width: 991px) {
+    .mobile-image {
+        display: block !important;
+    }
+
+    .desktop-image {
+        display: none !important;
+    }
+}
+
+/* =============================================
+   Section General Styles
+   ============================================= */
+
+section {
+    transition: background-color 0.3s ease;
+}
+
+section:nth-child(odd) {
+    background-color: var(--bg);
+}
+
+section:nth-child(even) {
+    background-color: var(--bg2);
+}
+
+section[id] {
+    scroll-margin-top: 80px;
+}
+
+.section-padding {
+    padding: 60px 0;
+    padding-top: 40px;
+    display: block;
+}
+
+/* --- Odometer Counter --- */
+.odometer {
+    display: inline-block;
+}
+
+/* --- WOW.js Override --- */
+.wow {
+    visibility: visible !important;
+    animation-duration: 1s !important;
+}
+
+.wow.fadeInUp {
+    animation-name: fadeInUp !important;
+}
+
+/* =============================================
+   Section Title
+   ============================================= */
+
+.section-title {
+    margin-bottom: 40px;
+    text-align: left;
+}
+
+.section-title h6 {
+    color: var(--theme-orange);
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 0px;
+    display: block;
+}
+
+.section-title h2 {
+    font-size: 48px;
+    line-height: 1.3;
+    color: var(--header);
+    font-weight: 700;
+}
+
+.section-title p {
+    max-width: 760px;
+    margin: 0 auto;
+    color: var(--text);
+    font-size: 1.25rem;
+    line-height: 1.8;
+}
+
+.courses-section .section-title,
+.projects-section .section-title {
+    text-align: center;
+}
+
+.courses-section .section-title .title-warp,
+.projects-section .section-title .title-warp {
+    margin: 0 auto;
+    text-align: center;
+}
+
+.title-bar {
+    display: block;
+    width: 100%;
+    height: 10px;
+    background: url(../img/bar/gold-bar.svg) no-repeat center;
+    background-size: 100% 100%;
+}
+
+.title-warp {
+    width: fit-content;
+    margin-bottom: 20px !important;
+}
+
+@media (max-width: 991px) {
+    .section-title,
+    .section-title .title-warp,
+    .section-title h2 {
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .section-title h2 {
+        font-size: 36px;
+    }
+}
+
+@media (max-width: 767px) {
+    .section-title h2 {
+        font-size: 28px;
+    }
+}
+
+/* =============================================
+   Button Styles
+   ============================================= */
+
+.btn {
+    user-select: none;
+    -moz-user-select: none;
+    background: var(--theme-green) none repeat scroll 0 0;
+    border: medium none;
+    border-radius: 50px;
+    color: var(--white);
+    cursor: pointer;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0;
+    line-height: 1.4;
+    margin-bottom: 0;
+    padding: 19px 0;
+    text-align: center;
+    text-transform: capitalize;
+    touch-action: manipulation;
+    transition: all 0.3s ease 0s;
+    vertical-align: middle;
+    white-space: nowrap;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.btn::before {
+    content: "";
+    position: absolute;
+    -webkit-transition-duration: 800ms;
+    transition-duration: 800ms;
+    width: 200%;
+    height: 200%;
+    top: 110%;
+    left: 50%;
+    background: var(--theme-gold);
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    border-radius: 50%;
+    z-index: -1;
+}
+
+.btn:hover {
+    color: var(--white);
+}
+
+.btn-two {
+    background: var(--theme-gold) none repeat scroll 0 0;
+}
+
+.btn-two::before {
+    background: var(--theme-green-2);
+}
+
+.btn:hover:before {
+    top: -40%;
+}
+
+.btn:focus,
+button:focus {
+    text-decoration: none;
+    outline: none;
+    box-shadow: none;
+}
+
+/* =============================================
+   END Base / Global Styles
+   ============================================= */

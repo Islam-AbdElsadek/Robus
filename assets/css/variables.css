@@ -1,0 +1,59 @@
+/* =============================================
+   CSS Custom Properties — Color Palette & Global Variables
+   ============================================= */
+
+:root {
+    /* Base Colors */
+    --body: #fff;
+    --black: #000;
+    --white: #fff;
+
+    /* Theme Green Palette */
+    --theme-green: #045c40;
+    --theme-green-2: #0e392a;
+    --theme-green-3: #1b9331;
+    --theme-green-4: #57c7a3;
+
+    /* Theme Gold / Yellow Palette */
+    --theme-gold: #e6941d;
+    --theme-gold-2: #fec819;
+    --theme-yellow: #ffd25d;
+    --theme-yellow-2: #f69b17;
+    --theme-yellow-3: #fdc500;
+    --theme-yellow-4: #ffd335;
+
+    /* Theme Blue Palette */
+    --theme-blue: #005bff;
+    --theme-blue-2: #553cdf;
+
+    /* Other Colors */
+    --theme-purple: #8f66ff;
+    --theme-red: #ad0119;
+    --theme-pink: #ee4a62;
+    --theme-orange: #f47900;
+
+    /* Semantic Colors */
+    --header: #034206;
+    --base: #5c30fd;
+    --text: #5b6d84;
+    --border: #e6efff;
+    --border2: #373737;
+    --ratting: #f8bc26;
+
+    /* Background Variants */
+    --bg: #f8fbff;
+    --bg2: #e6ffe6;
+    --bg3: #f4f0ff;
+    --bg4: #2f584e;
+    --bg5: #09224b;
+    --bg6: #edf3f5;
+    --bg7: #f8f2ec;
+    --bg8: #f3f1fd;
+
+    /* Shadow */
+    --shadow: 0px 4px 25px rgba(0, 0, 0, 0.06);
+}
+
+/* =============================================
+   END CSS Custom Properties
+   ============================================= */

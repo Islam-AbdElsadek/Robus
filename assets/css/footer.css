@@ -1,0 +1,325 @@
+/* =============================================
+   Footer Styles
+   ============================================= */
+
+/* =============================================
+   Footer Instagram Slider
+   ============================================= */
+
+.footer-images {
+    position: relative;
+    z-index: 3;
+    margin: 0 0 -95px;
+}
+
+.footer-images-swiper {
+    overflow: hidden;
+}
+
+.footer-image-item {
+    width: 100%;
+    aspect-ratio: 1;
+}
+
+.footer-image-item a {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.footer-image-item img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.footer-image-item a::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--theme-gold);
+    opacity: 0;
+    transition: all 0.3s ease-out 0s;
+}
+
+.footer-image-item a:hover::before {
+    opacity: .8;
+}
+
+.footer-image-item a::after {
+    content: "\f144";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--white);
+    font-family: "Font Awesome 5 Free";
+    font-weight: 400;
+    font-size: 70px;
+    line-height: 1;
+    transition: all 0.3s ease-out 0s;
+    opacity: 0;
+}
+
+.footer-image-item a:hover::after {
+    opacity: 1;
+}
+
+/* =============================================
+   Footer Top Area
+   ============================================= */
+
+.footer-top-wrap {
+    background: #0A0A0A;
+    position: relative;
+    padding: 195px 0 30px;
+    overflow-x: hidden;
+    z-index: 1;
+}
+
+.not-show-instagram .footer-top-wrap {
+    padding: 120px 0 30px;
+}
+
+.footer-top-wrap::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: -22px;
+    width: 100%;
+    height: 53px;
+    background-repeat: repeat;
+    background-position: center;
+    z-index: -1;
+}
+
+/* Decorative Shapes */
+.footer-shape {
+    position: absolute;
+    z-index: -1;
+}
+
+.footer-shape.one {
+    left: 0;
+    bottom: 100px;
+}
+
+.footer-shape.two {
+    max-width: 150px;
+    right: 0;
+    bottom: 170px;
+}
+
+.footer-shape.two img {
+    width: 100%;
+    position: relative;
+    right: -25px;
+}
+
+/* =============================================
+   Footer Widgets
+   ============================================= */
+
+.footer-widget {
+    margin: 0 0 50px;
+}
+
+.footer-logo {
+    margin: 0 0 30px;
+}
+
+.footer-widget .footer-text {
+    width: 75%;
+}
+
+.footer-widget .footer-text p {
+    margin: 0 0;
+    color: var(--white);
+    opacity: .7;
+}
+
+.footer-social {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 30px;
+}
+
+.footer-social a {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #1B1B1B;
+    border-radius: 50%;
+    color: var(--white);
+    text-decoration: none;
+}
+
+.footer-social a:hover {
+    background: var(--theme-gold);
+}
+
+.footer-widget .fw-title {
+    font-size: 20px;
+    color: var(--white);
+    letter-spacing: 0.02em;
+    margin: 0 0 30px;
+}
+
+.footer-widget ul li {
+    margin: 0 0 12px;
+}
+
+.footer-widget ul li:last-child {
+    margin: 0 0;
+}
+
+.footer-widget ul li a {
+    color: var(--white);
+    opacity: .7;
+}
+
+.footer-widget ul li a:hover {
+    color: var(--theme-gold);
+    opacity: 1;
+}
+
+/* Footer Contact */
+.footer-contact-wrap p {
+    color: var(--white);
+    opacity: .7;
+}
+
+.footer-contact-wrap .list-wrap {
+    margin: 30px 0 0;
+}
+
+.footer-contact-wrap .list-wrap li {
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    margin: 0 0 15px;
+}
+
+.footer-contact-wrap .list-wrap li i {
+    color: var(--theme-gold);
+    font-size: 18px;
+    margin-right: 10px;
+}
+
+/* Footer Widget Grid Padding */
+.footer-widgets-wrap .row [class*="col-"]:nth-child(4n+2) .footer-widget {
+    padding-left: 30px;
+}
+
+.footer-widgets-wrap .row [class*="col-"]:nth-child(4n+4) .footer-widget {
+    padding-left: 70px;
+}
+
+/* =============================================
+   Copyright Bar
+   ============================================= */
+
+.copyright-wrap {
+    background: #0A0A0A;
+    border-top: 1px solid #262626;
+    padding: 25px 0;
+}
+
+.copyright-text p {
+    margin: 0 0;
+    color: var(--white);
+    opacity: .9;
+}
+
+/* Mobile bottom nav spacing */
+@media (max-width: 767.98px) {
+    footer {
+        margin-bottom: 70px;
+    }
+}
+
+/* =============================================
+   Footer Responsive
+   ============================================= */
+
+/* 1500px and below */
+@media (max-width: 1500px) {
+    .footer-widgets-wrap .row [class*="col-"]:nth-child(4n+2) .footer-widget {
+        padding-left: 0;
+    }
+
+    .footer-widgets-wrap .row [class*="col-"]:nth-child(4n+4) .footer-widget {
+        padding-left: 40px;
+    }
+
+    .footer-widget .footer-text {
+        width: 87%;
+    }
+
+    .footer-shape.two {
+        max-width: 150px;
+    }
+}
+
+/* 1199px and below */
+@media (max-width: 1199.98px) {
+    .footer-shape.one { max-width: 50px; }
+
+    .footer-shape.two {
+        max-width: 100px;
+    }
+
+    .footer-shape.two img {
+        right: -17px;
+    }
+
+    .footer-widgets-wrap .row [class*="col-"]:nth-child(4n+4) .footer-widget {
+        padding-left: 0;
+    }
+
+    .footer-widgets-wrap .row [class*="col-"]:nth-child(4n+2) .footer-widget {
+        padding-left: 25px;
+    }
+
+    .footer-widget .footer-text {
+        width: 90%;
+    }
+
+    .footer-image-item a::after {
+        font-size: 50px;
+    }
+}
+
+/* 991px and below */
+@media (max-width: 991.98px) {
+    .footer-shape.two {
+        right: 0;
+        bottom: 30%;
+    }
+}
+
+/* 767px and below */
+@media (max-width: 767.98px) {
+    .footer-widgets-wrap .row [class*="col-"]:nth-child(4n+2) .footer-widget {
+        padding-left: 0;
+    }
+
+    .footer-shape.one {
+        max-width: 55px;
+        left: auto;
+        right: 0;
+        transform: rotate(180deg);
+    }
+}
+
+/* =============================================
+   END Footer Styles
+   ============================================= */

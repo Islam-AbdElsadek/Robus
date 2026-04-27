@@ -1,0 +1,388 @@
+/* =============================================
+   Keyframes & Animation Classes
+   ============================================= */
+
+/* =============================================
+   Page Load Keyframes
+   ============================================= */
+
+@keyframes slideUpLoader {
+    0%   { transform: translateY(0px); }
+    100% { transform: translateY(-1200px); }
+}
+
+@keyframes fadeDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* =============================================
+   Loader Spinner Keyframes
+   ============================================= */
+
+@keyframes animateC {
+    0%   { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes animate {
+    0%   { transform: rotate(45deg); }
+    100% { transform: rotate(405deg); }
+}
+
+/* =============================================
+   Floating Shape Keyframes
+   ============================================= */
+
+@keyframes floatUpDown {
+    0%   { transform: translateY(0); }
+    50%  { transform: translateY(-20px); }
+    100% { transform: translateY(0); }
+}
+
+@keyframes floatDownUp {
+    0%   { transform: translateY(0); }
+    50%  { transform: translateY(20px); }
+    100% { transform: translateY(0); }
+}
+
+@keyframes floatLeftRight {
+    0%   { transform: translateX(0); }
+    50%  { transform: translateX(-20px); }
+    100% { transform: translateX(0); }
+}
+
+@keyframes floatRightLeft {
+    0%   { transform: translateX(0); }
+    50%  { transform: translateX(20px); }
+    100% { transform: translateX(0); }
+}
+
+/* =============================================
+   Entrance / Fade Animation Keyframes
+   ============================================= */
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from { transform: translateY(100px); opacity: 0; }
+    to   { transform: translateY(0);     opacity: 1; }
+}
+
+@keyframes scaleIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes fadeInLeft {
+    from { opacity: 0; transform: translateX(-40px); }
+    to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fadeInRight {
+    from { opacity: 0; transform: translateX(40px); }
+    to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translate3d(0, 40px, 0); }
+    to   { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-40px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideInUp {
+    from {
+        transform: translate3d(0, 100%, 0);
+        visibility: visible;
+    }
+    to { transform: translate3d(0, 0, 0); }
+}
+
+@keyframes backInDown {
+    0%   { transform: translateY(-1200px) scale(0.7); opacity: 0.7; }
+    80%  { transform: translateY(0px) scale(0.7);     opacity: 0.7; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes backInLeft {
+    0%   { transform: translateX(-2000px) scale(0.7); opacity: 0.7; }
+    80%  { transform: translateX(0px) scale(0.7);     opacity: 0.7; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes backInRight {
+    0%   { transform: translateX(2000px) scale(0.7); opacity: 0.7; }
+    80%  { transform: translateX(0px) scale(0.7);    opacity: 0.7; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes backInUp {
+    0%   { transform: translateY(1200px) scale(0.7); opacity: 0.7; }
+    80%  { transform: translateY(0px) scale(0.7);    opacity: 0.7; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/* =============================================
+   Marquee / Ticker Keyframes
+   ============================================= */
+
+@keyframes scroll {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(calc(-100% - 50px)); }
+}
+
+@keyframes scrolls {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(100%); }
+}
+
+@keyframes shine {
+    from { -webkit-mask-position: 150%; }
+    to   { -webkit-mask-position: -50%; }
+}
+
+@keyframes ticker-move {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+/* =============================================
+   Floating Shapes — Base Styles & Section Positions
+   ============================================= */
+
+/* Pause all animations until loader disappears */
+.pause-animation {
+    animation-play-state: paused !important;
+}
+
+/* Base floating shape */
+.floating-shape {
+    position: absolute;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.floating-shape img {
+    width: 80px;
+    transition: width 0.3s ease;
+}
+
+/* --- Banner Section --- */
+.banner-section .floating-shape.shape-1 {
+    right: 15%;
+    top: 20%;
+    rotate: 45deg;
+    animation: floatUpDown 3s ease-in-out infinite;
+}
+.banner-section .floating-shape.shape-2 {
+    left: 15%;
+    top: 20%;
+    animation: floatLeftRight 3s ease-in-out infinite;
+}
+.banner-section .floating-shape.shape-3 {
+    right: 5%;
+    bottom: 20%;
+    animation: floatUpDown 3s ease-in-out infinite;
+}
+
+/* --- Courses Section --- */
+.courses-section .floating-shape.shape-1 {
+    right: 0;
+    top: 35%;
+    animation: floatLeftRight 3s ease-in-out infinite;
+}
+.courses-section .floating-shape.shape-2 {
+    left: 0;
+    bottom: 5%;
+    animation: floatRightLeft 3s ease-in-out infinite;
+}
+
+/* --- Projects Section --- */
+.projects-section .floating-shape.shape-1 {
+    right: 5%;
+    top: 25%;
+    animation: floatUpDown 3s ease-in-out infinite;
+}
+.projects-section .floating-shape.shape-2 {
+    left: 5%;
+    top: 35%;
+    rotate: -45deg;
+    animation: floatLeftRight 3s ease-in-out infinite;
+}
+
+/* --- Choose Us Section --- */
+.choose-us-section .floating-shape.shape-1 {
+    right: 5%;
+    bottom: 35%;
+    animation: floatUpDown 3s ease-in-out infinite;
+}
+.choose-us-section .floating-shape.shape-2 {
+    left: 5%;
+    top: 25%;
+    animation: floatLeftRight 3s ease-in-out infinite;
+}
+.choose-us-section .floating-shape.shape-3 {
+    right: 35%;
+    bottom: 5%;
+    animation: floatRightLeft 3s ease-in-out infinite;
+}
+
+/* --- Review Section --- */
+.review-section .floating-shape.shape-1 {
+    left: calc(50% - 150px);
+    top: 10%;
+    animation: floatUpDown 3s ease-in-out infinite;
+}
+
+/* --- FAQ (Q) Section --- */
+.q-section .floating-shape.shape-1 {
+    left: calc(50% - 150px);
+    top: 10%;
+    animation: floatUpDown 3s ease-in-out infinite;
+}
+
+/* =============================================
+   Floating Shapes — Responsive
+   ============================================= */
+
+@media (max-width: 1399px) {
+    .floating-shape img { width: 70px; }
+
+    .courses-section .floating-shape.shape-1 { top: 40%; }
+
+    .review-section .floating-shape.shape-1 { left: calc(50% - 100px); }
+
+    .q-section .floating-shape.shape-1 { left: calc(50% - 100px); }
+}
+
+@media (max-width: 1199px) {
+    .floating-shape img { width: 60px; }
+
+    .projects-section .floating-shape.shape-1 { top: 50%; }
+
+    .review-section .floating-shape.shape-1 { left: calc(50% + 40px); }
+
+    .q-section .floating-shape.shape-1 { left: calc(50% + 40px); }
+}
+
+@media (max-width: 991px) {
+    .floating-shape img { width: 50px; }
+
+    .courses-section .floating-shape.shape-1 { top: 35%; }
+
+    .projects-section .floating-shape.shape-1 { right: -5%; }
+    .projects-section .floating-shape.shape-2 { left: -5%; }
+
+    .choose-us-section .floating-shape.shape-3 { bottom: 0; }
+
+    .review-section .floating-shape.shape-1 { left: 15%; }
+
+    .q-section .floating-shape.shape-1 { left: 15%; }
+}
+
+@media (max-width: 767px) {
+    .floating-shape img { width: 40px; }
+
+    .banner-section .floating-shape.shape-3 { display: none; }
+
+    .courses-section .floating-shape.shape-1 { top: 40%; }
+
+    .projects-section .floating-shape.shape-1 { right: -10%; }
+    .projects-section .floating-shape.shape-2 { left: -10%; }
+}
+
+@media (max-width: 575px) {
+    .floating-shape img { width: 30px; }
+
+    .banner-section .floating-shape.shape-1 { top: 10%; }
+    .banner-section .floating-shape.shape-2 { top: 35%; }
+
+    .courses-section .floating-shape.shape-1 { top: 50%; }
+
+    .projects-section .floating-shape.shape-1 { right: 10%; top: 0%; }
+    .projects-section .floating-shape.shape-2 { left: 10%; top: -5%; }
+
+    .choose-us-section .floating-shape.shape-1 { right: 10%; bottom: 40%; }
+    .choose-us-section .floating-shape.shape-2 { left: 10%; }
+    .choose-us-section .floating-shape.shape-3 { left: 10%; bottom: 20%; }
+
+    .review-section .floating-shape.shape-1 { top: 5%; left: 5%; }
+
+    .q-section .floating-shape.shape-1 { top: 5%; left: 5%; }
+}
+
+/* =============================================
+   Scroll Animation System
+   ============================================= */
+
+/* Hide elements before scroll animation triggers */
+[data-scroll-animate]:not(.scroll-animate) {
+    opacity: 0 !important;
+    visibility: hidden !important;
+}
+
+[data-scroll-animate].wow:not(.scroll-animate) {
+    visibility: hidden !important;
+}
+
+.scroll-animate {
+    animation-fill-mode: both !important;
+    animation-duration: 1.5s;
+    animation-timing-function: ease-out;
+    visibility: visible;
+}
+
+/* Scroll Animation Variants */
+.scroll-animate.scroll-animate-fade-left   { animation-name: fadeInLeft; }
+.scroll-animate.scroll-animate-fade-right  { animation-name: fadeInRight; }
+.scroll-animate.scroll-animate-fade-up     { animation-name: fadeInUp; }
+.scroll-animate.scroll-animate-fade-down   { animation-name: fadeInDown; }
+.scroll-animate.scroll-animate-scale       { animation-name: scaleIn; }
+.scroll-animate.scroll-animate-zoom-in     { animation-name: zoomIn; }
+.scroll-animate.scroll-animate-slide-right { animation-name: slideInRight; }
+.scroll-animate.scroll-animate-slide-left  { animation-name: slideInLeft; }
+.scroll-animate.scroll-animate-slide-down  { animation-name: slideInDown; }
+.scroll-animate.scroll-animate-slide-up    { animation-name: slideInUp; }
+.scroll-animate.scroll-animate-swing       { animation-name: swing; }
+.scroll-animate.scroll-animate-tada        { animation-name: tada; }
+
+.scroll-animate.scroll-animate-back-in-right { animation-name: backInRight; }
+.scroll-animate.scroll-animate-back-in-left  { animation-name: backInLeft; }
+.scroll-animate.scroll-animate-back-in-up    { animation-name: backInUp; }
+.scroll-animate.scroll-animate-back-in-down  { animation-name: backInDown; }
+
+.scroll-animate.scroll-animate-flip        { animation-name: flip; }
+.scroll-animate.scroll-animate-flip-in-x   { animation-name: flipInX; }
+.scroll-animate.scroll-animate-flip-in-y   { animation-name: flipInY; }
+
+/* Stagger delay support */
+.scroll-animate-stagger {
+    --stagger-delay: 0s;
+    animation-delay: var(--stagger-delay);
+}
+
+.scroll-animate-stagger-row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.scroll-animate-stagger-row > * {
+    animation-delay: var(--stagger-delay, 0s);
+}
+
+/* =============================================
+   END Keyframes & Animation Classes
+   ============================================= */

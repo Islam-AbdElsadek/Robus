@@ -54,7 +54,16 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link rel="stylesheet" href="assets/css/animate.min.css">
     <link rel="stylesheet" href="assets/css/swiper-bundle.min.css" />
-    <link rel="stylesheet" href="assets/css/main.css" />
+    <!-- Robus Academy CSS — organized files -->
+    <link rel="stylesheet" href="assets/css/variables.css" />
+    <link rel="stylesheet" href="assets/css/base.css" />
+    <link rel="stylesheet" href="assets/css/animations.css" />
+    <link rel="stylesheet" href="assets/css/loader.css" />
+    <link rel="stylesheet" href="assets/css/components.css" />
+    <link rel="stylesheet" href="assets/css/navbar.css" />
+    <link rel="stylesheet" href="assets/css/sections.css" />
+    <link rel="stylesheet" href="assets/css/footer.css" />
+    <link rel="stylesheet" href="assets/css/rtl.css" />
 
 
     <script type="application/ld+json">
@@ -156,13 +165,15 @@
 </head>
 
 <body>
-    <!-- From Uiverse.io by pradipkaityuiux -->
+
+    <!-- ==================== PAGE LOADER ==================== -->
     <div class="loader-cont">
         <div class="loader">
             <img src="assets/img/logo/logo 1.png" alt="" width="100px">
             <span></span>
         </div>
     </div>
+    <!-- ==================== /PAGE LOADER ==================== -->
 
     <!-- <div class="fixed-left-buttons">
         <button class="fixed-left-btn fixed-left-btn--dark" type="button" aria-label="Dark mode">
@@ -177,7 +188,7 @@
         </button>
     </div> -->
 
-    <!-- Fixed Buttons Group -->
+    <!-- ==================== FIXED BUTTONS GROUP ==================== -->
     <div class="fixed-buttons-group" data-scroll-animate-group>
 
 
@@ -204,8 +215,9 @@
             <i class="fas fa-arrow-up"></i>
         </button>
     </div>
+    <!-- ==================== /FIXED BUTTONS GROUP ==================== -->
 
-    <!-- Chat Window -->
+    <!-- ==================== CHAT WINDOW ==================== -->
     <div class="chat-window" id="chatWindow">
         <div class="card rounded-5 overflow-hidden chat-card">
             <div class="card-header d-flex justify-content-between align-items-center p-3">
@@ -222,7 +234,9 @@
             </div>
         </div>
     </div>
+    <!-- ==================== /CHAT WINDOW ==================== -->
 
+    <!-- ==================== TOP NAVIGATION (STICKY) ==================== -->
     <nav class="top-nav hidden" id="TopNav">
         <div class="brand">
             <a href="#"><img src="assets/img/logo/logo 1.png" class="logo" alt="Robus Academy" width="120"></a>
@@ -243,7 +257,9 @@
             </button>
         </div>
     </nav>
+    <!-- ==================== /TOP NAVIGATION (STICKY) ==================== -->
 
+    <!-- ==================== MOBILE NAVIGATION ==================== -->
     <nav class="top-nav-mobile hidden" id="TopNavMobile">
         <div class="brand">
             <a href="#"><img src="assets/img/logo/logo 1.png" class="logo" alt="Robus Academy" width="120"></a>
@@ -254,8 +270,9 @@
             </div>
         </div>
     </nav>
+    <!-- ==================== /MOBILE NAVIGATION ==================== -->
 
-
+    <!-- ==================== BOTTOM NAVIGATION ==================== -->
     <a href="https://wa.me/robusacademy" class="tab whatsapp-tab" id="TabContactBottom" target="_blank">
         <div class="whatsapp-tab-circle">
             <i class="fab fa-whatsapp"></i>
@@ -283,8 +300,9 @@
             <span>Questions</span>
         </a>
     </nav>
+    <!-- ==================== /BOTTOM NAVIGATION ==================== -->
 
-    <!-- Gift Menu  -->
+    <!-- ==================== GIFT MENU ==================== -->
     <div class="gift-menu">
         <nav class="menu-box">
             <div class="close-btn"><i class="fas fa-times"></i></div>
@@ -306,18 +324,19 @@
                 <hr class="gift-divider my-3">
                 
                 <!-- WhatsApp Button -->
-                <a href="https://wa.me/robusacademy" target="_blank" class="btn menu-whatsapp-btn btn-success btn-lg w-100">
+                <a href="https://wa.me/robusacademy" target="_blank" class="btn btn-success btn-lg w-100">
                     <i class="fab fa-whatsapp me-2"></i> Contact via WhatsApp
                 </a>
             </div>
         </nav>
     </div>
     <div class="menu-backdrop"></div>
-    <!-- End Gift Menu -->
+    <!-- ==================== /GIFT MENU ==================== -->
 
+    <!-- ==================== MAIN CONTENT ==================== -->
+    <div>
 
-    <div class="hero">
-        <!-- Auto-player Section Start -->
+        <!-- ==================== MARQUEE / TICKER ==================== -->
         <div class="Auto-play-section style-header">
             <div class="myplayer player-header theme-green-bg">
                 <div class="swiper ticker-swiper">
@@ -333,9 +352,9 @@
                 </div>
             </div>
         </div>
-        <!-- Auto-player Section End -->
+        <!-- ==================== /MARQUEE / TICKER ==================== -->
 
-        <!-- banner-section -->
+        <!-- ==================== BANNER SECTION ==================== -->
         <section id="home" class="banner-section">
 
             <div class="top-nav-box">
@@ -421,8 +440,9 @@
                 <img src="assets/img/shapes/trophy.svg" alt="shape">
             </div>
         </section>
-        <!-- banner-section-end -->
+        <!-- ==================== /BANNER SECTION ==================== -->
 
+        <!-- ==================== COURSES SECTION ==================== -->
         <section id="courses" class="courses-section section-padding">
             <div class="container">
                 <div class="section-title text-center" data-scroll-animate="fade-up">
@@ -544,7 +564,9 @@
                 </div>
             </div>
         </section>
+        <!-- ==================== /COURSES SECTION ==================== -->
 
+        <!-- ==================== PROJECTS SECTION ==================== -->
         <section id="projects" class="projects-section section-padding">
             <div class="container">
                 <div class="section-title text-center" data-scroll-animate="fade-up">
@@ -953,8 +975,9 @@
                 </div>
             </div>
         </section>
+        <!-- ==================== /PROJECTS SECTION ==================== -->
 
-        <!-- Auto-player Section Start -->
+        <!-- ==================== MARQUEE / TICKER ==================== -->
         <div class="Auto-play-section style-header">
             <div class="myplayer player-header theme-green-bg">
                 <div class="swiper ticker-swiper">
@@ -970,9 +993,9 @@
                 </div>
             </div>
         </div>
-        <!-- Auto-player Section End -->
+        <!-- ==================== /MARQUEE / TICKER ==================== -->
 
-        <!-- Choose Us Section Start -->
+        <!-- ==================== CHOOSE US SECTION ==================== -->
         <section class="choose-us-section fix section-padding">
             <div class="container">
                 <div class="choose-us-wrapper">
@@ -1037,8 +1060,9 @@
                 </div>
             </div>
         </section>
-        <!-- Choose Us Section End -->
+        <!-- ==================== /CHOOSE US SECTION ==================== -->
 
+        <!-- ==================== REVIEWS SECTION ==================== -->
         <section id="reviews" class="review-section fix section-padding">
             <div class="container">
                 <div class="review-wrapper">
@@ -1195,7 +1219,7 @@
                         </div>
                         <div class="col-xxl-4 col-xl-5 col-lg-5 d-none d-md-flex" data-scroll-animate="fade-up">
                             <div class="review-image-items">
-                                <div class="box-shape bg-cover">
+                                <div class="box-shape">
                                     <img src="assets/img/grades/details-2.png" alt="img" />
                                 </div>
                             </div>
@@ -1208,7 +1232,9 @@
                 </div>
             </div>
         </section>
+        <!-- ==================== /REVIEWS SECTION ==================== -->
 
+        <!-- ==================== FAQ SECTION ==================== -->
         <section id="questions" class="q-section section-padding">
             <div class="q-image wow img-custom-anim-right" style="visibility: visible; right: 0 !important;"
                 data-scroll-animate="fade-up">
@@ -1320,10 +1346,15 @@
                 </div>
             </div>
         </section>
+        <!-- ==================== /FAQ SECTION ==================== -->
+
     </div>
+    <!-- ==================== /MAIN CONTENT ==================== -->
 
 
-    <footer class="footer-area">
+    <!-- ==================== FOOTER ==================== -->
+    <footer>
+        <!-- --- Instagram Slider --- -->
         <div class="footer-images" data-scroll-animate="fade-up">
             <div class="container">
                 <div class="footer-images-swiper swiper">
@@ -1368,13 +1399,16 @@
                 </div>
             </div>
         </div>
+        <!-- --- /Instagram Slider --- -->
+
+        <!-- --- Footer Widgets --- -->
         <div class="footer-top-wrap">
             <div class="container">
                 <div class="footer-widgets-wrap">
                     <div class="row" data-scroll-animate-group>
                         <div class="col-lg-4 col-md-7" data-scroll-animate="fade-up">
                             <div class="footer-widget">
-                                <div class="footer-about">
+                                <div>
                                     <div class="footer-logo logo">
                                         <a href="#"><img
                                                 src="assets/img/logo/logo 3.png" width="200" alt="Logo"></a>
@@ -1446,6 +1480,9 @@
                 <img src="assets/img/banner/right-robot.png" alt="img" style="width: 100%; max-width: 300px;">
             </div>
         </div>
+        <!-- --- /Footer Widgets --- -->
+
+        <!-- --- Copyright Bar --- -->
         <div class="copyright-wrap">
             <div class="container">
                 <div class="row align-items-center">
@@ -1463,8 +1500,9 @@
             </div>
         </div>
     </footer>
+    <!-- ==================== /FOOTER ==================== -->
 
-    <!-- Lightbox Modal -->
+    <!-- ==================== LIGHTBOX MODAL ==================== -->
     <div class="lightbox-modal" id="lightboxModal">
         <div class="lightbox-backdrop" id="lightboxBackdrop"></div>
         <div class="lightbox-container">
@@ -1485,9 +1523,9 @@
             </div>
         </div>
     </div>
+    <!-- ==================== /LIGHTBOX MODAL ==================== -->
 
-
-
+    <!-- ==================== SCRIPTS ==================== -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>

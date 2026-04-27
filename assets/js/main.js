@@ -626,48 +626,6 @@ window.addEventListener('load', initLightbox);
 
 
 
-  /*=============================================
-	=    Footer Instagram Slider (Swiper)        =
-=============================================*/
-  if (typeof Swiper !== 'undefined') {
-    window.addEventListener('load', () => {
-      const footerSwiper = new Swiper('.footer-instagram-slider', {
-        loop: true,
-        speed: 800,
-        spaceBetween: 0,
-        slidesPerView: 5,
-        slidesPerGroup: 1,
-        centeredSlides: false,
-        grabCursor: true,
-        observer: true,
-        observeParents: true,
-        autoplay: {
-          delay: 3500,
-          disableOnInteraction: false,
-        },
-        breakpoints: {
-          0: {
-            slidesPerView: 2,
-          },
-          576: {
-            slidesPerView: 3,
-          },
-          768: {
-            slidesPerView: 4,
-          },
-          1024: {
-            slidesPerView: 5,
-          },
-        },
-      });
-      
-      // Ensure autoplay starts
-      if (footerSwiper && footerSwiper.autoplay) {
-        footerSwiper.autoplay.start();
-      }
-    });
-  }
-
 /*=============================================
 	=    Mobile Menu Functionality               =
 =============================================*/
@@ -697,46 +655,6 @@ document.body.addEventListener('click', (e) => {
     if (e.target.closest('.gift-menu .close-btn')) {
         console.log('Close button clicked via delegation');
         closeMobileMenu();
-    }
-    
-    // Check if clicked element is a menu link (but not dropdown buttons)
-    if (e.target.closest('.gift-menu .navigation a') && !e.target.closest('.dropdown-btn')) {
-        console.log('Menu link clicked via delegation');
-        closeMobileMenu();
-    }
-
-    // Handle dropdown button clicks
-    const dropdownBtn = e.target.closest('.gift-menu .dropdown-btn');
-    if (dropdownBtn) {
-        e.preventDefault();
-        e.stopPropagation();
-        const parentLi = dropdownBtn.parentElement;
-        const subMenu = parentLi.querySelector(':scope > .sub-menu');
-        if (!subMenu) return;
-
-        // Close other open sub-menus at the same level
-        const siblings = parentLi.parentElement.querySelectorAll(':scope > li');
-        siblings.forEach(sibling => {
-            if (sibling !== parentLi) {
-                const sibBtn = sibling.querySelector(':scope > .dropdown-btn');
-                const sibMenu = sibling.querySelector(':scope > .sub-menu');
-                if (sibBtn) sibBtn.classList.remove('open');
-                if (sibMenu) {
-                    sibMenu.style.maxHeight = null;
-                    sibMenu.classList.remove('open');
-                }
-            }
-        });
-
-        // Toggle current sub-menu
-        dropdownBtn.classList.toggle('open');
-        if (subMenu.classList.contains('open')) {
-            subMenu.style.maxHeight = null;
-            subMenu.classList.remove('open');
-        } else {
-            subMenu.classList.add('open');
-            subMenu.style.maxHeight = subMenu.scrollHeight + 'px';
-        }
     }
 });
 

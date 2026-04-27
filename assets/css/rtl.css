@@ -1,0 +1,427 @@
+/* =============================================
+   RTL / Arabic Language Overrides
+   All styles scoped to html[dir="rtl"] or [dir="rtl"] / html[lang="ar"]
+   ============================================= */
+
+/* =============================================
+   Navigation — RTL
+   ============================================= */
+
+/* Force LTR direction on nav elements (icons, flex order stay logical) */
+html[dir="rtl"] .top-nav,
+html[dir="rtl"] .top-nav-mobile,
+html[dir="rtl"] .top-nav-box,
+html[dir="rtl"] .top-nav-mobile-box,
+html[dir="rtl"] .bottom-nav {
+    direction: ltr;
+}
+
+/* =============================================
+   Section Title — RTL
+   ============================================= */
+
+html[dir="rtl"] .section-title h2 {
+    text-align: right;
+}
+
+html[dir="rtl"] .courses-section .section-title h2,
+html[dir="rtl"] .projects-section .section-title h2 {
+    text-align: center;
+}
+
+@media (max-width: 991px) {
+    html[dir="rtl"] .section-title h2 {
+        text-align: center;
+    }
+}
+
+/* =============================================
+   Banner Section — RTL
+   ============================================= */
+
+html[dir="rtl"] .banner-images .bg-shape {
+    left: auto;
+    right: 50%;
+    transform: translateX(50%) translateY(-40px);
+}
+
+/* =============================================
+   Floating Shapes — RTL
+   ============================================= */
+
+/* Courses */
+html[dir="rtl"] .courses-section .floating-shape.shape-1 {
+    right: auto;
+    left: 0;
+    animation-name: floatRightLeft;
+}
+
+html[dir="rtl"] .courses-section .floating-shape.shape-2 {
+    left: auto;
+    right: 0;
+    animation-name: floatLeftRight;
+}
+
+/* Choose Us */
+html[dir="rtl"] .choose-us-section .floating-shape.shape-1 {
+    right: auto;
+    left: 5%;
+}
+
+html[dir="rtl"] .choose-us-section .floating-shape.shape-2 {
+    left: auto;
+    right: 5%;
+}
+
+html[dir="rtl"] .choose-us-section .floating-shape.shape-3 {
+    right: auto;
+    left: 35%;
+}
+
+@media (max-width: 575px) {
+    html[dir="rtl"] .choose-us-section .floating-shape.shape-1 {
+        right: auto;
+        left: 10%;
+    }
+
+    html[dir="rtl"] .choose-us-section .floating-shape.shape-2 {
+        left: auto;
+        right: 10%;
+    }
+
+    html[dir="rtl"] .choose-us-section .floating-shape.shape-3 {
+        left: auto;
+        right: 10%;
+    }
+}
+
+/* Review */
+html[dir="rtl"] .review-section .floating-shape.shape-1 {
+    left: auto;
+    right: calc(50% - 150px);
+}
+
+@media (max-width: 1399px) {
+    html[dir="rtl"] .review-section .floating-shape.shape-1 {
+        left: auto;
+        right: calc(50% - 100px);
+    }
+}
+
+@media (max-width: 1199px) {
+    html[dir="rtl"] .review-section .floating-shape.shape-1 {
+        left: auto;
+        right: calc(50% + 40px);
+    }
+}
+
+@media (max-width: 991px) {
+    html[dir="rtl"] .review-section .floating-shape.shape-1 {
+        left: auto;
+        right: 15%;
+    }
+}
+
+@media (max-width: 575px) {
+    html[dir="rtl"] .review-section .floating-shape.shape-1 {
+        left: auto;
+        right: 5%;
+    }
+}
+
+/* FAQ (Q Section) */
+html[dir="rtl"] .q-section .floating-shape.shape-1 {
+    left: auto;
+    right: calc(50% - 150px);
+}
+
+@media (max-width: 1399px) {
+    html[dir="rtl"] .q-section .floating-shape.shape-1 {
+        left: auto;
+        right: calc(50% - 100px);
+    }
+}
+
+@media (max-width: 1199px) {
+    html[dir="rtl"] .q-section .floating-shape.shape-1 {
+        left: auto;
+        right: calc(50% + 40px);
+    }
+}
+
+@media (max-width: 991px) {
+    html[dir="rtl"] .q-section .floating-shape.shape-1 {
+        left: auto;
+        right: 15%;
+    }
+}
+
+@media (max-width: 575px) {
+    html[dir="rtl"] .q-section .floating-shape.shape-1 {
+        left: auto;
+        right: 5%;
+    }
+}
+
+/* =============================================
+   Choose Us Section — RTL
+   ============================================= */
+
+html[dir="rtl"] .choose-us-wrapper .line-shape {
+    transform: rotateY(180deg);
+}
+
+html[dir="rtl"] .choose-us-wrapper .icon-items.icon-item-1 {
+    top: 0;
+    right: auto;
+    left: 0;
+}
+
+html[dir="rtl"] .choose-us-wrapper .icon-items.icon-item-2 {
+    bottom: 150px;
+    left: auto;
+    right: calc(50% - 40px);
+}
+
+html[dir="rtl"] .choose-us-wrapper .icon-items.icon-item-3 {
+    bottom: -20px;
+    left: auto;
+    right: 30px;
+}
+
+@media (max-width: 1399px) {
+    html[dir="rtl"] .choose-us-wrapper .icon-items.icon-item-2 {
+        bottom: 120px;
+        left: auto;
+        right: calc(50% - 60px);
+    }
+
+    html[dir="rtl"] .choose-us-wrapper .icon-items.icon-item-3 {
+        bottom: 20px;
+        right: 30px;
+    }
+}
+
+@media (max-width: 1199px) {
+    html[dir="rtl"] .choose-us-wrapper .icon-items.icon-item-2 {
+        bottom: 100px;
+        left: auto;
+        right: calc(50% - 150px);
+    }
+
+    html[dir="rtl"] .choose-us-wrapper .icon-items.icon-item-3 {
+        bottom: 0;
+        right: 30px;
+    }
+}
+
+@media (max-width: 991px) {
+    html[dir="rtl"] .choose-us-wrapper .icon-items.icon-item-1 {
+        top: 200px;
+        left: auto;
+        right: calc(50% - 110px);
+    }
+
+    html[dir="rtl"] .choose-us-wrapper .icon-items.icon-item-2 {
+        top: 500px;
+        left: auto;
+        right: calc(75% - 110px);
+    }
+
+    html[dir="rtl"] .choose-us-wrapper .icon-items.icon-item-3 {
+        top: 500px;
+        left: auto;
+        right: calc(25% - 110px);
+    }
+}
+
+@media (max-width: 575px) {
+    html[dir="rtl"] .choose-us-wrapper .icon-items.icon-item-2 {
+        top: 500px;
+        left: auto;
+        right: calc(50% - 110px);
+    }
+
+    html[dir="rtl"] .choose-us-wrapper .icon-items.icon-item-3 {
+        top: 820px;
+        left: auto;
+        right: calc(50% - 110px);
+    }
+}
+
+/* =============================================
+   FAQ (Accordion) — RTL
+   ============================================= */
+
+html[dir="rtl"] .q-wrapper .q-content .q-items .accordion .accordion-item h2 button {
+    padding-left: 40px;
+    padding-right: 105px;
+}
+
+html[dir="rtl"] .q-wrapper .q-content .q-items .accordion .accordion-button {
+    padding-left: 40px;
+    padding-right: 105px;
+    text-align: right;
+}
+
+html[dir="rtl"] .q-wrapper .q-content .q-items .accordion .accordion-button::before {
+    left: auto;
+    right: 50px;
+}
+
+/* Arrow points left in RTL when collapsed */
+html[dir="rtl"] .q-wrapper .q-content .q-items .accordion .accordion-button.collapsed::before {
+    content: "\f0a8";
+}
+
+@media (max-width: 1199px) {
+    html[dir="rtl"] .q-wrapper .q-content .q-items .accordion .accordion-button::before {
+        left: auto;
+        right: 30px;
+    }
+
+    html[dir="rtl"] .q-wrapper .q-content .q-items .accordion .accordion-item h2 button {
+        padding-left: 40px;
+        padding-right: 105px;
+    }
+}
+
+@media (max-width: 575px) {
+    html[dir="rtl"] .q-wrapper .q-content .q-items .accordion .accordion-item h2 button {
+        padding-left: 30px;
+        padding-right: 60px;
+    }
+
+    html[dir="rtl"] .q-wrapper .q-content .q-items .accordion .accordion-button {
+        padding-left: 30px;
+        padding-right: 60px;
+    }
+}
+
+/* =============================================
+   Chatbot / Chat Window — RTL
+   ============================================= */
+
+[dir="rtl"] .chat-card .card-body .bg-body-tertiary,
+html[lang="ar"] .chat-card .card-body .bg-body-tertiary {
+    border-left: none;
+    border-right: 3px solid var(--theme-green-4);
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+}
+
+[dir="rtl"] .chat-card .card-footer,
+html[lang="ar"] .chat-card .card-footer {
+    justify-content: flex-end;
+}
+
+[dir="rtl"] .chat-card .card-footer input,
+html[lang="ar"] .chat-card .card-footer input {
+    margin-left: 10px;
+    margin-right: 0;
+}
+
+[dir="rtl"] .chat-card .card-footer a,
+html[lang="ar"] .chat-card .card-footer a {
+    margin-right: 0;
+    margin-left: 10px;
+}
+
+/* Message Container Alignment */
+[dir="rtl"] .d-flex.flex-row.justify-content-start,
+html[lang="ar"] .d-flex.flex-row.justify-content-start {
+    justify-content: flex-end !important;
+}
+
+[dir="rtl"] .d-flex.flex-row.justify-content-end,
+html[lang="ar"] .d-flex.flex-row.justify-content-end {
+    justify-content: flex-start !important;
+}
+
+/* Options Container */
+[dir="rtl"] .options-container button,
+html[lang="ar"] .options-container button {
+    text-align: right;
+}
+
+/* Message Margin Adjustment */
+[dir="rtl"] .chat-card .card-body p.small.ms-3,
+html[lang="ar"] .chat-card .card-body p.small.ms-3 {
+    margin-left: 0 !important;
+    margin-right: 12px !important;
+}
+
+[dir="rtl"] .chat-card .card-body p.small.me-3,
+html[lang="ar"] .chat-card .card-body p.small.me-3 {
+    margin-right: 0 !important;
+    margin-left: 12px !important;
+}
+
+[dir="rtl"] .chat-card .card-body small.ms-3,
+html[lang="ar"] .chat-card .card-body small.ms-3 {
+    margin-left: 0 !important;
+    margin-right: 12px !important;
+}
+
+[dir="rtl"] .chat-card .card-body small.me-3,
+html[lang="ar"] .chat-card .card-body small.me-3 {
+    margin-right: 0 !important;
+    margin-left: 12px !important;
+    text-align: right;
+}
+
+/* Image Margin in Messages */
+[dir="rtl"] .chat-card .card-body img,
+html[lang="ar"] .chat-card .card-body img {
+    margin-left: 10px !important;
+    margin-right: 0 !important;
+}
+
+/* Bot Message Image Positioning */
+[dir="rtl"] .d-flex.flex-row.justify-content-start img,
+html[lang="ar"] .d-flex.flex-row.justify-content-start img {
+    order: 2;
+}
+
+[dir="rtl"] .d-flex.flex-row.justify-content-start > div,
+html[lang="ar"] .d-flex.flex-row.justify-content-start > div {
+    order: 1;
+}
+
+/* =============================================
+   Footer — RTL
+   ============================================= */
+
+html[dir="rtl"] .footer-shape.one {
+    left: auto;
+    right: 0;
+}
+
+html[dir="rtl"] .footer-shape.two {
+    right: auto;
+    left: 0;
+}
+
+html[dir="rtl"] .footer-shape.two img {
+    right: auto;
+    left: -25px;
+    transform: rotateY(180deg);
+}
+
+@media (max-width: 1199.98px) {
+    html[dir="rtl"] .footer-shape.two img {
+        left: -17px;
+    }
+}
+
+@media (max-width: 991.98px) {
+    html[dir="rtl"] .footer-shape.two {
+        right: auto;
+        left: 0;
+        bottom: 30%;
+    }
+}
+
+/* =============================================
+   END RTL / Arabic Language Overrides
+   ============================================= */
