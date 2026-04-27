@@ -395,7 +395,7 @@ a {
     background: var(--theme-green-3);
     top: -6px;
     right: -6px;
-    box-shadow: 0 0 20px 5px var(--theme-green);
+    box-shadow: 0 0 10px rgba(0, 128, 0, 0.5);
 }
 
 /* Pause animations until loader disappears */
@@ -1057,7 +1057,7 @@ section[id] {
 @media (max-width: 991px) {
     #home {
         padding: 4rem 0;
-        padding-top: 150px;
+        padding-top: 100px;
     }
 
     .top-nav,
