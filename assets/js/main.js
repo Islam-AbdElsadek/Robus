@@ -199,6 +199,15 @@ window.addEventListener('load', updateActiveNavOnScroll);
 
 // review swiper initialization
 if (typeof Swiper !== 'undefined') {
+    // Ticker — pure CSS infinite marquee (no Swiper JS, never stops)
+    document.querySelectorAll('.ticker-swiper').forEach(function (el) {
+        const wrapper = el.querySelector('.swiper-wrapper');
+        if (wrapper) {
+            // Duplicate slides so translateX(-50%) creates a seamless loop
+            wrapper.innerHTML += wrapper.innerHTML;
+        }
+    });
+
     const reviewSwiper = new Swiper('.review-slider-2', {
         loop: true,
         speed: 800,

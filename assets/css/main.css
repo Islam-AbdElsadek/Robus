@@ -3843,6 +3843,65 @@ html[dir="rtl"] .q-wrapper .q-content .q-items .accordion .accordion-button.coll
     position: static;
 }
 
+/* Ticker Swiper */
+.ticker-swiper {
+    overflow: hidden;
+    direction: ltr;
+}
+
+.ticker-swiper:hover .swiper-wrapper {
+    animation-play-state: paused;
+}
+
+.ticker-swiper .swiper-wrapper {
+    display: flex;
+    direction: ltr;
+    width: max-content;
+    align-items: center;
+    padding: 5px 0;
+    animation: ticker-move 25s linear infinite;
+    will-change: transform;
+}
+
+.ticker-swiper .swiper-slide {
+    width: auto !important;
+    flex-shrink: 0;
+    padding: 0 10px;
+}
+
+.ticker-slide {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 32px;
+    text-transform: capitalize;
+    color: var(--white);
+    font-family: "Sora", system-ui, sans-serif;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+}
+
+.ticker-slide i {
+    font-size: 21px;
+}
+
+@keyframes ticker-move {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+@media (max-width: 575px) {
+    .ticker-slide {
+        font-size: 14px;
+    }
+
+    .ticker-swiper .swiper-slide {
+        padding: 0 5px;
+    }
+}
+
+/* Legacy scrolling-wrap (kept for style-2 variants) */
 .scrolling-wrap {
     overflow: hidden;
     white-space: nowrap;
