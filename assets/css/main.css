@@ -1,3 +1,6 @@
+/* ====================================================================
+   1. CSS VARIABLES - ROOT COLORS AND DIMENSIONS
+   ==================================================================== */
 :root {
     --body: #fff;
     --black: #000;
@@ -34,12 +37,49 @@
     --bg8: #f3f1fd;
     --shadow: 0px 4px 25px rgba(0, 0, 0, 0.06);
 }
+/* END CSS VARIABLES */
+
+/* ====================================================================
+   2. GLOBAL STYLES - GENERAL & BASIC ELEMENTS
+   ==================================================================== */
+html {
+    scroll-behavior: smooth;
+}
 
 html::selection {
     color: var(--white);
     background-color: var(--theme-green-2);
 }
 
+a {
+    text-decoration: none;
+}
+
+.fas {
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    display: inline-block;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    line-height: 1;
+}
+
+.fa-arrow-up:before {
+    content: "\f176";
+}
+
+@media (max-width: 991px) {
+    html,
+    body {
+        overflow-x: hidden;
+    }
+}
+/* END GLOBAL STYLES */
+
+/* ====================================================================
+   3. ANIMATIONS & KEYFRAMES
+   ==================================================================== */
 @keyframes slideUpLoader {
     0% {
         transform: translateY(0px);
@@ -62,8 +102,225 @@ html::selection {
     }
 }
 
-/* From Uiverse.io by pradipkaityuiux */
+@keyframes animateC {
+    0% {
+        transform: rotate(0deg);
+    }
 
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes animate {
+    0% {
+        transform: rotate(45deg);
+    }
+
+    100% {
+        transform: rotate(405deg);
+    }
+}
+
+@keyframes floatUpDown {
+    0% {transform: translateY(0);}
+    50% {transform: translateY(-20px);}
+    100% {transform: translateY(0);}
+}
+
+@keyframes floatDownUp {
+    0% {transform: translateY(0);}
+    50% {transform: translateY(20px);}
+    100% {transform: translateY(0);}
+}
+
+@keyframes floatLeftRight {
+    0% {transform: translateX(0);}
+    50% {transform: translateX(-20px);}
+    100% {transform: translateX(0);}
+}
+
+@keyframes floatRightLeft {
+    0% {transform: translateX(0);}
+    50% {transform: translateX(20px);}
+    100% {transform: translateX(0);}
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(100px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(calc(-100% - 50px));
+    }
+}
+
+@keyframes scrolls {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+@keyframes shine {
+    from {
+        -webkit-mask-position: 150%;
+    }
+
+    to {
+        -webkit-mask-position: -50%;
+    }
+}
+
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes slideInUp {
+    from {
+        transform: translate3d(0, 100%, 0);
+        visibility: visible;
+    }
+    to {
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+@keyframes backInDown {
+    0% { transform: translateY(-1200px) scale(0.7); opacity: 0.7; }
+    80% { transform: translateY(0px) scale(0.7); opacity: 0.7; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes backInLeft {
+    0% { transform: translateX(-2000px) scale(0.7); opacity: 0.7; }
+    80% { transform: translateX(0px) scale(0.7); opacity: 0.7; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes backInRight {
+    0% { transform: translateX(2000px) scale(0.7); opacity: 0.7; }
+    80% { transform: translateX(0px) scale(0.7); opacity: 0.7; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes backInUp {
+    0% { transform: translateY(1200px) scale(0.7); opacity: 0.7; }
+    80% { transform: translateY(0px) scale(0.7); opacity: 0.7; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes ticker-move {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+/* END ANIMATIONS & KEYFRAMES */
+
+/* ====================================================================
+   4. SCROLLBAR STYLES
+   ==================================================================== */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--theme-green-4);
+    box-shadow: inset 0 0 5px var(--theme-green);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--theme-green);
+    border-radius: 15px;
+    transition: all 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--theme-green-2);
+    box-shadow: 0 0 6px rgba(0, 91, 255, 0.3);
+}
+/* END SCROLLBAR STYLES */
+
+/* ====================================================================
+   5. LOADER & FIXED LOADER STYLES
+   ==================================================================== */
 .loader-cont {
     position: fixed;
     top: 0;
@@ -98,11 +355,6 @@ html::selection {
     text-shadow: 0 0 10px var(--theme-green);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
-
-a {
-    text-decoration: none;
-}
-
 
 .loader>img {
     transform: translateY(-5px);
@@ -146,68 +398,15 @@ a {
     box-shadow: 0 0 20px 5px var(--theme-green);
 }
 
-@keyframes animateC {
-    0% {
-        transform: rotate(0deg);
-    }
-
-    100% {
-        transform: rotate(360deg);
-    }
+/* Pause animations until loader disappears */
+.pause-animation {
+    animation-play-state: paused !important;
 }
+/* END LOADER STYLES */
 
-@keyframes animate {
-    0% {
-        transform: rotate(45deg);
-    }
-
-    100% {
-        transform: rotate(405deg);
-    }
-}
-
-/* Modern Scrollbar */
-
-html {
-    scroll-behavior: smooth;
-}
-
-::-webkit-scrollbar {
-    width: 6px;
-    height: 10px;
-}
-
-::-webkit-scrollbar-track {
-    background: var(--theme-green-4);
-    box-shadow: inset 0 0 5px var(--theme-green);
-}
-
-::-webkit-scrollbar-thumb {
-    background: var(--theme-green);
-    border-radius: 15px;
-    transition: all 0.3s ease;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: var(--theme-green-2);
-    box-shadow: 0 0 6px rgba(0, 91, 255, 0.3);
-}
-
-.fas {
-    -moz-osx-font-smoothing: grayscale;
-    -webkit-font-smoothing: antialiased;
-    display: inline-block;
-    font-style: normal;
-    font-variant: normal;
-    text-rendering: auto;
-    line-height: 1;
-}
-
-.fa-arrow-up:before {
-    content: "\f176";
-}
-
-/* Fixed Buttons Group */
+/* ====================================================================
+   6. FIXED BUTTONS & ICONS
+   ==================================================================== */
 .fixed-buttons-group {
     position: fixed;
     right: 30px;
@@ -482,7 +681,11 @@ html {
         height: 300px !important;
     } */
 }
+/* END CHATBOT & CHAT WINDOW STYLES */
 
+/* ====================================================================
+   8. NAVIGATION MENUS - GIFT MENU & TOGGLERS
+   ==================================================================== */
 /* Back to Top Button */
 .back-top {
     background-color: var(--theme-green);
@@ -2954,9 +3157,12 @@ html[dir="rtl"] .choose-us-wrapper .icon-items.icon-item-3 {
     }
 }
 
+/* ===== END CHOOSE US SECTION ===== */
 
 
-/* Flaticon icons replacement with Font Awesome */
+/* ====================================================================
+   10. QUESTIONS/ACCORDION SECTION STYLES
+   ==================================================================== */
 .flaticon-satisfaction::before {
     content: "\f5a2";
     font-family: 'Font Awesome 6 Free';
@@ -3017,8 +3223,12 @@ html[dir="rtl"] .choose-us-wrapper .icon-items.icon-item-3 {
     display: inline-block;
 }
 
+/* ===== END QUESTIONS/ACCORDION SECTION ===== */
 
 
+/* ====================================================================
+   11. REVIEW SECTION & TESTIMONIALS
+   ==================================================================== */
 
 
 @media (max-width: 575px) {
@@ -3800,6 +4010,13 @@ html[dir="rtl"] .q-wrapper .q-content .q-items .accordion .accordion-button.coll
         margin: 0 auto;
     }
 }
+
+/* ===== END REVIEW SECTION ===== */
+
+/* ====================================================================
+   12. MARQUEE/AUTO-PLAY SECTION & TICKER
+   ==================================================================== */
+
 
 /* ==================== Marquee Section Styles ==================== */
 
@@ -4640,6 +4857,21 @@ html[dir="rtl"] .footer-shape.two img {
 
     footer {
         margin-bottom: 70px;
+    }
+
+    .footer-widget .footer-text {
+        width: 100%;
+    }
+
+    .footer-widget {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+
+    [dir="rtl"] .footer-widget,
+    html[lang="ar"] .footer-widget {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
     }
 }
 
