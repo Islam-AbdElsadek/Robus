@@ -46,6 +46,19 @@ chatbotBtn.addEventListener('click', () => {
     chatWindow.classList.toggle('show');
 });
 
+// Chatbot tooltip click handler - opens chat window
+const chatbotTooltip = document.getElementById('chatbotTooltip');
+if (chatbotTooltip) {
+    chatbotTooltip.addEventListener('click', (e) => {
+        e.stopPropagation();
+        chatWindow.classList.add('show');
+        chatbotTooltip.classList.remove('show');
+        // Stop repeating tooltip once user interacts
+        if (tooltipTimeoutId) { clearTimeout(tooltipTimeoutId); tooltipTimeoutId = null; }
+        if (tooltipIntervalId) { clearInterval(tooltipIntervalId); tooltipIntervalId = null; }
+    });
+}
+
 if (closeChatBtn) {
     closeChatBtn.addEventListener('click', (e) => {
         e.stopPropagation();
@@ -691,20 +704,37 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Chatbot tooltip timeout ID
 let tooltipTimeoutId = null;
+let tooltipIntervalId = null;
 
-// Function to initialize tooltip
-function initTooltip() {
+// Function to show tooltip for 10 seconds
+function showTooltip() {
     const tooltip = document.getElementById('chatbotTooltip');
-    if (tooltip && !tooltip.classList.contains('show')) {
-        // Show tooltip
-        tooltip.classList.add('show');
-        
-        // Hide tooltip after 15 seconds
-        tooltipTimeoutId = setTimeout(() => {
-            tooltip.classList.remove('show');
-            tooltipTimeoutId = null;
-        }, 15000);
-    }
+    if (!tooltip) return;
+
+    // Don't show if chat window is already open
+    const chatWindow = document.getElementById('chatWindow');
+    if (chatWindow && chatWindow.classList.contains('show')) return;
+
+    tooltip.classList.add('show');
+
+    // Hide after 10 seconds
+    if (tooltipTimeoutId) clearTimeout(tooltipTimeoutId);
+    tooltipTimeoutId = setTimeout(() => {
+        tooltip.classList.remove('show');
+        tooltipTimeoutId = null;
+    }, 10000);
+}
+
+// Function to initialize tooltip (show once then repeat every 60 seconds)
+function initTooltip() {
+    // Show immediately on init
+    showTooltip();
+
+    // Repeat every 60 seconds
+    if (tooltipIntervalId) clearInterval(tooltipIntervalId);
+    tooltipIntervalId = setInterval(() => {
+        showTooltip();
+    }, 30000);
 }
 
 // Tooltip is initialized together with scroll animations (after loader disappears)
@@ -886,11 +916,8 @@ chatbotBtn.addEventListener('click', () => {
     const tooltip = document.getElementById('chatbotTooltip');
     if (tooltip) {
         tooltip.classList.remove('show');
-        // Clear the timeout if it exists
-        if (tooltipTimeoutId) {
-            clearTimeout(tooltipTimeoutId);
-            tooltipTimeoutId = null;
-        }
+        if (tooltipTimeoutId) { clearTimeout(tooltipTimeoutId); tooltipTimeoutId = null; }
+        if (tooltipIntervalId) { clearInterval(tooltipIntervalId); tooltipIntervalId = null; }
     }
 });
 
